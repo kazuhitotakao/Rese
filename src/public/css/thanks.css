@@ -1,0 +1,50 @@
+.header {
+    background: #fff;
+}
+
+.header__inner {
+    margin: 0 auto;
+    padding: 10px 15px;
+    max-width: 1230px;
+}
+
+.header-utilities {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+/* s main */
+.mail__content {
+    margin: 0 auto;
+    padding: 30px 15px;
+    height: 80vh;
+    max-width: 1230px;
+    background-color: #f2f2f2;
+}
+
+.card {
+    margin: 3vh auto;
+    width: 600px;
+    padding: 10px 20px 20px 20px;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.card__button {
+    text-align: center;
+}
+
+.card__button-submit {
+    font-weight: bold;
+    text-decoration: none;
+}
+/* e main */
