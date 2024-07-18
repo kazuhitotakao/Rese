@@ -1,48 +1,108 @@
-.header {
-    background: #fff;
+.navbar-nav {
+    margin-top: 5rem;
 }
 
-.header__inner {
-    margin: 0 auto;
-    padding: 10px 15px;
-    max-width: 1230px;
-}
-
-.header-utilities {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.nav-link {
+    font-size: 2rem;
+    text-align: center;
 }
 
 .header__logo {
-    color: #000;
+    color: blue;
     text-decoration: none;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 35px;
+    margin-left: 20px;
 }
 
-.header-utilities nav {
-    width: 35%;
+/* s オフキャンバスの幅 */
+.offcanvas,
+.offcanvas-xxl,
+.offcanvas-xl,
+.offcanvas-lg,
+.offcanvas-md,
+.offcanvas-sm {
+    --bs-offcanvas-width: 100vw;
+}
+/* e オフキャンバスの幅 */
+
+/* s ハンバーガーメニュー */
+.navbar {
+    position: absolute;
+    left: 6%;
+    top: 5%;
+    z-index: 30;
+    display: inline-block;
 }
 
-.header-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.bg-body-tertiary {
+    --bs-bg-opacity: 0;
 }
 
-.header-nav__link {
-    color: #000;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+.navbar-toggler{
+    background-color: blue;
+    height: 2.5rem;
 }
 
-.header-nav__button {
-    border: none;
-    background: transparent;
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='1' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E");
 }
+/* e ハンバーガーメニュー */
+
+/* s ボタンクリック時の色の指定 */
+.navbar-toggler:hover,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:active:focus,
+.navbar-toggler:active:hover,
+.navbar-toggler:active.focus,
+.navbar-toggler.active,
+.navbar-toggler.active:focus,
+.navbar-toggler.active:hover,
+.navbar-toggler.active.focus,
+.open>.dropdown-toggle.navbar-toggler,
+.open>.dropdown-toggle.navbar-toggler:hover,
+.open>.dropdown-toggle.navbar-toggler:focus,
+.open>.dropdown-toggle.navbar-toggler.focus,
+.navbar-toggler.disabled:hover,
+.navbar-toggler[disabled]:hover,
+fieldset[disabled] .navbar-toggler:hover,
+.navbar-toggler.disabled:focus,
+.navbar-toggler[disabled]:focus,
+fieldset[disabled] .navbar-toggler:focus,
+.navbar-toggler.disabled.focus,
+.navbar-toggler[disabled].focus,
+fieldset[disabled] .navbar-toggler.focus {
+    background: blue;
+    /* ホバーやフォーカス時の背景色を濃い青に設定 */
+    color: rgba(0,0,0,0);
+    /* ホバーやフォーカス時のテキストの色を透明に設定 */
+}
+
+.navbar-toggler.outline {
+    border: 3px solid #007bff;
+    /* アウトラインボタンの線の色を青に設定 */
+    color: #007bff;
+    /* アウトラインボタンのテキストの色を青に設定 */
+}
+/* e ボタンクリック時の色の指定 */
+
+/* s 閉じるボタン */
+.offcanvas-header {
+    position: relative;
+    left: 6%;
+    top: 5%;
+}
+
+.close{
+    background-color: blue;
+    color: #fff;
+    font-size: 1.2rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 5px;
+    border: 1px solid blue;
+}
+/* e 閉じるボタン */
+
+

@@ -1,53 +1,111 @@
-.attendance__container {
+.shop__container {
     margin: 0 auto;
-    height: 80vh;
-    max-width: 1230px;
+    padding-top: 7.5vh;
+    height: 100%;
+    height: 100vh;
     background-color: #f2f2f2;
 }
-.attendance__comment {
-    margin: 0 auto;
-    text-align: center;
-    padding: 30px 15px;
-    max-width: 1230px;
-}
 
-.attendance__content {
+/* s 検索 */
+.shop__inner {
     position: relative;
-    margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
+    left: 30%;
+    width: 64%;
 }
 
-.attendance__panel {
+.search-form {
     display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 90%;
+    justify-content: space-around;
+    gap: 12px;
+    height: 2.5rem;
 }
 
-.attendance__button {
-    display: inline-block;
-    width: 40%;
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.attendance__button-submit {
+.search-form__item-select {
     padding: 5px;
-    width: 80%;
-    height: 100px;
-    border: none;
+    width: 18%;
+    border: 1px solid #ddd;
     border-radius: 3px;
-    background: #1a639c;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
 }
 
-.attendance__button-submit:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.search-form__keyword-input {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    width: 40%;
+    border: 1px solid #E3DED9;
+    background-color: #FBFBFB;
 }
+
+.btn {
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #FFF;
+    font-size: 14px;
+    cursor: pointer;
+    width: 5rem;
+}
+
+.btn:hover {
+    background-color: #88b7db;
+    color: #fff;
+}
+
+/* e 検索 */
+
+/* s カード */
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem 1rem;
+    grid-template-columns: repeat(4,1fr);
+    margin-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.shop__card {
+    width: 100%;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.card__img img {
+    width: 100%;
+}
+
+.card__content {
+    padding: 15px 25px;
+}
+
+.card__name {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.tag {
+    font-size: 14px;
+    text-align: left;
+}
+
+.card__area {
+    display: inline-block;
+    color: #008888;
+}
+
+.card__genre {
+    display: inline-block;
+    margin-left: 20px;
+    color: #888888;
+}
+/* e カード */
+
+
 
 
 

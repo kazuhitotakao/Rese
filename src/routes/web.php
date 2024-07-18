@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/thanks', [RegisteredUserController::class, 'thanks']);
+Route::get('/test', [RegisteredUserController::class, 'test']);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', [ShopController::class, 'index']);
+    Route::get('/search', [ShopController::class, 'search']);
 });
