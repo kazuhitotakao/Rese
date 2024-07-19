@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 @endsection
 
 @section('content')
@@ -32,7 +33,7 @@
         </form>
     </div>
     <div class="wrapper grid">
-    @foreach($shops as $shop)
+        @foreach($shops as $shop)
         <div class="shop__card">
             <div class="card__img">
                 <img src="{{ $shop->image }}" alt="image">
@@ -40,8 +41,18 @@
             <div class="card__content">
                 <div class="card__name">{{ $shop->name }}</div>
                 <div class="tag">
-                    <div class="card__area">{{ $shop->area }}</div>
-                    <div class="card__genre">{{ $shop->genre->name }}</div>
+                    <div class="card__area">#{{ $shop->area }}</div>
+                    <div class="card__genre">#{{ $shop->genre->name }}</div>
+                    <div class="form__wrap">
+                        <form class="detail__form" action="/detail" method="get">
+                            <button class="btn detail__button">詳しく見る</button>
+                        </form>
+                        <form class="like__form" action="" method="get">
+                            <button class="like__form-button" type="submit">
+                                <i id="likeButton" class="lar la-heart like-button"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

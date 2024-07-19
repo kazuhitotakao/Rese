@@ -22,4 +22,5 @@ Route::get('/test', [RegisteredUserController::class, 'test']);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', [ShopController::class, 'index']);
     Route::get('/search', [ShopController::class, 'search']);
+    Route::get('/detail', [ShopController::class, 'detail']);
 });

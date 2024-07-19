@@ -14,6 +14,13 @@ class ShopController extends Controller
         $genres = Genre::all();
         return view('index', compact('shops', 'genres'));
     }
+    
+    public function detail()
+    {
+        $shops = Shop::with('genre')->get();
+        $genres = Genre::all();
+        return view('detail', compact('shops', 'genres'));
+    }
 
     public function search(Request $request)
     {
