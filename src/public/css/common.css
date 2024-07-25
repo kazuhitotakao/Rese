@@ -32,8 +32,8 @@
 /* s ハンバーガーメニュー */
 .navbar {
     position: absolute;
-    left: 6%;
-    top: 5%;
+    left: 4%;
+    top: 3%;
     z-index: 30;
     display: inline-block;
 }

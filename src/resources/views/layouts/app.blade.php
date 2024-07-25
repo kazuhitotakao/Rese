@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Rese</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @yield('css')
 </head>
 
@@ -42,7 +44,7 @@
                         </li>
                         @else
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="">Home</a>
+                            <a class="nav-link text-primary" href="/login">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/register">Registration</a>
@@ -59,6 +61,7 @@
     <main>
         @yield('content')
     </main>
+    @yield('script')
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 

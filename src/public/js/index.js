@@ -18,12 +18,7 @@ document.getElementById('genre-dropdown').addEventListener('blur', function() {
     }
 });
 
-document.getElementById('likeButton').addEventListener('click', function() {
-    if (this.classList.contains('liked')) {
-        this.classList.remove('liked');
-        this.classList.replace('las', 'lar');
-    } else {
-        this.classList.add('liked');
-        this.classList.replace('lar', 'las');
-    }
-});
+
+
+
+

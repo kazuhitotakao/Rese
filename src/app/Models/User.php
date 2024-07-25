@@ -41,4 +41,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class, 'favorites')->withTimestamps();
+    }
+
+    public function reservations()
+    {
+        return $this->belongsToMany(Shop::class, 'reservations')->withPivot('date', 'time_id', 'number_id')->withTimestamps();
+    }
 }

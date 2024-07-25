@@ -21,4 +21,14 @@ class Shop extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    public function reservations()
+    {
+        return $this->belongsToMany(User::class, 'reservations')->withPivot('date', 'time_id', 'number_id')->withTimestamps();
+    }
 }

@@ -12,11 +12,9 @@
 </head>
 
 <body>
-    <form class="like__form" action="/test" method="get">
         <button class="like__form-button" type="submit">
             <i id="likeButton" class="lar la-heart like-button"></i>
         </button>
-    </form>
 
     <script>
         document.getElementById('likeButton').addEventListener('click', function() {
