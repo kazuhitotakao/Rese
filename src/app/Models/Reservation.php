@@ -16,6 +16,10 @@ class Reservation extends Model
         'number_id',
     ];
 
+    protected $dates = [
+        'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

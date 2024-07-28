@@ -40,7 +40,7 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="">Mypage</a>
+                            <a class="nav-link text-primary" href="/my-page">Mypage</a>
                         </li>
                         @else
                         <li class="nav-item">

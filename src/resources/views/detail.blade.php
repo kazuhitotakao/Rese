@@ -8,10 +8,7 @@
 <div class="detail__container">
     <div class="shop__detail">
         <div class="detail__wrap">
-            <form class="detail__form" action="/detail/back" method="get">
-                @csrf
-                <button class="detail__btn-move" type="submit">&lt</button>
-            </form>
+            <button class="detail__btn-move" type="button" onClick="history.back()">&lt</button>
             <div class="detail__name">{{ $shop->name }}</div>
         </div>
         <div class="detail__img">
@@ -32,30 +29,30 @@
             <h2 class="reservation__title">予約</h2>
             <form class="reservation__form" action="/reserve" method="post">
                 @csrf
-                <input type="hidden" name="shop_id" value="{{ $shop->id }}" readonly />
-                <input id="inputDate" class="form reservation__date" type="date" name="date" value="{{ $date->format('Y-m-d') }}">
+                <input type="hidden" name="shops_id" value="{{ $shops_id }}">
+                <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                <input id="inputDate" class="form reservation__date" type="date" name="date" @if($data_flg) value="{{ $date->format('Y-m-d' )}}" @endif>
                 <select id="selectTime" class="form reservation__time" name="time_id">
+                    <option disabled selected>時間を選択してください</option>
                     @foreach($times as $time)
-                    @php
-                    $formattedTime = (new DateTime($time->time))->format('H:i');
-                    @endphp
-                    <option value="{{ $time->id }}" data-time="{{ $formattedTime }}" @if( $time->id==$time_id ) selected @endif>
-                        {{ $formattedTime }}
+                    <option value="{{ $time->id }}" data-time="{{ $time->time->format('H:i') }}" @if( $data_flg && $time->id==$time_id ) selected @endif>
+                        {{ $time->time->format('H:i') }}
                     </option>
                     @endforeach
                 </select>
                 <select id="selectNumber" class="form reservation__number" name="number_id">
+                    <option disabled selected>人数を選択してください</option>
                     @foreach($numbers as $number)
-                    <option value="{{ $number->id }}" @if( $number->id==$number_id ) selected @endif>
+                    <option value="{{ $number->id }}" data-number="{{ $number->number }}" @if( $data_flg && $number->id==$number_id ) selected @endif>
                         {{ $number->number }}
                     </option>
                     @endforeach
                 </select>
-                <div class="wrap__table">
+                <div class=" wrap__table">
                     <table class="reservation__table">
                         <tr class="reservation__row">
                             <th class="reservation__label">Shop</th>
-                            <td class="reservation__data">{{ $shop->name }}</td>
+                            <td class="reservation__data">{{ $shop->name }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $comment }}</td>
                         </tr>
                         <tr class="reservation__row">
                             <th class="reservation__label">Date</th>
@@ -71,7 +68,7 @@
                         </tr>
                     </table>
                 </div>
-                <button class="reservation__button">予約する</button>
+                <button id="reservationButton" class="reservation__button">予約する</button>
 
             </form>
         </div>
@@ -81,27 +78,46 @@
 
 @section('script')
 <script>
-    window.addEventListener('load', function() {
+    window.addEventListener('DOMContentLoaded', function() {
         const inputDate = document.getElementById('inputDate');
-        const selectNumber = document.getElementById('selectNumber');
         const tableDate = document.getElementById('tableDate');
         const tableTime = document.getElementById('tableTime');
         const tableNumber = document.getElementById('tableNumber');
+        const reservationButton = document.getElementById('reservationButton');
 
         tableDate.textContent = inputDate.value;
         tableTime.textContent = $("#selectTime option:selected").data("time");
-        tableNumber.textContent = `${selectNumber.value}人`;
+        tableNumber.textContent = $("#selectNumber option:selected").data("number");
 
-
+        if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
+            reservationButton.disabled = false
+        } else {
+            reservationButton.disabled = true;
+        }
 
         inputDate.addEventListener('change', function() {
             tableDate.textContent = inputDate.value;
+            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
+                reservationButton.disabled = false;
+            } else {
+                reservationButton.disabled = true;
+            }
         });
         selectTime.addEventListener('change', function() {
             tableTime.textContent = $("#selectTime option:selected").data("time");
+            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
+                reservationButton.disabled = false;
+            } else {
+                reservationButton.disabled = true;
+            }
         });
         selectNumber.addEventListener('change', function() {
-            tableNumber.textContent = `${selectNumber.value}人`;
+            tableNumber.textContent = $("#selectNumber option:selected").data("number");
+            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
+                reservationButton.disabled = false;
+            } else {
+                reservationButton.disabled = true;
+            }
         });
     });
 </script>

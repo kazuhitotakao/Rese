@@ -15,12 +15,9 @@
     display: flex;
 }
 
-.detail__form {
-    margin-left: 4rem;
-    padding-top: 0.9rem;
-}
-
 .detail__btn-move{
+    margin-left: 4rem;
+    margin-top: 0.9rem;
     font-size: 20px;
     font-weight: bold;
     color: black;

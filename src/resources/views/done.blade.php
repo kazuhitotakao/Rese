@@ -9,7 +9,9 @@
         <h3 class="card__title">
             ご予約ありがとうございます
         </h3>
-        <form class="card__button" action="/done/back" method="get">
+        <form class="card__button" action="/done-back" method="post">
+            @csrf
+            <input type="hidden" name="shops_id" value="{{ $shops_id }}">
             <button class="card__button-submit">戻る</button>
         </form>
     </div>

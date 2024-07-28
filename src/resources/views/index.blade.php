@@ -63,7 +63,7 @@
                         @endphp
                         @endif
                         @endforeach
-                        @if(!$isMatched)
+                        @if($isMatched == false)
                         <i data-id="{{ $shop->id }}" class="lar la-heart like-button"></i>
                         @endif
                     </div>
