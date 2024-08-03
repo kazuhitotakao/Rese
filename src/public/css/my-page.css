@@ -81,6 +81,20 @@
     font-weight: bold;
 }
 
+/* s モーダルウィンドウ */
+.la-times-circle {
+    cursor: pointer;
+}
+
+.modal-body {
+    font-size: 1.2rem;
+}
+
+.modal-position{ 
+    top: 20%;
+}
+
+/* e モーダルウィンドウ */
 
 /* e reservation */
 

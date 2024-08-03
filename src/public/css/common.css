@@ -93,8 +93,8 @@ fieldset[disabled] .navbar-toggler.focus {
 /* s 閉じるボタン */
 .offcanvas-header {
     position: relative;
-    left: 6%;
-    top: 5%;
+    left: 4%;
+    top: 3%;
 }
 
 .close{

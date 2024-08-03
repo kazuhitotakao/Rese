@@ -21,7 +21,7 @@
             <div class=" wrap__table">
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
                 <span class="table__title">予約{{ $count }}</span>
-                <i class="lar la-times-circle"></i>
+                <i class="lar la-times-circle" data-bs-toggle="modal" data-bs-target="#exampleModal" data-reservation-id="{{ $reservation->id }}"></i>
                 <table class="reservation__table">
                     <tr class="reservation__row">
                         <th class="reservation__label">Shop</th>
@@ -41,6 +41,32 @@
                     </tr>
                 </table>
             </div>
+
+            <div class="container">
+                <!-- キャンセル確認モーダル -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-position">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">予約の取消しについて</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                予約をキャンセルしてもよろしいですか？
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/cancel" method="post">
+                                @csrf
+                                <input type="hidden" name="reservation_id" id="reservationId">
+                                <button type="submit" class="btn btn-primary yes-button">はい</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @php $count++ ; @endphp
             @endforeach
         </div>
@@ -80,6 +106,7 @@
 </div>
 @endsection
 
+
 @section('script')
 <script>
     $(document).ready(function() {
@@ -107,9 +134,21 @@
             }).done(function(res) {
                 console.log(res);
             }).fail(function() {
-                alert('通信の失敗をしました');
+                alert('通信の失敗をしました。\nお手数ですが、ログアウトしてやり直してください');
             });
         });
     });
+
+    // modal //
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('exampleModal');
+        modal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const reservationId = button.getAttribute('data-reservation-id');
+            const hiddenInput = document.getElementById('reservationId');
+            hiddenInput.value = reservationId;
+        });
+    });
+
 </script>
 @endsection

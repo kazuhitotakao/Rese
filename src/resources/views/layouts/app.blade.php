@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/f094d395e0.js" crossorigin="anonymous"></script>
     @yield('css')
 </head>
 
@@ -61,6 +63,7 @@
     <main>
         @yield('content')
     </main>
+
     @yield('script')
     <script src="{{ mix('js/app.js') }}"></script>
 </body>

@@ -81,4 +81,11 @@ class ReservationController extends Controller
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
         return view('index', compact('shops', 'search', 'genres', 'common_shops_id'));
     }
+
+    public function cancel(Request $request)
+    {
+        $reservation_id = $request->reservation_id;
+        Reservation::find($reservation_id)->delete();
+        return redirect('/my-page');
+    }
 }

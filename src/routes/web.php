@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/favorite', [FavoriteController::class, 'favorite']);
     Route::post('/detail/{shop_id}', [ReservationController::class, 'detail'])->name('detail');
     Route::post('/reserve', [ReservationController::class, 'reserve']);
+    Route::post('/cancel', [ReservationController::class, 'cancel']);
     Route::post('/done-back', [ReservationController::class, 'doneBack']);
     Route::get('/my-page', [ShopController::class, 'myPage']);
 });
