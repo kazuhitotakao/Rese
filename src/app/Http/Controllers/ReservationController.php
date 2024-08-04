@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use App\Models\Favorite;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class ReservationController extends Controller
         return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'time_id', 'number_id', 'date', 'comment', 'data_flg'));
     }
 
-    public function reserve(Request $request)
+    public function reserve(ReservationRequest $request)
     {   
         $shops_id = $request->shops_id;
         $shop_id = $request->shop_id;

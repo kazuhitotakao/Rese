@@ -36,9 +36,9 @@
                             <a class="nav-link text-primary" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <form class="form" action="/logout" method="post">
+                            <form class="form__logout" action="/logout" method="post">
                                 @csrf
-                                <button style="width: 100%;" class="nav-link text-primary nav-button">Logout</button>
+                                <button class="nav-link text-primary nav-button">Logout</button>
                             </form>
                         </li>
                         <li class="nav-item">

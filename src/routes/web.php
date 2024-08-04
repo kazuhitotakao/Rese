@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 Route::get('/thanks', [RegisteredUserController::class, 'thanks']);
 Route::get('/test', [RegisteredUserController::class, 'test']);
 
@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', [ShopController::class, 'index']);
     Route::get('/search', [ShopController::class, 'search']);
     Route::post('/favorite', [FavoriteController::class, 'favorite']);
+    Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])->name('detail');
     Route::post('/detail/{shop_id}', [ReservationController::class, 'detail'])->name('detail');
     Route::post('/reserve', [ReservationController::class, 'reserve']);
     Route::post('/cancel', [ReservationController::class, 'cancel']);

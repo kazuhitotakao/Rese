@@ -31,15 +31,25 @@
                 @csrf
                 <input type="hidden" name="shops_id" value="{{ $shops_id }}">
                 <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                <input id="inputDate" class="form reservation__date" type="date" name="date" @if($data_flg) value="{{ $date->format('Y-m-d' )}}" @endif>
+                <input id="inputDate" class="form reservation__date" type="date" name="date" @if($data_flg) value="{{ $date->format('Y-m-d' )}}" @endif value="{{ old('date') }}">
+                <div class="form__error">
+                    @error('date')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <select id="selectTime" class="form reservation__time" name="time_id">
                     <option disabled selected>時間を選択してください</option>
                     @foreach($times as $time)
-                    <option value="{{ $time->id }}" data-time="{{ $time->time->format('H:i') }}" @if( $data_flg && $time->id==$time_id ) selected @endif>
+                    <option value="{{ $time->id }}" data-time="{{ $time->time->format('H:i') }}" @if($time->id == old('time_id')) selected @endif @if( $data_flg && $time->id==$time_id ) selected @endif>
                         {{ $time->time->format('H:i') }}
                     </option>
                     @endforeach
                 </select>
+                <div class="form__error">
+                    @error('time_id')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <select id="selectNumber" class="form reservation__number" name="number_id">
                     <option disabled selected>人数を選択してください</option>
                     @foreach($numbers as $number)
@@ -48,6 +58,11 @@
                     </option>
                     @endforeach
                 </select>
+                <div class="form__error">
+                    @error('number_id')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <div class=" wrap__table">
                     <table class="reservation__table">
                         <tr class="reservation__row">
@@ -89,35 +104,14 @@
         tableTime.textContent = $("#selectTime option:selected").data("time");
         tableNumber.textContent = $("#selectNumber option:selected").data("number");
 
-        if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
-            reservationButton.disabled = false
-        } else {
-            reservationButton.disabled = true;
-        }
-
         inputDate.addEventListener('change', function() {
             tableDate.textContent = inputDate.value;
-            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
-                reservationButton.disabled = false;
-            } else {
-                reservationButton.disabled = true;
-            }
         });
         selectTime.addEventListener('change', function() {
             tableTime.textContent = $("#selectTime option:selected").data("time");
-            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
-                reservationButton.disabled = false;
-            } else {
-                reservationButton.disabled = true;
-            }
         });
         selectNumber.addEventListener('change', function() {
             tableNumber.textContent = $("#selectNumber option:selected").data("number");
-            if (tableDate.textContent.trim() !== "" && tableTime.textContent.trim() !== "" && tableNumber.textContent.trim() !== "") {
-                reservationButton.disabled = false;
-            } else {
-                reservationButton.disabled = true;
-            }
         });
     });
 </script>
