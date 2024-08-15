@@ -42,8 +42,5 @@ class RegisteredUserController extends Controller
         return view('auth.thanks');
     }
 
-    public function test()
-    {
-        return view('test');
-    }
+
 }

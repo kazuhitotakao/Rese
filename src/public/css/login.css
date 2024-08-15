@@ -1,5 +1,4 @@
 .login__content{
-    text-align: center;
     margin: 0 auto;
     padding: 20vh 15px;
     height: 100vh;
@@ -8,8 +7,8 @@
 
 .card {
     margin: 3vh auto;
-    width: 30vw;
-    height: 41vh;
+    height: 16rem;
+    width: 25rem;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     background-color: #fff;
@@ -33,7 +32,7 @@
 .form {
     margin: 20px auto;
     width: 100%;
-    text-align: center;
+    position: relative;
 }
 
 .form__group {
@@ -57,14 +56,15 @@
     border: none;
     border-bottom: 2px solid #000;
     outline: none;
+    margin-left: 1%;
 }
 
 .form__input--text::before{
     content:'';
     font-family: 'FontAwesome';
-    padding: 5px 10px;
     font-size: 1.5rem;
     vertical-align: middle;
+    margin-left: 5% ;
 }
 
 .input__email::before{
@@ -73,11 +73,12 @@
 
 .input__password::before{
     content:'\f023';
+    margin-right: 3px;
 }
 
 .form__button {
-    margin-left: 72%;
-    margin-top: 10px;
+    position: absolute;
+    right: 10%;
 }
 
 .form__button-submit {
@@ -88,4 +89,10 @@
     background: #305dff;
     color: #fff;
     cursor: pointer;
+}
+
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+
 }

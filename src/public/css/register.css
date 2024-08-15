@@ -1,4 +1,4 @@
-.register__content{
+.register__content {
     text-align: center;
     margin: 0 auto;
     padding: 20vh 15px;
@@ -8,22 +8,21 @@
 
 .card {
     margin: 3vh auto;
-    width: 35vw;
-    height: 51vh;
+    height: 20rem;
+    width: 25rem;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     background-color: #fff;
     border: none;
 }
 
-.register-form__heading{
+.register-form__heading {
     text-align: left;
     padding: 15px 20px;
     color: #fff;
     background-color: #305dff;
     border-radius: 5px 5px 0 0;
     border: none;
-
 }
 
 .register-form__heading-text {
@@ -39,7 +38,6 @@
 .form__group {
     margin-bottom: 5px;
 }
-
 
 .form__error {
     height: 18px;
@@ -59,24 +57,24 @@
     outline: none;
 }
 
-.form__input--text::before{
-    content:'';
-    font-family: 'FontAwesome';
+.form__input--text::before {
+    content: "";
+    font-family: "FontAwesome";
     padding: 5px 10px;
     font-size: 1.5rem;
     vertical-align: middle;
 }
 
-.input__name::before{
-    content:'\f007';
+.input__name::before {
+    content: "\f007";
 }
 
-.input__email::before{
-    content:'\f0e0';
+.input__email::before {
+    content: "\f0e0";
 }
 
-.input__password::before{
-    content:'\f023';
+.input__password::before {
+    content: "\f023";
 }
 
 .form__button {

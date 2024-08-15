@@ -9,8 +9,10 @@ use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\Time;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 
 class ShopController extends Controller
@@ -29,10 +31,21 @@ class ShopController extends Controller
         session(['search_results' => $shops]);
         session(['search' => $search]);
 
+        $imagesUrl = [];
+        foreach ($shops as $shop) {
+            if (strpos($shop->image, 'http') === 0) {
+                // 公開URLの場合
+                $imagesUrl[] = $shop->image;
+            } else {
+                // ストレージ内の画像の場合
+                $imagesUrl[] = Storage::url($shop->image);
+            }
+        }
+
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'genres', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'imagesUrl', 'genres', 'common_shops_id'));
     }
 
     public function search(Request $request)
@@ -55,10 +68,21 @@ class ShopController extends Controller
         session(['search' => $search]);
         $genres = Genre::all();
 
+        $imagesUrl = [];
+        foreach ($shops as $shop) {
+            if (strpos($shop->image, 'http') === 0) {
+                // 公開URLの場合
+                $imagesUrl[] = $shop->image;
+            } else {
+                // ストレージ内の画像の場合
+                $imagesUrl[] = Storage::url($shop->image);
+            }
+        }
+
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'genres', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'genres', 'imagesUrl', 'common_shops_id'));
     }
 
     private function getSearchQuery($request, $query)
@@ -78,10 +102,52 @@ class ShopController extends Controller
         return $query;
     }
 
+    public function detail(Request $request)
+    {
+        $shop_id = $request->shop_id;
+        $shops_id = session('search_results')->pluck('id');
+        $user_reservation = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
+        $shop = Shop::with('genre')->where('id', $shop_id)->first();
+        $user = User::find(Auth::id());
+        $user_id = User::find(Auth::id())->id;
+
+        $times = Time::all();
+        $numbers = Number::all();
+
+        if ($user_reservation == null) {
+            $data_flg = false;
+            $date = Carbon::today();
+            $time_id = Time::first()->id;
+            $number_id = Number::first()->id;
+        } else {
+            $data_flg = true;
+            $date = $user_reservation->date;
+            $time_id = $user_reservation->time_id;
+            $number_id = $user_reservation->number_id;
+        }
+
+        if ($user_reservation == null) {
+            $comment = null;
+        } else {
+            $comment = '※予約済※';
+        }
+
+        if (strpos($shop->image, 'http') === 0) {
+            // 公開URLの場合
+            $imagesUrl = $shop->image;
+        } else {
+            // ストレージ内の画像の場合
+            $imagesUrl = Storage::url($shop->image);
+        }
+
+        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'time_id', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl'));
+    }
+
     public function myPage(Request $request)
     {
         $user = User::find(Auth::id());
         $shops = Shop::with('genre')->get();
+
         $reservations = Reservation::where('user_id', Auth::id())->orderBy('date')->orderBy('time_id')->get();
         $shops_name = [];
         foreach ($reservations as $reservation) {
@@ -95,14 +161,39 @@ class ShopController extends Controller
             $times[] = $time->first();
         }
 
+        $times_id = [];
+        foreach ($reservations as $reservation) {
+            $time = Time::where('id', $reservation->time_id)->pluck('id');
+            $times_id[] = $time->first();
+        }
+
         $numbers = [];
         foreach ($reservations as $reservation) {
             $number = Number::where('id', $reservation->number_id)->pluck('number');
             $numbers[] = $number->first();
         }
 
+        $numbers_id = [];
+        foreach ($reservations as $reservation) {
+            $number = Number::where('id', $reservation->number_id)->pluck('id');
+            $numbers_id[] = $number->first();
+        }
+
+        $imagesUrl = [];
+        foreach ($shops as $shop) {
+            if (strpos($shop->image, 'http') === 0) {
+                // 公開URLの場合
+                $imagesUrl[] = $shop->image;
+            } else {
+                // ストレージ内の画像の場合
+                $imagesUrl[] = Storage::url($shop->image);
+            }
+        }
 
         $user_favorite_shops_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
-        return view('my-page', compact('user', 'shops', 'reservations', 'shops_name', 'times', 'numbers', 'user_favorite_shops_id'));
+        $times_all = Time::all();
+        $numbers_all = Number::all();
+
+        return view('my-page', compact('user', 'shops', 'reservations', 'shops_name', 'times', 'times_id', 'numbers', 'numbers_id', 'times_all', 'numbers_all', 'user_favorite_shops_id', 'imagesUrl'));
     }
 }

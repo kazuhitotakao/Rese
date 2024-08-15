@@ -44,9 +44,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/my-page">Mypage</a>
                         </li>
+                        @can('register')
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="/admin-page">Admin page</a>
+                        </li>
+                        @endcan
+                        @can('owner')
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="/owner-page">ShopInfo</a>
+                        </li>
+                        @endcan
                         @else
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/login">Home</a>
+                            <a class="nav-link text-primary" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/register">Registration</a>

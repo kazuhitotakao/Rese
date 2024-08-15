@@ -12,7 +12,11 @@
             <div class="detail__name">{{ $shop->name }}</div>
         </div>
         <div class="detail__img">
-            <img src="{{ $shop->image }}" alt="image">
+            @if(empty($shop->image))
+            <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+            @else
+            <img class="card__img-img" src="{{ $imagesUrl }}" alt="image">
+            @endif
         </div>
         <div class="detail__content">
             <div class="tag">
@@ -84,7 +88,6 @@
                     </table>
                 </div>
                 <button id="reservationButton" class="reservation__button">予約する</button>
-
             </form>
         </div>
     </div>
@@ -98,7 +101,6 @@
         const tableDate = document.getElementById('tableDate');
         const tableTime = document.getElementById('tableTime');
         const tableNumber = document.getElementById('tableNumber');
-        const reservationButton = document.getElementById('reservationButton');
 
         tableDate.textContent = inputDate.value;
         tableTime.textContent = $("#selectTime option:selected").data("time");

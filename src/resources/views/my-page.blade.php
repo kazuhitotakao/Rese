@@ -7,9 +7,21 @@
 
 @section('content')
 <script src="{{ asset('js/index.js')}}" defer></script>
+
 <div class="my-page__wrap">
     <div class="user-name">
         <h2 class="user-name__content">{{ $user->name }}さん</h2>
+    </div>
+    <div class="alert">
+        @if ($errors->any())
+        <div class="alert--danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     </div>
     <div class="my-page__container">
         <div class="my-page__reservation">
@@ -21,7 +33,8 @@
             <div class=" wrap__table">
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
                 <span class="table__title">予約{{ $count }}</span>
-                <i class="lar la-times-circle" data-bs-toggle="modal" data-bs-target="#exampleModal" data-reservation-id="{{ $reservation->id }}"></i>
+                <a href="#{{ $reservation->id }}change"><i class="lar la-edit"></i></a>
+                <a href="#{{ $reservation->id }}cancel" class="circle"><i class="lar la-times-circle"></i></a>
                 <table class="reservation__table">
                     <tr class="reservation__row">
                         <th class="reservation__label">Shop</th>
@@ -42,45 +55,120 @@
                 </table>
             </div>
 
-            <div class="container">
-                <!-- キャンセル確認モーダル -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-position">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">予約の取消しについて</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                予約をキャンセルしてもよろしいですか？
-                            </div>
-                            <div class="modal-footer">
-                                <form action="/cancel" method="post">
+            <!-- s キャンセル確認モーダル -->
+            <div class="modal-wrapper" id="{{ $reservation->id }}cancel">
+                <a href="#!" class="modal-overlay"></a>
+                <div class="modal-window">
+                    <div class="modal-content">
+                        <h2 class="cancel__title">予約のキャンセル</h2>
+                        <div class="cancel__text">
+                            <span>予約をキャンセルしてもよろしいですか？</span>
+                        </div>
+                        <div class="cancel__btn">
+                            <form class="cancel__form" action="/cancel" method="post">
                                 @csrf
-                                <input type="hidden" name="reservation_id" id="reservationId">
-                                <button type="submit" class="btn btn-primary yes-button">はい</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                            </div>
+                                <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                                <button type="submit" class="modal__btn">はい</button>
+                            </form>
+                            <a href="#!" class="modal__btn--a">いいえ</a>
                         </div>
                     </div>
+                    <a href="#!" class="modal-close">×</a>
                 </div>
             </div>
+            <!-- e キャンセル確認モーダル -->
 
+            <!-- s 予約変更モーダル -->
+            <div class="modal-wrapper" id="{{ $reservation->id }}change">
+                <a href="#!" class="modal-overlay"></a>
+                <div class="modal-window">
+                    <div class="modal-content">
+                        <h2 class="reservation-modal__title">予約の変更</h2>
+                        <form class="reservation__form" action="/reserve/change" method="post">
+                            @csrf
+                            <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                            <table class="reservation-modal__table">
+                                <tr class="reservation-modal__row">
+                                    <th class="reservation-modal__label">Shop</th>
+                                    <td class="reservation-modal__data">
+                                        <div class="form form__shop-name">{{ $shops_name[$count-1] }}</div>
+                                    </td>
+                                </tr>
+                                <tr class="reservation-modal__row">
+                                    <th class="reservation-modal__label">Date</th>
+                                    <td class="reservation-modal__data">
+                                        <input class="form reservation__date" type="date" name="date" value="{{ $reservation->date->format('Y-m-d') }}">
+                                        <div class="form__error">
+                                            @error('date')
+                                            {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="reservation-modal__row">
+                                    <th class="reservation-modal__label">Time</th>
+                                    <td class="reservation-modal__data">
+                                        <select class="form reservation__time" name="time_id">
+                                            <option disabled selected>時間を選択してください</option>
+                                            @foreach($times_all as $time)
+                                            <option value="{{ $time->id }}" @if( $time->id==$times_id[$count-1] ) selected @endif>
+                                                {{ $time->time->format('H:i') }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <div class=" form__error">
+                                            @error('time_id')
+                                            {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="reservation-modal__row">
+                                    <th class="reservation-modal__label">Number</th>
+                                    <td class="reservation-modal__data">
+                                        <select class="form reservation__number" name="number_id">
+                                            <option disabled selected>人数を選択してください</option>
+                                            @foreach($numbers_all as $number)
+                                            <option value="{{ $number->id }}" @if( $number->id==$numbers_id[$count-1] ) selected @endif>
+                                                {{ $number->number  }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <div class="form__error">
+                                            @error('number_id')
+                                            {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="reservation-modal__button">変更する</button>
+                        </form>
+                    </div>
+                    <a href="#!" class="modal-close">×</a>
+                </div>
+            </div>
+            <!-- e 予約変更モーダル -->
             @php $count++ ; @endphp
             @endforeach
+
         </div>
         <div class="my-page__shop">
             <div class="shop__title">
                 <h2 class="shop__title-content">お気に入り店舗</h2>
             </div>
             <div class="wrapper grid">
+                @php $count = 1; @endphp
                 @foreach($shops as $shop)
                 @foreach($user_favorite_shops_id as $user_favorite_shop_id)
                 @if($shop->id === $user_favorite_shop_id)
                 <div class="shop__card">
                     <div class="card__img">
-                        <img src="{{ $shop->image }}" alt="image">
+                        @if(empty($shop->image))
+                        <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                        @else
+                        <img class="card__img-img" src="{{ $imagesUrl[$count-1] }}" alt="image">
+                        @endif
                     </div>
                     <div class="card__content">
                         <div class="card__name">{{ $shop->name }}</div>
@@ -88,8 +176,7 @@
                             <div class="card__area">#{{ $shop->area }}</div>
                             <div class="card__genre">#{{ $shop->genre->name }}</div>
                             <div class="form__wrap">
-                                <form class="detail__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}" method="post">
-                                    @csrf
+                                <form class="detail__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}" method="get">
                                     <button class="btn detail__button">詳しく見る</button>
                                 </form>
                                 <i data-id="{{ $shop->id }}" class="las la-heart like-button liked"></i>
@@ -99,14 +186,13 @@
                 </div>
                 @endif
                 @endforeach
+                @php $count++ ; @endphp
                 @endforeach
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-
 @section('script')
 <script>
     $(document).ready(function() {
@@ -115,40 +201,30 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $('.like-button').on('click', function() {
             const shop_id = $(this).data('id');
-            if (this.classList.contains('liked')) {
-                this.classList.remove('liked');
-                this.classList.replace('las', 'lar');
+            if ($(this).hasClass('liked')) {
+                $(this).removeClass('liked');
+                $(this).removeClass('las').addClass('lar');
             } else {
-                this.classList.add('liked');
-                this.classList.replace('lar', 'las');
+                $(this).addClass('liked');
+                $(this).removeClass('lar').addClass('las');
             }
+
             $.ajax({
                 url: '/favorite',
                 type: 'POST',
                 data: {
                     shop_id: shop_id
                 },
-                dataType: "json",
+                dataType: "json"
             }).done(function(res) {
                 console.log(res);
             }).fail(function() {
-                alert('通信の失敗をしました。\nお手数ですが、ログアウトしてやり直してください');
+                alert('通信の失敗をしました');
             });
         });
     });
-
-    // modal //
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('exampleModal');
-        modal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const reservationId = button.getAttribute('data-reservation-id');
-            const hiddenInput = document.getElementById('reservationId');
-            hiddenInput.value = reservationId;
-        });
-    });
-
 </script>
 @endsection

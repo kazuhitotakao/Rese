@@ -1,0 +1,283 @@
+.alert-info {
+    padding: 10px 10px;
+    color: red;
+    font-weight: bold;
+}
+
+.owner-page__wrap {
+    background-color: #f2f2f2;
+}
+
+.owner-page__container {
+    display: flex;
+}
+
+.user-name {
+    padding-top: 6rem;
+    text-align: center;
+}
+
+.user-name__content {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* s ショップ */
+.owner-page__shop {
+    width: 50vw;
+    padding-top: 1.5rem;
+    min-height: 100vh;
+}
+
+.shop__title {
+    margin-left: 5.5rem;
+}
+
+.shop__title-content {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+/* s card */
+.shop__card {
+    width: 90%;
+    background-color: #f2f2f2;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: 4rem;
+    height: 110vh;
+}
+
+/* s image */
+.image__content {
+    display: flex;
+    justify-content: center;
+}
+
+.card__img-img {
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    height: 30vh;
+    border-radius: 5px 5px 0 0;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.form-file {
+    margin-top: 1vh;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 6px;
+    width: 20vw;
+    border-radius: 3px;
+}
+
+.form-file::file-selector-button {
+    width: 7rem;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #2384cf;;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+}
+
+
+
+.form__button-image {
+    width: 4rem;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #2384cf;;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* e image */
+
+.card__content {
+    padding: 15px 25px 0 0;
+}
+
+.card__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tag {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.form__group {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 3px 6px;
+    width: 30vw;
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.form__group-title {
+    padding-top: 3px;
+    width: 5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form__error {
+    font-size: 1rem;
+    color: red;
+    text-align: left;
+}
+
+.select__form {
+    padding: 3px 3px;
+}
+
+.card__overview {
+    width: 30vw;
+    height: 10rem;
+    overflow: auto; /* スクロールバーを表示する */
+}
+
+.form__button {
+    text-align: right;
+}
+
+.form__button-submit {
+    margin-right: 2rem;
+    width: 4rem;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #305dff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* e カード */
+
+/* e ショップ */
+
+/* s reservation */
+.owner-page__reservation {
+    width: 50vw;
+    padding-top: 1.5rem;
+    min-height: 100vh;
+}
+
+.reservation__title {
+    padding: 0 5.5rem;
+}
+
+.reservation__title-content {
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+.wrap__table {
+    position: relative;
+    width: 80%;
+    background-color: #305dff;
+    margin: 0 5.5rem 1rem;
+    padding: 1rem;
+    color: #fff;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.clock__icon {
+    width: 1.5rem;
+}
+
+.table__title {
+    vertical-align: middle;
+    margin-left: 1.5rem;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.reservation__table {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.reservation__row {
+    height: 1.7rem;
+    font-size: 1.2rem;
+}
+
+.reservation__label {
+    width: 25%;
+}
+
+.reservation__data {
+    width: 75%;
+    font-weight: bold;
+}
+
+/* e reservation */
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+    .owner-page__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .owner-page__shop {
+        width: 40rem;
+        padding-top: 1.5rem;
+        min-height: 100vh;
+    }
+
+    .form-file {
+        margin-top: 5vh;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 3px 6px;
+        width: 20rem;
+        border-radius: 3px;
+    }
+
+    .form {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 3px 6px;
+        width: 20rem;
+        border: 1px solid gray;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+
+    .owner-page__reservation {
+        width: 40rem;
+        padding-top: 1.5rem;
+        min-height: 100vh;
+    }
+}
+/* 480px以下 */
+@media screen and (max-width: 480px) {
+}

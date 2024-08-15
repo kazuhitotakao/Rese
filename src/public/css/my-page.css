@@ -1,3 +1,27 @@
+
+.alert {
+    text-align: center;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.alert--danger {
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 90%;
+    margin-left: 5%;
+    align-items: center;
+    height: 3rem;
+}
+
+.alert--danger ul {
+    list-style-type: none;
+    padding: 0.5rem;
+}
+
 .my-page__wrap {
     background-color: #f2f2f2;
 }
@@ -33,7 +57,7 @@
     width: 100%;
 }
 
-.wrap__table{
+.wrap__table {
     position: relative;
     width: 80%;
     background-color: #305dff;
@@ -56,15 +80,20 @@
     font-size: 1.2rem;
 }
 
+.la-edit {
+    font-size: 2rem;
+    position: absolute;
+    top: 6%;
+    right: 20%;
+    color: #fff;
+}
+
 .la-times-circle {
     font-size: 2rem;
     position: absolute;
-    top:    7%;
-    left: 90%;
-}
-.reservation__row {
-    height: 1.7rem;
-    font-size: 1.2rem;
+    top: 7%;
+    right: 5%;
+    color: #fff;
 }
 
 .reservation__table {
@@ -72,29 +101,210 @@
     width: 100%;
 }
 
-.reservation__label {
-    width: 25%;
-}
-
-.reservation__data {
-    width: 75%;
-    font-weight: bold;
-}
-
-/* s モーダルウィンドウ */
-.la-times-circle {
-    cursor: pointer;
-}
-
-.modal-body {
+.reservation__row {
+    height: 1.7rem;
     font-size: 1.2rem;
 }
 
-.modal-position{ 
-    top: 20%;
+.reservation__label {
+    width: 32%;
 }
 
-/* e モーダルウィンドウ */
+.reservation__data {
+    width: 68%;
+    font-weight: bold;
+}
+
+/* s モーダル共通 */
+.modal-wrapper {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 40px 10px;
+    text-align: center;
+}
+
+.modal-wrapper:not(:target) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s, visibility 0.1s;
+}
+
+.modal-wrapper:target {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.1s, visibility 0.1s;
+}
+
+.modal-wrapper::after {
+    display: inline-block;
+    height: 100%;
+    margin-left: -0.05em;
+    vertical-align: middle;
+    content: "";
+}
+
+.modal-wrapper .modal-window {
+    box-sizing: border-box;
+    display: inline-block;
+    z-index: 20;
+    position: relative;
+    width: 400px;
+    max-width: 600px;
+    padding: 30px 30px 15px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    vertical-align: middle;
+}
+
+.modal-wrapper .modal-window .modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.modal-overlay {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-wrapper .modal-close {
+    z-index: 20;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    color: #95979c !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+.modal-wrapper .modal-close:hover {
+    color: #2b2e38 !important;
+}
+
+/* e モーダル共通 */
+/* s キャンセル確認モーダル */
+.cancel__title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.cancel__text {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cancel__btn {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.modal__btn {
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 3px;
+}
+
+.modal__btn--a {
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 7rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 0;
+    border-radius: 3px;
+}
+/* e キャンセル確認モーダル */
+/* s 予約変更モーダル */
+
+.reservation-modal__title{
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.reservation-modal__table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.reservation-modal__row {
+    height: 1.7rem;
+    font-size: 1.2rem;
+}
+
+.reservation-modal__label {
+    width: 25%;
+}
+
+.reservation-modal__data {
+    width: 75%;
+    font-weight: bold;
+}   
+
+.reservation-modal__button {
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 3px;
+    margin: 20px auto;
+}
+
+.form{
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #000;
+    height: 2rem;
+    padding: 0rem 0.5rem;
+    font-size: 1.2rem;
+}
+
+.form__shop-name {
+    border: none;
+}
+
+.form__error{
+    font-size: 1rem;
+    color: red;
+    text-align: left;
+
+}
+
+/* e 予約変更モーダル */
 
 /* e reservation */
 
@@ -210,7 +420,7 @@
     display: block;
     border: none;
     background-color: #2384cf;
-    color: #FFF;
+    color: #fff;
     font-size: 14px;
     cursor: pointer;
     width: 6rem;
@@ -222,3 +432,58 @@
 }
 /* e ショップ */
 
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+.my-page__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem 1rem;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 1.5rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.my-page__reservation {
+    width: 30rem;
+    padding-top: 1.5rem;
+    min-height: 100vh;
+}
+
+.my-page__shop {
+    width: 20rem;
+    padding-top: 1.5rem;
+    min-height: 100vh;
+}
+
+.wrap__table {
+    position: relative;
+    width: 80%;
+    background-color: #305dff;
+    margin: 1.5rem 1rem;
+    padding: 1rem;
+    color: #fff;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.reservation__title {
+    padding: 0 1rem;
+}
+
+}
+
+/* 480px以下 */
+@media screen and (max-width: 480px) {
+
+.my-page__reservation {
+    width: 25rem;
+    padding-top: 1.5rem;
+    min-height: 100vh;
+}
+}

@@ -28,18 +28,25 @@
                 @endforeach
             </select>
             <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search..." value="{{ $search['keyword'] }}">
-            <input class="btn" type="submit" value="検索">
-            <input class="btn" type="submit" value="リセット" name="reset">
+            <div class="btn__wrap">
+                <input class="btn" type="submit" value="検索">
+                <input class="btn" type="submit" value="リセット" name="reset">
+            </div>
         </form>
     </div>
     <div class="wrapper grid">
+        @php $count = 1; @endphp
         @foreach($shops as $shop)
         @php
         $isMatched = false;
         @endphp
         <div class="shop__card">
             <div class="card__img">
-                <img src="{{ $shop->image }}" alt="image">
+                @if(empty($shop->image))
+                <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                @else
+                <img class="card__img-img" src="{{ $imagesUrl[$count-1] }}" alt="image">
+                @endif
             </div>
             <div class="card__content">
                 <div class="card__name">{{ $shop->name }}</div>
@@ -47,10 +54,10 @@
                     <div class="card__area">#{{ $shop->area }}</div>
                     <div class="card__genre">#{{ $shop->genre->name }}</div>
                     <div class="form__wrap">
-                        <form class="detail__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}" method="post">
-                            @csrf
+                        <form class="detail__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}" method="get">
                             <button class="btn detail__button">詳しく見る</button>
                         </form>
+                        @can('register-only')
                         @foreach($common_shops_id as $common_shop_id)
                         @if($shop->id === $common_shop_id)
                         @php
@@ -65,10 +72,12 @@
                         @if($isMatched == false)
                         <i data-id="{{ $shop->id }}" class="lar la-heart like-button"></i>
                         @endif
+                        @endcan
                     </div>
                 </div>
             </div>
         </div>
+        @php $count++ ; @endphp
         @endforeach
     </div>
 </div>
