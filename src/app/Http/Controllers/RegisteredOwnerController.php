@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,8 +19,14 @@ class RegisteredOwnerController  extends Controller
 
     public function adminPage()
     {
-        $owners = User::permission('owner')->get();
-        return view('auth.admin-page', compact('owners'));
+        // $owners = User::permission('owner')->get();
+        $users = User::all();
+        $roles = [];
+        foreach ($users as $user) {
+            $roles = array_merge($roles, $user->getRoleNames()->toArray());
+        }
+        $roles_select = Role::all();
+        return view('auth.admin-page', compact('users', 'roles', 'roles_select'));
     }
 
     public function ownerRegister(Request $request)
@@ -60,9 +67,7 @@ class RegisteredOwnerController  extends Controller
         $user = User::create($form);
         $user->assignRole('owner');
 
-        $owners = User::permission('owner')->get();
-
-        return view('auth.admin-page', compact('owners'));
+        return redirect('/admin-page')->with('message', $user->name . 'さんを店舗代表者として登録しました。');
     }
 
     public function search(Request $request)
@@ -70,15 +75,35 @@ class RegisteredOwnerController  extends Controller
         if ($request->has('reset')) {
             return redirect('/admin-page');
         }
+        
+        $query = User::query();
+        $query = $this->getSearchQuery($request, $query);
+        $users = $query->get();
 
-        if (empty($request->keyword)) {
-            $owners = User::permission('owner')->get();
-        } else {
-            $owners = User::permission('owner')
-                ->where('name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('email', 'like', '%' . $request->keyword . '%')
-                ->get();
+        $roles = [];
+        foreach ($users as $user) {
+            $roles = array_merge($roles, $user->getRoleNames()->toArray());
         }
-        return view('auth.admin-page', compact('owners'));
+
+        $roles_select = Role::all();
+        return view('auth.admin-page', compact('users', 'roles', 'roles_select'));
+    }
+
+    private function getSearchQuery($request, $query)
+    {
+
+        if (!empty($request->keyword)) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        if (!empty($request->keyword)) {
+            $query->orWhere('email', 'like', '%' . $request->keyword . '%');
+        }
+
+        if (!empty($request->role)) {
+            $query->role($request->role);
+        }
+        
+        return $query;
     }
 }

@@ -35,7 +35,7 @@
                             </div>
                             <div class="wrap__img">
                                 @if (session('messageImg'))
-                                <div class=" alert-info">
+                                <div class=" alert__info">
                                     {!! session('messageImg') !!}
                                 </div>
                                 @endif
@@ -145,7 +145,7 @@
                         </div>
                     </form>
                     @if (session('message'))
-                    <div class=" alert-info">
+                    <div class=" alert__info">
                         {!! session('message') !!}
                     </div>
                     @endif
@@ -156,11 +156,27 @@
             <div class="reservation__title">
                 <h2 class="reservation__title-content">予約情報</h2>
             </div>
+            <div class="alert--danger">
+                @error('subject')
+                {{ $message }}
+                @enderror
+            </div>
+            <div class="alert--danger">
+                @error('content')
+                {{ $message }}
+                @enderror
+            </div>
+            @if (session('messageEmail'))
+            <div class="alert__email">
+                {!! session('messageEmail') !!}
+            </div>
+            @endif
             @php $count = 1; @endphp
             @foreach($reservations as $reservation)
             <div class=" wrap__table">
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
                 <span class="table__title">予約{{ $count }}</span>
+                <a class="mail__button" href="#{{ $reservation->id }}mail"><i class="las la-envelope"></i></a>
                 <table class="reservation__table">
                     <tr class="reservation__row">
                         <th class="reservation__label">Name</th>
@@ -180,11 +196,58 @@
                     </tr>
                 </table>
             </div>
+
+            <!-- s mailモーダル -->
+            <div class="modal-wrapper" id="{{ $reservation->id }}mail">
+                <a href="#!" class="modal-overlay"></a>
+                <div class="modal-window">
+                    <div class="modal-content">
+                        <h2 class="mail-modal__title">メール送信</h2>
+                        <form class="mail__form" action="/mail/shop-to-user" method="get">
+                            <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                            <table class="mail-modal__table">
+                                <tr class="mail-modal__row">
+                                    <th class="mail-modal__label">宛先</th>
+                                    <td class="mail-modal__data">
+                                        <div class="form__user-name">{{ $users_name[$count-1] }}</div>
+                                    </td>
+                                </tr>
+                                <tr class="mail-modal__row">
+                                    <th class="mail-modal__label">件名</th>
+                                    <td class="mail-modal__data">
+                                        <input class="mail__data-subject" type="text" name="subject">
+                                        <div class="form__error">
+                                            @error('subject')
+                                            {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="mail-modal__row">
+                                    <th class="mail-modal__label">本文</th>
+                                    <td class="mail-modal__data">
+                                        <textarea class="mail__data-content" type="text" name="content"></textarea>
+                                        <div class="form__error">
+                                            @error('content')
+                                            {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="mail-modal__button">送信</button>
+                        </form>
+                    </div>
+                    <a href="#!" class="modal-close">×</a>
+                </div>
+            </div>
+            <!-- e mailモーダル -->
             @php $count++ ; @endphp
             @endforeach
         </div>
     </div>
 </div>
+
 @endsection
 @section('script')
 <script>

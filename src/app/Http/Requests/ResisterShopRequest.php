@@ -33,7 +33,7 @@ class ResisterShopRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '※店名を選択してください。',
+            'name.required' => '※店名を入力してください。',
             'area.required' => '※地域を選択してください。',
             'genre_id.required' => '※ジャンルを選択してください。',
         ];

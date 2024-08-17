@@ -46,12 +46,12 @@
                         </li>
                         @can('register')
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/admin-page">Admin page</a>
+                            <a class="nav-link text-primary" href="/admin-page">Admin Page</a>
                         </li>
                         @endcan
                         @can('owner')
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/owner-page">ShopInfo</a>
+                            <a class="nav-link text-primary" href="/owner-page">Shop Info</a>
                         </li>
                         @endcan
                         @else

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\RegisteredOwnerController;
 use App\Http\Controllers\RegisteredShopController;
 use App\Http\Controllers\RegisteredUserController;
@@ -41,6 +42,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/owner-page', [RegisteredShopController::class, 'ownerPage']);
     Route::post('/shop/saveOrUpdate', [RegisteredShopController::class, 'saveOrUpdate']);
     Route::post('/image-upload', [ImageUploadController::class, 'imageUpload']);
+    Route::get('/mail/shop-to-user', [MailSendController::class, 'shopToUser']);
+    Route::get('/mail/admin-to-each', [MailSendController::class, 'adminToEach']);
 });
 
 Route::get('/test', [TestController::class, 'test']);

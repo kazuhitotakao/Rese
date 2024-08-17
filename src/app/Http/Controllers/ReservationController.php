@@ -73,6 +73,6 @@ class ReservationController extends Controller
     {
         $reservation_id = $request->reservation_id;
         Reservation::find($reservation_id)->delete();
-        return redirect('/my-page')->with('message', 'Todoを作成しました');;
+        return redirect('/my-page');
     }
 }

@@ -105,7 +105,12 @@ class ShopController extends Controller
     public function detail(Request $request)
     {
         $shop_id = $request->shop_id;
-        $shops_id = session('search_results')->pluck('id');
+        $shops_id = session('search_results');
+        if ($shops_id !== null) {
+            $shops_id = $shops_id->pluck('id');
+        } else {
+            $shops_id = Shop::all()->pluck('id');
+        }
         $user_reservation = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
         $shop = Shop::with('genre')->where('id', $shop_id)->first();
         $user = User::find(Auth::id());

@@ -1,8 +1,36 @@
-.alert-info {
+.alert__info {
     padding: 10px 10px;
     color: red;
     font-weight: bold;
 }
+
+.alert__email {
+    padding-left: 5.5rem;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.alert--danger {
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 80%;
+    margin-left: 5.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.form__error {
+    color: red;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+
 
 .owner-page__wrap {
     background-color: #f2f2f2;
@@ -85,20 +113,18 @@
     height: 32px;
     border: none;
     border-radius: 5px;
-    background: #2384cf;;
+    background: #2384cf;
     color: #fff;
     cursor: pointer;
     display: block;
 }
-
-
 
 .form__button-image {
     width: 4rem;
     height: 32px;
     border: none;
     border-radius: 5px;
-    background: #2384cf;;
+    background: #2384cf;
     color: #fff;
     cursor: pointer;
     margin-left: 5px;
@@ -142,12 +168,6 @@
     width: 5rem;
     text-align: center;
     font-weight: bold;
-}
-
-.form__error {
-    font-size: 1rem;
-    color: red;
-    text-align: left;
 }
 
 .select__form {
@@ -219,6 +239,21 @@
     font-size: 1.2rem;
 }
 
+/* s mail */
+.mail__button {
+    background-color: #305dff;
+    border: none;
+    position: absolute;
+    top: 6%;
+    right: 10%;
+}
+
+.la-envelope {
+    font-size: 2rem;
+    color: #fff;
+}
+/* e mail */
+
 .reservation__table {
     margin-top: 1rem;
     width: 100%;
@@ -238,6 +273,150 @@
     font-weight: bold;
 }
 
+/* s モーダル共通 */
+.modal-wrapper {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 40px 10px;
+    text-align: center;
+}
+
+.modal-wrapper:not(:target) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s, visibility 0.1s;
+}
+
+.modal-wrapper:target {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.1s, visibility 0.1s;
+}
+
+.modal-wrapper::after {
+    display: inline-block;
+    height: 100%;
+    margin-left: -0.05em;
+    vertical-align: middle;
+    content: "";
+}
+
+.modal-wrapper .modal-window {
+    box-sizing: border-box;
+    display: inline-block;
+    z-index: 20;
+    position: relative;
+    width: 450px;
+    max-width: 600px;
+    padding: 30px 30px 15px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    vertical-align: middle;
+}
+
+.modal-wrapper .modal-window .modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.modal-overlay {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-wrapper .modal-close {
+    z-index: 20;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    color: #95979c !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+.modal-wrapper .modal-close:hover {
+    color: #2b2e38 !important;
+}
+/* e モーダル共通 */
+
+/* s mailモーダル */
+.mail-modal__title{
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mail-modal__table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.mail-modal__row {
+    height: 1.7rem;
+    font-size: 1rem;
+}
+
+.mail-modal__label {
+    width: 20%;
+}
+
+.mail-modal__data {
+    width: 80%;
+    font-weight: bold;
+}   
+
+.mail-modal__button {
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 3px;
+    margin: 20px auto;
+}
+
+.mail__data-subject {
+    width: 100%;
+}
+
+.mail__data-content {
+    height: 10rem;
+    width: 100%;
+}
+
+.form__user-name {
+    border: none;
+}
+
+.form__error{
+    font-size: 1rem;
+    color: red;
+    text-align: left;
+
+}
+/* e mailモーダル */
 /* e reservation */
 
 /* 768px以下 */
