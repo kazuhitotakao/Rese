@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         Commands\ReservationReminder::class,
+        Commands\ReviewMailSend::class,
     ];
     /**
      * Define the application's command schedule.
@@ -20,6 +21,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:reminder')->dailyAt('8:00');
+        $schedule->command('command:review')->everyMinute();
     }
 
     /**

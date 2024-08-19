@@ -15,7 +15,13 @@
     <div class="owner-page__container">
         <div class="owner-page__shop">
             <div class="shop__title">
-                <h2 class="shop__title-content">店舗情報</h2>
+                <span class="shop__title-content">店舗情報</span>
+                @if($reviews_count > 0)
+                <span class="shop__review-content">{{ $review_average }}</span>
+                <form class="shop__comment-form" action="/comment" method="get">
+                    <button class="shop__comment-content"><i class="las la-comment"></i>コメント</button>
+                </form>
+                @endif
             </div>
             <div class="wrapper">
                 <div class="shop__card">

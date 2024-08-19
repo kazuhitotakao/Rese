@@ -7,51 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/test.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/review.css') }}">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 
 <body>
-    <button class="like__form-button" type="submit">
-        <i id="likeButton" class="lar la-heart like-button"></i>
-    </button>
 
-    <script>
-        document.getElementById('likeButton').addEventListener('click', function() {
-            if (this.classList.contains('liked')) {
-                this.classList.remove('liked');
-                this.classList.replace('las', 'lar');
-            } else {
-                this.classList.add('liked');
-                this.classList.replace('lar', 'las');
-            }
-        });
-    </script>
-</body>
+    <div class="mail__content">
+        <div class="card">
+            <h3 class="card__title">
+                アンケートにご協力ください
+            </h3>
+            <form class="form" action="" method="post">
+                @csrf
+                <div class="form__group">
+                    <div class="form__group-title">
+                        <span class="form__label--item">評価</span>
+                    </div>
+                    <div class="form__group-content--review">
+                        <div class="form__input--radio">
+                            <input class="visually-hidden" type="radio" name="review" value="1" id="1" @if (old ('review') == '1') checked @endif>
+                            <label class="form__input--radio-label" for="1">1</label>
+                            <input class="visually-hidden" type="radio" name="review" value="2" id="2" @if (old ('review') == '2') checked @endif>
+                            <label class="form__input--radio-label" for="2">2</label>
+                            <input class="visually-hidden" type="radio" name="review" value="3" id="3" @if ( old ('review') == '3') checked @endif>
+                            <label class="form__input--radio-label" for="3">3</label>
+                            <input class="visually-hidden" type="radio" name="review" value="4" id="4" @if ( old ('review') == '4') checked @endif>
+                            <label class="form__input--radio-label" for="4">4</label>
+                            <input class="visually-hidden" type="radio" name="review" value="5" id="5" @if ( old ('review') == '5') checked @endif>
+                            <label class="form__input--radio-label" for="5">5</label>
+                        </div>
+                        <div class="form__error">
+                            @error('review')
+                            {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
-<div class="container">
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-position">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">予約の取消しについて</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    予約をキャンセルしてもよろしいですか？
-                </div>
-                <div class="modal-footer">
-                    <form action="/cancel" method="post">
-                        @csrf
-                        <input type="hidden" name="reservation_id" id="reservationId">
-                        <button type="submit" class="btn btn-primary yes-button">はい</button>
-                    </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                </div>
-            </div>
+
+                <button class="card__button-submit">回答する</button>
+            </form>
         </div>
     </div>
-</div>
 
+</body>
 
 </html>

@@ -18,7 +18,8 @@ use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 class ShopController extends Controller
 {
     public function index(Request $request)
-    {
+    {      
+        
         $user = User::find(Auth::id());
         $shops = Shop::with('genre')->get();
         $search = [

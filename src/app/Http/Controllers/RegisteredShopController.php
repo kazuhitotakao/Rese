@@ -25,7 +25,7 @@ class RegisteredShopController extends Controller
         $image = Image::where('user_id', Auth::id())->first();
         $genres = Genre::all();
 
-        if($image == null){
+        if ($image == null) {
             JavaScriptFacade::put([
                 'flgBtn' => false,
             ]);
@@ -40,7 +40,9 @@ class RegisteredShopController extends Controller
             $users_name = [];
             $times = [];
             $numbers = [];
-            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers'));
+            $review_average = null;
+            $reviews_count = null;
+            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count'));
         }
 
         // --shopデータが存在する場合
@@ -51,6 +53,21 @@ class RegisteredShopController extends Controller
         } else {
             // ストレージ内の画像の場合
             $imageUrl = Storage::url($shop->image);
+        }
+
+        // 評価の平均値
+        $reviews = Reservation::where('shop_id', $shop->id)
+            ->whereNotNull('review')->get();
+        $reviews_count = $reviews->count();
+
+        $total_review = 0;
+        foreach ($reviews as $review) {
+            $total_review += $review->review;
+        }
+        if ($reviews_count !== 0) {
+            $review_average = '評価  ★ ' . round($total_review / $reviews_count, 1);
+        } else {
+            $review_average = null;
         }
 
         $reservations = Reservation::where('shop_id', $shop->id)
@@ -75,7 +92,7 @@ class RegisteredShopController extends Controller
             $numbers[] = $number->first();
         }
 
-        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers'));
+        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count'));
     }
 
     public function saveOrUpdate(ResisterShopRequest $request)
@@ -90,10 +107,10 @@ class RegisteredShopController extends Controller
         ];
 
         $image = Image::where('user_id', Auth::id())->first();
-        if($image !== null){
+        if ($image !== null) {
             $form['image'] = $image->path;
         }
-        
+
         if ($request->action === 'register') {
             $own_shop = Shop::where('user_id', Auth::id())->first();
             if ($own_shop == null) {

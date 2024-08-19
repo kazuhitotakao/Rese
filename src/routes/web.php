@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\MailSendController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\RegisteredOwnerController;
 use App\Http\Controllers\RegisteredShopController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +46,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/image-upload', [ImageUploadController::class, 'imageUpload']);
     Route::get('/mail/shop-to-user', [MailSendController::class, 'shopToUser']);
     Route::get('/mail/admin-to-each', [MailSendController::class, 'adminToEach']);
+    Route::get('/review/{reservation_id}', [ReviewController::class, 'review'])->name('review');
+    Route::post('/review/{reservation_id}', [ReviewController::class, 'reviewPost']);
+    Route::get('/comment', [CommentController::class, 'view']);
 });
 
 Route::get('/test', [TestController::class, 'test']);

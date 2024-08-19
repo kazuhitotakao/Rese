@@ -28,9 +28,7 @@
     text-align: left;
     font-size: 1.2rem;
     font-weight: bold;
-
 }
-
 
 .owner-page__wrap {
     background-color: #f2f2f2;
@@ -66,6 +64,39 @@
     font-size: 1.5rem;
 }
 
+.shop__review-content {
+    position: relative;
+    bottom: 1px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #305dff;
+    margin-left: 0.5rem;
+}
+
+.shop__comment-form {
+    display: inline-block;
+}
+
+.shop__comment-content {
+    position: relative;
+    bottom: 1px;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    padding: 2px 5px;
+    color: #305dff;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+}
+
+.la-comment {
+    position: relative;
+    top: 2px;
+    right: 3px;
+    color: #305dff;
+    font-size: 1.5rem;
+}
+
 .wrapper {
     max-width: 1200px;
     margin: 0 auto;
@@ -80,7 +111,7 @@
     border-radius: 5px;
     margin-bottom: 20px;
     margin-left: 4rem;
-    height: 110vh;
+    height: 40rem;
 }
 
 /* s image */
@@ -356,7 +387,7 @@
 /* e モーダル共通 */
 
 /* s mailモーダル */
-.mail-modal__title{
+.mail-modal__title {
     font-size: 1.6rem;
     font-weight: bold;
     text-align: center;
@@ -382,7 +413,7 @@
 .mail-modal__data {
     width: 80%;
     font-weight: bold;
-}   
+}
 
 .mail-modal__button {
     display: block;
@@ -410,11 +441,10 @@
     border: none;
 }
 
-.form__error{
+.form__error {
     font-size: 1rem;
     color: red;
     text-align: left;
-
 }
 /* e mailモーダル */
 /* e reservation */

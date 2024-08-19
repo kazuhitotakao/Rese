@@ -16,6 +16,8 @@ class Reservation extends Model
         'number_id',
         'review',
         'comment',
+        'comment_at',
+        'review_mail_sent',
     ];
 
     protected $dates = [

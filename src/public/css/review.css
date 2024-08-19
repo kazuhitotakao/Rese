@@ -1,0 +1,118 @@
+.mail__content {
+    margin: 0 auto;
+    padding: 4rem 15px;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.card {
+    margin: 0 auto;
+    height: 32rem;
+    width: 30rem;
+    padding: 10px 20px 20px 20px;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    padding-top: 2rem;
+}
+
+.card__title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.form {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.form__group {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form__group-title {
+    text-align: left;
+}
+
+.form__label--item {
+    font-weight: bold;
+}
+
+.form__input--textarea textarea {
+    width: 100%;
+    height: 6rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* sラジオボタン */
+label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 50px;
+    padding: 0px 50px 0px 3rem;
+    display: block;
+}
+
+label::before,
+label::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+label::before {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    left: 10px;
+}
+
+label::after {
+    background-color: #2384cf;
+    border-radius: 50%;
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    left: 12px;
+}
+
+input:checked + label::after {
+    opacity: 1;
+}
+
+.visually-hidden {
+    position: absolute;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+/* e ラジオボタン */
+
+.card__button-submit {
+        display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 3px;
+    margin: 0 auto;
+}
