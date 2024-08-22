@@ -17,7 +17,7 @@
 
 .detail__btn-move {
     margin-left: 4rem;
-    margin-top: 5rem;
+    margin-top: 1rem;
     font-size: 20px;
     font-weight: bold;
     color: black;
@@ -92,10 +92,18 @@
     margin: 1.5rem;
 }
 
+.alert__info {
+    font-size: 1rem;
+    padding: 0 10px;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
 .form {
     display: block;
     margin-left: 1.5rem;
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     border-radius: 3px;
     border: none;
     height: 2rem;
@@ -112,6 +120,7 @@
 }
 
 .reservation__date {
+    display: inline-block;
     width: 40%;
     padding-left: 0.7rem;
 }
@@ -122,6 +131,17 @@
 
 .reservation__number {
     width: 90%;
+}
+
+.available {
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 4rem;
+    color: #fff;
+    background-color: #4d7fff;
+    padding: 8px;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 .wrap__table {

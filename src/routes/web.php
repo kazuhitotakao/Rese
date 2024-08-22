@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageUploadController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RegisteredShopController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +51,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/review/{reservation_id}', [ReviewController::class, 'review'])->name('review');
     Route::post('/review/{reservation_id}', [ReviewController::class, 'reviewPost']);
     Route::get('/comment', [CommentController::class, 'view']);
+    Route::get('/setting', [SettingController::class, 'index']);
+    Route::post('/setting/save', [SettingController::class, 'save']);
+    Route::get('/available/{shop_id}', [AvailabilityController::class, 'index'])->name('available');
+    Route::get('/available-search', [AvailabilityController::class, 'search']);
 });
 
 Route::get('/test', [TestController::class, 'test']);

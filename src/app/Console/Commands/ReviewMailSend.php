@@ -48,15 +48,16 @@ class ReviewMailSend extends Command
         $reservations = Reservation::where('date', '=', Carbon::today())
             ->where('review_mail_sent', null)
             ->get();
-        // time_idから時間を抽出
+        // 時間を抽出
         $times = [];
         foreach ($reservations as $reservation) {
-            $times[] = Time::find($reservation->time_id)->time;
+            $time = $reservation->time;
+            $times[] = $time;
         }
         // 当日の予約でまだメールを送ってないもの、かつ、予約時間を過ぎた予約のreview_mail_sentにfalseを立てる
         $count = 0;
         foreach ($reservations as $reservation) {
-            if ($times[$count] < Carbon::now()) {
+            if ($times[$count] < Carbon::now()->format('H:i')) {
                 $reservation->review_mail_sent = false;
                 $reservation->save();
             }

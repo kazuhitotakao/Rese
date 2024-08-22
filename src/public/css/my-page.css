@@ -12,13 +12,12 @@
     font-weight: bold;
     width: 90%;
     margin-left: 5%;
-    align-items: center;
     height: 3rem;
+    line-height: 3rem;
 }
 
 .alert--danger ul {
     list-style-type: none;
-    padding: 0.5rem;
 }
 
 .my-page__wrap {
@@ -246,6 +245,25 @@
     font-size: 1.6rem;
     font-weight: bold;
     text-align: center;
+}
+
+.reservation__form {
+    position: relative;
+}
+
+.available {
+    position: absolute;
+    top: 7%;
+    right: 0%;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #2384cf;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1px solid ;
+    width: 8rem;
 }
 
 .reservation-modal__table {

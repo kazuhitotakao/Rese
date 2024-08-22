@@ -13,6 +13,11 @@
         <h2 class="user-name__content">{{ $user->name }}さん</h2>
     </div>
     <div class="alert">
+        @if (session('message'))
+        <div class="alert--danger">
+            {{ session('message') }}
+        </div>
+        @endif
         @if ($errors->any())
         <div class="alert--danger">
             <ul>
@@ -46,7 +51,7 @@
                     </tr>
                     <tr class="reservation__row">
                         <th class="reservation__label">Time</th>
-                        <td id="tableTime" class="reservation__data">{{ $times[$count-1]->format('H:i') }}</td>
+                        <td id="tableTime" class="reservation__data">{{ $select_times[$count-1] }}</td>
                     </tr>
                     <tr class="reservation__row">
                         <th class="reservation__label">Number</th>
@@ -87,6 +92,8 @@
                         <form class="reservation__form" action="/reserve/change" method="post">
                             @csrf
                             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                            <input type="hidden" name="shop_id" value="{{ $shops_id[$count-1] }}">
+                            <a class="available" href="{{ route('available', ['shop_id' => $shops_id[$count-1]]) }}">予約空き時間検索</a>
                             <table class="reservation-modal__table">
                                 <tr class="reservation-modal__row">
                                     <th class="reservation-modal__label">Shop</th>
@@ -108,16 +115,16 @@
                                 <tr class="reservation-modal__row">
                                     <th class="reservation-modal__label">Time</th>
                                     <td class="reservation-modal__data">
-                                        <select class="form reservation__time" name="time_id">
+                                        <select class="form reservation__time" name="time">
                                             <option disabled selected>時間を選択してください</option>
-                                            @foreach($times_all as $time)
-                                            <option value="{{ $time->id }}" @if( $time->id==$times_id[$count-1] ) selected @endif>
-                                                {{ $time->time->format('H:i') }}
+                                            @foreach($times[$count-1] as $time)
+                                            <option value="{{ $time }}" @if( $time==$select_times[$count-1] ) selected @endif>
+                                                {{ $time }}
                                             </option>
                                             @endforeach
                                         </select>
                                         <div class=" form__error">
-                                            @error('time_id')
+                                            @error('time')
                                             {{ $message }}
                                             @enderror
                                         </div>

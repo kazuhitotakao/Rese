@@ -21,6 +21,7 @@ class CreateShopsTable extends Migration
             $table->string('overview')->nullable();
             $table->string('image')->nullable();
             $table->integer('user_id')->nullable();
+            $table->integer('interval')->default('15');
             $table->timestamps();
         });
     }

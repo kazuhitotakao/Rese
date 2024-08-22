@@ -6,11 +6,12 @@ use App\Http\Requests\ResisterShopRequest;
 use App\Models\Favorite;
 use App\Models\Genre;
 use App\Models\Image;
+use App\Models\Max;
 use App\Models\Number;
 use App\Models\Reservation;
 use App\Models\Shop;
-use App\Models\Time;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -72,7 +73,7 @@ class RegisteredShopController extends Controller
 
         $reservations = Reservation::where('shop_id', $shop->id)
             ->where('date', '>=', today())
-            ->orderBy('date')->orderBy('time_id')->get();
+            ->orderBy('date')->orderBy('time')->get();
 
         $users_name = [];
         foreach ($reservations as $reservation) {
@@ -82,8 +83,8 @@ class RegisteredShopController extends Controller
 
         $times = [];
         foreach ($reservations as $reservation) {
-            $time = Time::where('id', $reservation->time_id)->pluck('time');
-            $times[] = $time->first();
+            $time = $reservation->time;
+            $times[] = $time;
         }
 
         $numbers = [];
@@ -106,6 +107,11 @@ class RegisteredShopController extends Controller
             'user_id' => Auth::id(),
         ];
 
+        $max = [
+            'user_id' => Auth::id(),
+            // 10~23timeの枠数についてviewからとってくるように修正予定
+            '10time' => 3,
+        ];
         $image = Image::where('user_id', Auth::id())->first();
         if ($image !== null) {
             $form['image'] = $image->path;
@@ -115,12 +121,14 @@ class RegisteredShopController extends Controller
             $own_shop = Shop::where('user_id', Auth::id())->first();
             if ($own_shop == null) {
                 Shop::create($form);
+                Max::create($max);
                 return redirect('/owner-page')->with('message', '店舗情報を登録しました。');
             } else {
                 return redirect('/owner-page')->with('message', '※登録がキャンセルされました。<br>※店舗代表者１人につき登録する店舗は１つでお願いします。');
             }
         } elseif ($request->action === 'update') {
             Shop::where('user_id', Auth::id())->update($form);
+            Max::where('user_id', Auth::id())->update($max);
             return redirect('/owner-page')->with('message', '店舗情報を更新しました。');
         }
     }

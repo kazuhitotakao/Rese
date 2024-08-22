@@ -73,6 +73,29 @@
     margin-left: 0.5rem;
 }
 
+.shop__setting-form {
+    display: inline-block;
+}
+
+.shop__setting-content {
+    position: relative;
+    bottom: 1px;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    padding: 2px 5px;
+    color: #305dff;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+}
+
+.la-cog {
+    position: relative;
+    top: 2px;
+    right: 3px;
+    color: #305dff;
+    font-size: 1.5rem;
+}
 .shop__comment-form {
     display: inline-block;
 }

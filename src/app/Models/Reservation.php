@@ -12,7 +12,7 @@ class Reservation extends Model
         'user_id',
         'shop_id',
         'date',
-        'time_id',
+        'time',
         'number_id',
         'review',
         'comment',
@@ -32,11 +32,6 @@ class Reservation extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
-    }
-
-    public function time()
-    {
-        return $this->belongsTo(Time::class);
     }
 
     public function number()

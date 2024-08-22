@@ -1,0 +1,67 @@
+.setting__wrap {
+    position: relative;
+    background-color: #f2f2f2;
+}
+
+.btn__back {
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    background-color: #fff;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10%;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.shop-name {
+    padding-top: 6rem;
+    text-align: center;
+}
+
+.shop-name__content {
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.setting__container {
+    margin-left: 4rem;
+}
+
+.setting__title {
+    margin-top: 1rem;
+}
+
+th {
+    padding-top: 0.5rem;
+    text-align: center;
+}
+
+.input__time {
+    width: 3.3rem;
+    text-align: center;
+}
+
+.setting__button {
+    margin-top: 1rem;
+    width: 6rem;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background: #305dff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+.input__time {
+    width: 2.5rem;
+    text-align: center;
+}
+}

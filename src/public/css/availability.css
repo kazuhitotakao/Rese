@@ -1,0 +1,97 @@
+.available__wrap {
+    position: relative;
+    background-color: #f2f2f2;
+}
+
+.btn__back {
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    background-color: #fff;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10%;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.shop-name {
+    padding-top: 6rem;
+    text-align: center;
+}
+
+.shop-name__content {
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.alert {
+    text-align: center;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.alert__info {
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 90%;
+    margin-left: 5%;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.available__container {
+    margin-left: 4rem;
+}
+
+.available__title {
+    margin-top: 1rem;
+}
+
+th {
+    padding-top: 0.5rem;
+    text-align: center;
+}
+
+.input__time {
+    width: 3.3rem;
+    text-align: center;
+}
+
+.available {
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 4rem;
+    color: #fff;
+    background-color: #4d7fff;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1px solid;
+    width: 5rem;
+}
+
+.form {
+    margin-top: 0.5rem;
+    border-radius: 3px;
+    border: 1px solid;
+    height: 2rem;
+    padding: 0rem 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+    .input__time {
+        width: 2.5rem;
+        text-align: center;
+    }
+}

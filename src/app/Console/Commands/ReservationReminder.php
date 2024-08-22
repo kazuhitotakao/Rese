@@ -65,11 +65,11 @@ class ReservationReminder extends Command
         $date = Carbon::today()->format('Y-m-d');
 
         // 時間
-        $reservation_times_id = $reservation_today->pluck('time_id');
+        $reservation_times = $reservation_today->pluck('time');
         $times = [];
-        foreach ($reservation_times_id as $reservation_time_id) {
-            $times[] = Time::find($reservation_time_id)->time
-                ->format('H:i');
+        foreach ($reservation_times as $reservation_time) {
+            $time = $reservation_time;
+            $times[] = $time;
         }
 
         // 人数

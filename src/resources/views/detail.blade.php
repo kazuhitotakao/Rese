@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+@include ('footer')
 <div class="detail__container">
     <div class="shop__detail">
         <div class="detail__wrap">
@@ -31,33 +32,39 @@
     <div class="shop__reservation">
         <div class="reservation__wrap-form">
             <h2 class="reservation__title">予約</h2>
+            @if (session('message'))
+            <div class="alert__info">
+                {{ session('message') }}
+            </div>
+            @endif
             <form class="reservation__form" action="/reserve" method="post">
                 @csrf
                 <input type="hidden" name="shops_id" value="{{ $shops_id }}">
                 <input type="hidden" name="shop_id" value="{{ $shop->id }}">
                 <input id="inputDate" class="form reservation__date" type="date" name="date" @if($data_flg) value="{{ $date->format('Y-m-d' )}}" @endif value="{{ old('date') }}">
+                <a class="available" href="{{ route('available', ['shop_id' => $shop->id]) }}">予約空き時間検索</a>
                 <div class="form__error">
                     @error('date')
                     {{ $message }}
                     @enderror
                 </div>
-                <select id="selectTime" class="form reservation__time" name="time_id">
+                <select id="selectTime" class="form reservation__time" name="time">
                     <option disabled selected>時間を選択してください</option>
                     @foreach($times as $time)
-                    <option value="{{ $time->id }}" data-time="{{ $time->time->format('H:i') }}" @if($time->id == old('time_id')) selected @endif @if( $data_flg && $time->id==$time_id ) selected @endif>
-                        {{ $time->time->format('H:i') }}
+                    <option value="{{ $time }}" data-time="{{ $time }}" @if($time==old('time')) selected @endif @if( $data_flg && $select_time==$time ) selected @endif>
+                        {{ $time }}
                     </option>
                     @endforeach
                 </select>
                 <div class="form__error">
-                    @error('time_id')
+                    @error('time')
                     {{ $message }}
                     @enderror
                 </div>
                 <select id="selectNumber" class="form reservation__number" name="number_id">
                     <option disabled selected>人数を選択してください</option>
                     @foreach($numbers as $number)
-                    <option value="{{ $number->id }}" data-number="{{ $number->number }}" @if( $data_flg && $number->id==$number_id ) selected @endif>
+                    <option value="{{ $number->id }}" data-number="{{ $number->number }}" @if($number->id == old('number_id')) selected @endif @if( $data_flg && $number->id==$number_id ) selected @endif>
                         {{ $number->number }}
                     </option>
                     @endforeach
@@ -87,7 +94,7 @@
                         </tr>
                     </table>
                 </div>
-                <button id="reservationButton" class="reservation__button">予約する</button>
+                <button id="reservationButton" class="reservation__button"></button>
             </form>
         </div>
     </div>
@@ -116,5 +123,12 @@
             tableNumber.textContent = $("#selectNumber option:selected").data("number");
         });
     });
+
+    const button = document.getElementById('reservationButton');
+    if (flgBtn) {
+        button.textContent = '変更する';
+    } else {
+        button.textContent = '予約する';
+    }
 </script>
 @endsection

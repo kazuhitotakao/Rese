@@ -30,6 +30,6 @@ class Shop extends Model
 
     public function reservations()
     {
-        return $this->belongsToMany(User::class, 'reservations')->withPivot('date', 'time_id', 'number_id', 'review', 'comment', 'comment_at','review_mail_sent')->withTimestamps();
+        return $this->belongsToMany(User::class, 'reservations')->withPivot('date', 'time', 'number_id', 'review', 'comment', 'comment_at','review_mail_sent')->withTimestamps();
     }
 }

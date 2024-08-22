@@ -16,10 +16,15 @@
         <div class="owner-page__shop">
             <div class="shop__title">
                 <span class="shop__title-content">店舗情報</span>
+                @if(!empty($shop))
+                <form class="shop__setting-form" action="/setting" method="get">
+                    <button class="shop__setting-content"> <i class="las la-cog"></i>設定</button>
+                </form>
+                @endif
                 @if($reviews_count > 0)
                 <span class="shop__review-content">{{ $review_average }}</span>
                 <form class="shop__comment-form" action="/comment" method="get">
-                    <button class="shop__comment-content"><i class="las la-comment"></i>コメント</button>
+                    <button class="shop__comment-content"><i class="las la-comment"></i>コメントを見る</button>
                 </form>
                 @endif
             </div>
@@ -194,7 +199,7 @@
                     </tr>
                     <tr class="reservation__row">
                         <th class="reservation__label">Time</th>
-                        <td id="tableTime" class="reservation__data">{{ $times[$count-1]->format('H:i') }}</td>
+                        <td id="tableTime" class="reservation__data">{{ $times[$count-1] }}</td>
                     </tr>
                     <tr class="reservation__row">
                         <th class="reservation__label">Number</th>
@@ -257,7 +262,7 @@
 @endsection
 @section('script')
 <script>
-    button = document.getElementById('imageButton');
+    const button = document.getElementById('imageButton');
     if (flgBtn) {
         button.textContent = '更新';
     } else {

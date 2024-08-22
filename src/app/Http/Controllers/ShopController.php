@@ -18,8 +18,7 @@ use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 class ShopController extends Controller
 {
     public function index(Request $request)
-    {      
-        
+    {
         $user = User::find(Auth::id());
         $shops = Shop::with('genre')->get();
         $search = [
@@ -117,25 +116,37 @@ class ShopController extends Controller
         $user = User::find(Auth::id());
         $user_id = User::find(Auth::id())->id;
 
-        $times = Time::all();
+        $shop_interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
+        $times = $this->generateTimeOptions($shop_interval);
         $numbers = Number::all();
 
         if ($user_reservation == null) {
             $data_flg = false;
             $date = Carbon::today();
-            $time_id = Time::first()->id;
+            $select_time = reset($times);
             $number_id = Number::first()->id;
-        } else {
+            $comment = null;
+            JavaScriptFacade::put([
+                'flgBtn' => false,
+            ]);
+        } elseif (!$user_reservation->review_mail_sent) {
             $data_flg = true;
             $date = $user_reservation->date;
-            $time_id = $user_reservation->time_id;
+            $select_time = $user_reservation->time;
             $number_id = $user_reservation->number_id;
-        }
-
-        if ($user_reservation == null) {
-            $comment = null;
-        } else {
             $comment = '※予約済※';
+            JavaScriptFacade::put([
+                'flgBtn' => true,
+            ]);
+        } else {
+            $data_flg = false;
+            $date = Carbon::today();
+            $select_time = reset($times);
+            $number_id = Number::first()->id;
+            $comment = null;
+            JavaScriptFacade::put([
+                'flgBtn' => false,
+            ]);
         }
 
         if (strpos($shop->image, 'http') === 0) {
@@ -146,7 +157,20 @@ class ShopController extends Controller
             $imagesUrl = Storage::url($shop->image);
         }
 
-        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'time_id', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl'));
+        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'select_time', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl'));
+    }
+
+    private function generateTimeOptions($interval)
+    {
+        $times = [];
+        $start = strtotime('10:00');
+        $end = strtotime('23:59');
+
+        for ($time = $start; $time <= $end; $time += $interval * 60) {
+            $times[] = date('H:i', $time);
+        }
+
+        return $times;
     }
 
     public function myPage(Request $request)
@@ -154,23 +178,19 @@ class ShopController extends Controller
         $user = User::find(Auth::id());
         $shops = Shop::with('genre')->get();
 
-        $reservations = Reservation::where('user_id', Auth::id())->orderBy('date')->orderBy('time_id')->get();
+        $reservations = Reservation::where('user_id', Auth::id())
+            ->Where('review_mail_sent', '=', null)
+            ->orderBy('date')->orderBy('time')->get();
         $shops_name = [];
         foreach ($reservations as $reservation) {
             $shopName = Shop::where('id', $reservation->shop_id)->pluck('name');
             $shops_name[] = $shopName->first();
         }
 
-        $times = [];
+        $select_times = [];
         foreach ($reservations as $reservation) {
-            $time = Time::where('id', $reservation->time_id)->pluck('time');
-            $times[] = $time->first();
-        }
-
-        $times_id = [];
-        foreach ($reservations as $reservation) {
-            $time = Time::where('id', $reservation->time_id)->pluck('id');
-            $times_id[] = $time->first();
+            $time = $reservation->time;
+            $select_times[] = $time;
         }
 
         $numbers = [];
@@ -197,9 +217,30 @@ class ShopController extends Controller
         }
 
         $user_favorite_shops_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
-        $times_all = Time::all();
         $numbers_all = Number::all();
 
-        return view('my-page', compact('user', 'shops', 'reservations', 'shops_name', 'times', 'times_id', 'numbers', 'numbers_id', 'times_all', 'numbers_all', 'user_favorite_shops_id', 'imagesUrl'));
+        $shops_id = [];
+        foreach ($reservations as $reservation) {
+            $shop_id = $reservation->shop_id;
+            $shops_id[] = $shop_id;
+        }
+
+        $shops_interval = [];
+        $count = 0;
+        foreach ($reservations as $reservation) {
+            $shop_interval = Shop::with('genre')->where('id', $shops_id[$count])->first()->interval;
+            $shops_interval[] = $shop_interval;
+            $count++;
+        }
+
+        $times = [];
+        $count = 0;
+        foreach ($reservations as $reservation) {
+            $time = $this->generateTimeOptions($shops_interval[$count]);
+            $times[] = $time;
+            $count++;
+        }
+
+        return view('my-page', compact('user', 'shops', 'reservations', 'shops_id', 'shops_name', 'select_times', 'numbers', 'numbers_id', 'times', 'numbers_all', 'user_favorite_shops_id', 'imagesUrl'));
     }
 }

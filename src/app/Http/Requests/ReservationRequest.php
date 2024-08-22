@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Shop;
 use App\Models\Time;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,18 +29,29 @@ class ReservationRequest extends FormRequest
     {
         return [
             'date' => ['required', 'after:yesterday'],
-            'time_id' => ['required', function ($attribute, $value, $fail) {
+            'time' => ['required', function ($attribute, $value, $fail) {
                 $selectedDate = Carbon::parse($this->input('date'));
                 $currentTime = Carbon::now()->format('H:i');
-                // 日付が翌日以降であれば、time_idのバリデーションは緩和
+                $start = strtotime('10:00');
+                $end = strtotime('23:59');
+                $times = [];
+                $shop_id = $this->input('shop_id');
+                $interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
+
+                for ($time = $start; $time <= $end; $time += $interval * 60) {
+                    $times[] = date('H:i', $time);
+                }
+
                 if ($selectedDate->isToday()) {
                     // 今日の場合、現在時刻より後の時刻を選択
-                    $availableTimes = Time::where('time', '>', $currentTime)->pluck('id')->toArray();
+                    $availableTimes = array_filter($times, function ($time) use ($currentTime) {
+                        return $time > $currentTime;
+                    });
                     if (!in_array($value, $availableTimes)) {
                         $fail('※現在以降の時間を選択してください。');
                     }
                 } else {
-                    // 翌日以降の場合は、time_idのバリデーションをスキップする
+                    // 翌日以降の場合は、timeのバリデーションをスキップする
                 }
             }],
             'number_id' => ['required'],
@@ -52,7 +64,7 @@ class ReservationRequest extends FormRequest
         return [
             'date.required' => '※日付を選択してください。',
             'date.after' => '※日付は本日以降の日付を選択してください。',
-            'time_id.required' => '※時間を選択してください。',
+            'time.required' => '※時間を選択してください。',
             'number_id.required' => '※人数を選択してください。',
         ];
     }
