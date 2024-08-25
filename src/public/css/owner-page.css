@@ -261,13 +261,28 @@
 }
 
 .reservation__title {
-    padding: 0 5.5rem;
+    padding: 0 2rem 0 5.5rem;
+    display: inline-block;
 }
 
 .reservation__title-content {
     font-weight: bold;
     font-size: 1.5rem;
     width: 100%;
+}
+
+.qr {
+    text-decoration: none;
+    position: relative;
+    bottom: 2px;
+    font-weight: bold;
+}
+
+.la-qrcode {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    position: relative;
+    top: -3px;
 }
 
 .wrap__table {
@@ -291,6 +306,16 @@
     padding-top: 5px;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.check_in {
+    background-color: #305dff;
+    border: none;
+    position: absolute;
+    top: 7%;
+    right: 30%;
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 /* s mail */

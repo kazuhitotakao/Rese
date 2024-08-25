@@ -13,43 +13,8 @@
 
 <body>
 
-    <div class="mail__content">
-        <div class="card">
-            <h3 class="card__title">
-                アンケートにご協力ください
-            </h3>
-            <form class="form" action="" method="post">
-                @csrf
-                <div class="form__group">
-                    <div class="form__group-title">
-                        <span class="form__label--item">評価</span>
-                    </div>
-                    <div class="form__group-content--review">
-                        <div class="form__input--radio">
-                            <input class="visually-hidden" type="radio" name="review" value="1" id="1" @if (old ('review') == '1') checked @endif>
-                            <label class="form__input--radio-label" for="1">1</label>
-                            <input class="visually-hidden" type="radio" name="review" value="2" id="2" @if (old ('review') == '2') checked @endif>
-                            <label class="form__input--radio-label" for="2">2</label>
-                            <input class="visually-hidden" type="radio" name="review" value="3" id="3" @if ( old ('review') == '3') checked @endif>
-                            <label class="form__input--radio-label" for="3">3</label>
-                            <input class="visually-hidden" type="radio" name="review" value="4" id="4" @if ( old ('review') == '4') checked @endif>
-                            <label class="form__input--radio-label" for="4">4</label>
-                            <input class="visually-hidden" type="radio" name="review" value="5" id="5" @if ( old ('review') == '5') checked @endif>
-                            <label class="form__input--radio-label" for="5">5</label>
-                        </div>
-                        <div class="form__error">
-                            @error('review')
-                            {{ $message }}
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-
-
-                <button class="card__button-submit">回答する</button>
-            </form>
-        </div>
-    </div>
+    <!-- {!! QrCode::generate($reservation_id); !!} -->
+    {!! QrCode::generate('test'); !!}
 
 </body>
 

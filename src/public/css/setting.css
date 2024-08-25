@@ -33,16 +33,24 @@
     margin-left: 4rem;
 }
 
+.wrap__table {
+    margin-top: 2rem;
+}
+
 .setting__title {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 th {
-    padding-top: 0.5rem;
     text-align: center;
 }
 
 .input__time {
+    width: 3.3rem;
+    text-align: center;
+}
+
+.input__interval {
     width: 3.3rem;
     text-align: center;
 }

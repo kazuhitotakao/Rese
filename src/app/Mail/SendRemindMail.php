@@ -32,6 +32,7 @@ class SendRemindMail extends Mailable
         return $this->view('emails.remind-to-user')
             ->subject('ご予約日当日のご案内')
             ->with([
+                'reservation_id' => $this->data['reservation_id'],
                 'name' => $this->data['name'],
                 'shop' => $this->data['shop'],
                 'date' => $this->data['date'],

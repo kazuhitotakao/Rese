@@ -57,11 +57,11 @@ class ReviewMailSend extends Command
         // 当日の予約でまだメールを送ってないもの、かつ、予約時間を過ぎた予約のreview_mail_sentにfalseを立てる
         $count = 0;
         foreach ($reservations as $reservation) {
-            if ($times[$count] < Carbon::now()->format('H:i')) {
+            if ($times[$count] <= Carbon::now()->format('H:i')) {
                 $reservation->review_mail_sent = false;
                 $reservation->save();
             }
-            ++$count;
+            $count++;
         }
         // 当日の予約でまだメールを送ってないもの、かつ、review_mail_sentがfalseのものを抽出
         $reservations_over = Reservation::where('review_mail_sent', false)->get();

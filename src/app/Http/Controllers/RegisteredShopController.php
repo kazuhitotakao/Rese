@@ -43,7 +43,8 @@ class RegisteredShopController extends Controller
             $numbers = [];
             $review_average = null;
             $reviews_count = null;
-            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count'));
+            $check_in = null;
+            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count','check_in'));
         }
 
         // --shopデータが存在する場合
@@ -93,7 +94,13 @@ class RegisteredShopController extends Controller
             $numbers[] = $number->first();
         }
 
-        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count'));
+        $checks_in = [];
+        foreach ($reservations as $reservation) {
+            $check_in = $reservation->check_in;
+            $checks_in[] = $check_in;
+        }
+
+        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count', 'checks_in'));
     }
 
     public function saveOrUpdate(ResisterShopRequest $request)
@@ -109,8 +116,6 @@ class RegisteredShopController extends Controller
 
         $max = [
             'user_id' => Auth::id(),
-            // 10~23timeの枠数についてviewからとってくるように修正予定
-            '10time' => 3,
         ];
         $image = Image::where('user_id', Auth::id())->first();
         if ($image !== null) {

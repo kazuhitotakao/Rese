@@ -14,6 +14,7 @@ class SettingController extends Controller
     public function index()
     {
         $shop = Shop::where('user_id', Auth::id())->first();
+        $interval = Shop::where('user_id', Auth::id())->first()->interval;
         $time10 = Max::where('user_id', Auth::id())->first()->pluck('time10');
         $time11 = Max::where('user_id', Auth::id())->first()->pluck('time11');
         $time12 = Max::where('user_id', Auth::id())->first()->pluck('time12');
@@ -30,6 +31,7 @@ class SettingController extends Controller
         $time23 = Max::where('user_id', Auth::id())->first()->pluck('time23');
         return view('setting', compact(
             'shop',
+            'interval',
             'time10',
             'time11',
             'time12',
@@ -66,7 +68,10 @@ class SettingController extends Controller
             'time22' => $request->time22,
             'time23' => $request->time23,
         ];
+        $interval = [ 'interval' => $request->interval ];
         Max::where('user_id', Auth::id())->update($max);
+        Shop::where('user_id', Auth::id())->update($interval);
+
         return redirect('/owner-page')->with('message', '設定を保存しました。');
     }
 }

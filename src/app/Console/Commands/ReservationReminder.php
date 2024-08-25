@@ -48,6 +48,9 @@ class ReservationReminder extends Command
     {
         // 当日の予約
         $reservation_today = Reservation::where('date', '=', Carbon::today());
+        // 当日の予約ID
+        $reservations_id = $reservation_today->pluck('id')->toArray();
+
         // 当日に予約をしているユーザー
         $reservation_users_id = $reservation_today->pluck('user_id');
         $users = [];
@@ -83,6 +86,7 @@ class ReservationReminder extends Command
         $count = 0;
         foreach ($users as $user) {
             $data = [
+                'reservation_id' => $reservations_id[$count],
                 'name' => $user->name,
                 'shop' => $shops[$count],
                 'date' => $date,

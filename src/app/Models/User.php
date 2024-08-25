@@ -51,6 +51,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function reservations()
     {
-        return $this->belongsToMany(Shop::class, 'reservations')->withPivot('date', 'time', 'number_id', 'review', 'comment', 'comment_at', 'review_mail_sent')->withTimestamps();
+        return $this->belongsToMany(Shop::class, 'reservations')->withPivot('date', 'time', 'number_id', 'review', 'comment', 'comment_at', 'review_mail_sent', 'check_in', 'check_in_at')->withTimestamps();
     }
 }

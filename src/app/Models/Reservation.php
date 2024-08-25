@@ -18,6 +18,8 @@ class Reservation extends Model
         'comment',
         'comment_at',
         'review_mail_sent',
+        'check_in',
+        'check_in_at',
     ];
 
     protected $dates = [

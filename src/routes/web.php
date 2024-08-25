@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/setting/save', [SettingController::class, 'save']);
     Route::get('/available/{shop_id}', [AvailabilityController::class, 'index'])->name('available');
     Route::get('/available-search', [AvailabilityController::class, 'search']);
+    Route::get('/qr', [ReservationController::class, 'qr']);
 });
 
 Route::get('/test', [TestController::class, 'test']);

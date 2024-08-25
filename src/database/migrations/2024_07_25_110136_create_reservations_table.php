@@ -24,6 +24,8 @@ class CreateReservationsTable extends Migration
             $table->string('comment')->nullable();
             $table->timestamp('comment_at')->nullable();
             $table->boolean('review_mail_sent')->nullable();
+            $table->string('check_in')->nullable();
+            $table->timestamp('check_in_at')->nullable();
             $table->timestamps();
         });
     }

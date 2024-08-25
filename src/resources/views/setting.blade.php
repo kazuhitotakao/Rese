@@ -13,12 +13,12 @@
         <h2 class="shop-name__content">店名：{{ $shop->name }}</h2>
     </div>
     <div class="setting__container">
-        <div class="setting__title">
-            <h2 class="title-content">時間枠設定</h2>
-        </div>
         <form action="/setting/save" method="post">
             @csrf
             <div class=" wrap__table">
+                <div class="setting__title">
+                    <h2 class="title-content">時間枠設定</h2>
+                </div>
                 <table>
                     <tr>
                         <th>10時台</th>
@@ -30,13 +30,13 @@
                         <th>16時台</th>
                     </tr>
                     <tr>
-                        <td><input class="input__time" type="text" name="time10" value="{{ $time10[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time11" value="{{ $time11[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time12" value="{{ $time12[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time13" value="{{ $time13[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time14" value="{{ $time14[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time15" value="{{ $time15[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time16" value="{{ $time16[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time10" value="{{ $time10[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time11" value="{{ $time11[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time12" value="{{ $time12[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time13" value="{{ $time13[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time14" value="{{ $time14[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time15" value="{{ $time15[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time16" value="{{ $time16[0] }}"></td>
                     </tr>
                     <tr>
                         <th>17時台</th>
@@ -48,13 +48,26 @@
                         <th>23時台</th>
                     </tr>
                     <tr>
-                        <td><input class="input__time" type="text" name="time17" value="{{ $time17[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time18" value="{{ $time18[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time19" value="{{ $time19[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time20" value="{{ $time20[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time21" value="{{ $time21[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time22" value="{{ $time22[0] }}"></td>
-                        <td><input class="input__time" type="text" name="time23" value="{{ $time23[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time17" value="{{ $time17[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time18" value="{{ $time18[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time19" value="{{ $time19[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time20" value="{{ $time20[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time21" value="{{ $time21[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time22" value="{{ $time22[0] }}"></td>
+                        <td><input class="input__time" type="number" name="time23" value="{{ $time23[0] }}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class=" wrap__table">
+                <div class="setting__title">
+                    <h2 class="title-content">予約時間間隔設定</h2>
+                </div>
+                <table>
+                    <tr>
+                        <th>間隔</th>
+                    </tr>
+                    <tr>
+                        <td><input class="input__interval" type="number" name="interval" value="{{ $interval }}"></td>
                     </tr>
                 </table>
                 <button class="setting__button">設定する</button>

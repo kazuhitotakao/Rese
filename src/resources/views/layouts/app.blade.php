@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/f094d395e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     @yield('css')
+    @livewireStyles
 </head>
 
 <body>
@@ -73,8 +75,9 @@
     <main>
         @yield('content')
     </main>
-
+    @livewireScripts
     @yield('script')
+
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 

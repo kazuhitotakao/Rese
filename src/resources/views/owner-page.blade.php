@@ -167,6 +167,7 @@
             <div class="reservation__title">
                 <h2 class="reservation__title-content">予約情報</h2>
             </div>
+            <a class="qr" href="/qr"><i class="las la-qrcode"></i>来店確認</a>
             <div class="alert--danger">
                 @error('subject')
                 {{ $message }}
@@ -187,6 +188,9 @@
             <div class=" wrap__table">
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
                 <span class="table__title">予約{{ $count }}</span>
+                @if(!empty($checks_in[$count-1]))
+                <span class="check_in">来店済</span>
+                @endif
                 <a class="mail__button" href="#{{ $reservation->id }}mail"><i class="las la-envelope"></i></a>
                 <table class="reservation__table">
                     <tr class="reservation__row">
