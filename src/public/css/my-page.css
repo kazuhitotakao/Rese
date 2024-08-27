@@ -78,6 +78,23 @@
     font-size: 1.2rem;
 }
 
+.payment__button {
+    position: absolute;
+    top: 7%;
+    right: 42%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    background-color: #305dff;
+}
+
+.la-yen-sign {
+    position: absolute;
+    color: #fff;
+    background-color: #305dff;
+    font-size: 2rem;
+}
+
 .la-edit {
     font-size: 2rem;
     position: absolute;
@@ -262,7 +279,7 @@
     padding: 4px;
     border-radius: 3px;
     font-weight: bold;
-    border: 1px solid ;
+    border: 1px solid;
     width: 8rem;
 }
 

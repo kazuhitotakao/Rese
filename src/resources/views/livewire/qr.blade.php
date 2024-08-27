@@ -1,9 +1,8 @@
 <div>
     <div id="loading">ブラウザのカメラの使用を許可してください。</div>
     @if (session()->has('message'))
-    <div class="alert alert-success d-flex align-items-center" role="alert">
-        <i class="fa-solid fa-circle-check mr-1"></i>
-        {{ session('message') }}
+    <div class="alert alert-success" role="alert" style="margin: 0; height: 6rem;">
+        <div style="text-align: center; margin-top: 1rem; font-size: 1.8rem;">{{ session('message') }}</div>
     </div>
     @endif
     <canvas id="canvas" hidden></canvas>

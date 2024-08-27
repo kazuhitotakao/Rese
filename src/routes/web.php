@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\MailSendController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisteredOwnerController;
 use App\Http\Controllers\RegisteredShopController;
 use App\Http\Controllers\RegisteredUserController;
@@ -56,6 +57,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/available/{shop_id}', [AvailabilityController::class, 'index'])->name('available');
     Route::get('/available-search', [AvailabilityController::class, 'search']);
     Route::get('/qr', [ReservationController::class, 'qr']);
+    Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
 });
-
-Route::get('/test', [TestController::class, 'test']);

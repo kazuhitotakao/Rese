@@ -38,6 +38,10 @@
             <div class=" wrap__table">
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
                 <span class="table__title">予約{{ $count }}</span>
+                <form action="/payment/create" method="get">
+                    <input type="hidden" name="shop_id" value="{{ $shops_id[$count-1] }}">
+                    <button class="payment__button"><i class="las la-yen-sign"></i></button>
+                </form>
                 <a href="#{{ $reservation->id }}change"><i class="lar la-edit"></i></a>
                 <a href="#{{ $reservation->id }}cancel" class="circle"><i class="lar la-times-circle"></i></a>
                 <table class="reservation__table">
