@@ -35,6 +35,7 @@ class SendQrMail extends Mailable
         return $this->view('emails.qr')
             ->subject('受付用ＱＲコードの送信')
             ->with([
+                'url' => route('qrSend', ['reservation_id' => $this->reservation_id]),
                 'content' => $this->reservation_id,
                 'name' => $this->user_name,
                 'shop' => $this->shop_name,

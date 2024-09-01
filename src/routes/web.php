@@ -11,6 +11,7 @@ use App\Http\Controllers\RegisteredShopController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SendQrController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TestController;
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/available/{shop_id}', [AvailabilityController::class, 'index'])->name('available');
     Route::get('/available-search', [AvailabilityController::class, 'search']);
     Route::get('/qr', [ReservationController::class, 'qr']);
+    Route::get('/qr-send/{reservation_id}', [SendQrController::class, 'show'])->name('qrSend');
     Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
 });
