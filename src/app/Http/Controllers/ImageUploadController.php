@@ -22,7 +22,7 @@ class ImageUploadController extends Controller
             'user_id' => Auth::id(),
         ];
         if ($image_db == null) {
-            // $image_dbを登録 $shop_imageの登録はなし
+            // $image_dbを登録
             $path = $image_file->store('public/images');
             $image = new Image();
             $image->path = $path;
@@ -32,7 +32,7 @@ class ImageUploadController extends Controller
         } else {
             // $image_dbありで、$shop_imageの有り無しで場合分け
             if ($shop_image == null) {
-                // $image_dbのみ更新のみ
+                // $image_dbのみ更新
                 $image_db->update($form);
                 return redirect('/owner-page')->with('messageImg', '画像を更新しました。');
             } else {

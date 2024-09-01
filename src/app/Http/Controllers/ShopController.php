@@ -48,6 +48,37 @@ class ShopController extends Controller
         return view('index', compact('shops', 'search', 'imagesUrl', 'genres', 'common_shops_id'));
     }
 
+    public function guest(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $shops = Shop::with('genre')->get();
+        $search = [
+            'pref' => null,
+            'genre_id' => null,
+            'keyword' => null
+        ];
+        $genres = Genre::all();
+
+        session(['search_results' => $shops]);
+        session(['search' => $search]);
+
+        $imagesUrl = [];
+        foreach ($shops as $shop) {
+            if (strpos($shop->image, 'http') === 0) {
+                // 公開URLの場合
+                $imagesUrl[] = $shop->image;
+            } else {
+                // ストレージ内の画像の場合
+                $imagesUrl[] = Storage::url($shop->image);
+            }
+        }
+
+        $shops_id = session('search_results')->pluck('id');
+        $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
+        $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
+        return view('guest', compact('shops', 'search', 'imagesUrl', 'genres', 'common_shops_id'));
+    }
+
     public function search(Request $request)
     {
         if ($request->has('reset')) {

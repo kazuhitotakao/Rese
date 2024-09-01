@@ -58,7 +58,7 @@
                         @endcan
                         @else
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href="/">Home</a>
+                            <a class="nav-link text-primary" href="/guest">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="/register">Registration</a>

@@ -29,10 +29,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 Route::get('/thanks', [RegisteredUserController::class, 'thanks']);
-Route::get('/', [ShopController::class, 'index']);
+Route::get('/guest', [ShopController::class, 'guest']);
 Route::get('/search', [ShopController::class, 'search']);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/', [ShopController::class, 'index']);
     Route::get('/detail/{shop_id}', [ShopController::class, 'detail'])->name('detail');
     Route::get('/my-page', [ShopController::class, 'myPage']);
     Route::post('/reserve', [ReservationController::class, 'reserve']);
