@@ -1,12 +1,22 @@
 @extends('layouts.app')
 
 @section('css')
+@if(app('env')=='local')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+@endif
+@if(app('env')=='production')
+<link rel="stylesheet" href="{{ secure_asset('css/index.css') }}">
+@endif
 @endsection
 
 @section('content')
 @include ('footer')
+@if(app('env')=='local')
 <script src="{{ asset('js/index.js')}}" defer></script>
+@endif
+@if(app('env')=='production')
+<script src="{{ secure_asset('js/index.js')}}" defer></script>
+@endif
 <div class="shop__container">
     <div class="shop__inner">
         <form class="search-form" action="/search" method="get">
@@ -43,7 +53,12 @@
         <div class="shop__card">
             <div class="card__img">
                 @if(empty($shop->image))
+                @if(app('env')=='local')
                 <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                @endif
+                @if(app('env')=='production')
+                <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                @endif
                 @else
                 <img class="card__img-img" src="{{ $imagesUrl[$count-1] }}" alt="image">
                 @endif

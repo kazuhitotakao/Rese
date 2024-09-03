@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('css')
+@if(app('env')=='local')
 <link rel="stylesheet" href="{{ asset('css/verify-email.css') }}">
+@endif
+@if(app('env')=='production')
+<link rel="stylesheet" href="{{ secure_asset('css/verify-email.css') }}">
+@endif
 @endsection
 @section('content')
 <div class="mail__content">
@@ -21,4 +26,3 @@
     </div>
 </div>
 @endsection
-

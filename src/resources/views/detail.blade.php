@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('css')
+@if(app('env')=='local')
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+@endif
+@if(app('env')=='production')
+<link rel="stylesheet" href="{{ secure_asset('css/detail.css') }}">
+@endif
 @endsection
 
 @section('content')
@@ -14,7 +19,12 @@
         </div>
         <div class="detail__img">
             @if(empty($shop->image))
+            @if(app('env')=='local')
             <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+            @endif
+            @if(app('env')=='production')
+            <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+            @endif
             @else
             <img class="card__img-img" src="{{ $imagesUrl }}" alt="image">
             @endif

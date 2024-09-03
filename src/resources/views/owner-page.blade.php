@@ -1,13 +1,23 @@
 @extends('layouts.app')
 
 @section('css')
+@if(app('env')=='local')
 <link rel="stylesheet" href="{{ asset('css/owner-page.css') }}">
+@endif
+@if(app('env')=='production')
+<link rel="stylesheet" href="{{ secure_asset('css/owner-page.css') }}">
+@endif
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 @endsection
 
 @section('content')
 @include ('footer')
+@if(app('env')=='local')
 <script src="{{ asset('js/index.js')}}" defer></script>
+@endif
+@if(app('env')=='production')
+<script src="{{ secure_asset('js/index.js')}}" defer></script>
+@endif
 <div class="owner-page__wrap">
     <div class="user-name">
         <h2 class="user-name__content">店舗代表者：{{ $user->name }}さん</h2>
@@ -36,7 +46,12 @@
                             <div class="card__img">
                                 @if(empty($shop->image))
                                 @if(empty($image->path))
+                                @if(app('env')=='local')
                                 <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                                @endif
+                                @if(app('env')=='production')
+                                <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                                @endif
                                 @else
                                 <img class="card__img-img" src="{{ Storage::url($image->path) }}" alt="image">
                                 @endif
@@ -186,7 +201,12 @@
             @php $count = 1; @endphp
             @foreach($reservations as $reservation)
             <div class=" wrap__table">
+                @if(app('env')=='local')
                 <img class="clock__icon" src="{{ asset('images/clock.png') }}" alt="clock">
+                @endif
+                @if(app('env')=='production')
+                <img class="clock__icon" src="{{ secure_asset('images/clock.png') }}" alt="clock">
+                @endif
                 <span class="table__title">予約{{ $count }}</span>
                 @if(!empty($checks_in[$count-1]))
                 <span class="check_in">来店済</span>
