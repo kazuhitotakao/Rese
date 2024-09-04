@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Rese</title>
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @if(app('env')=='local')
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
@@ -15,7 +16,6 @@
     <link rel="stylesheet" href="{{ secure_asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('css/common.css') }}">
     @endif
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/f094d395e0.js" crossorigin="anonymous"></script>
