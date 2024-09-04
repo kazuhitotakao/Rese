@@ -44,19 +44,29 @@
                         @csrf
                         <div class="image__content">
                             <div class="card__img">
+                                <!-- 開発環境の場合 -->
+                                @if(app('env')=='local')
                                 @if(empty($shop->image))
                                 @if(empty($image->path))
-                                @if(app('env')=='local')
                                 <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
-                                @endif
-                                @if(app('env')=='production')
-                                <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
-                                @endif
                                 @else
                                 <img class="card__img-img" src="{{ Storage::url($image->path) }}" alt="image">
                                 @endif
                                 @else
                                 <img class="card__img-img" src="{{ $imageUrl }}" alt="image">
+                                @endif
+                                @endif
+                                <!-- 本番環境の場合 -->
+                                @if(app('env')=='production')
+                                @if(empty($shop->image))
+                                @if(empty($image->path))
+                                <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                                @else
+                                <img class="card__img-img" src="{{ $image->path }}" alt="image">
+                                @endif
+                                @else
+                                <img class="card__img-img" src="{{ $imageUrl }}" alt="image">
+                                @endif
                                 @endif
                             </div>
                             <div class="wrap__img">
