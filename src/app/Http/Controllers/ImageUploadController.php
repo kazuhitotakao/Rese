@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ImageUploadController extends Controller
 {
@@ -59,10 +60,8 @@ class ImageUploadController extends Controller
             ];
             if ($image_db == null) {
                 // $image_dbを登録
-                $path = Storage::disk('s3')->putFile('/', $image_file);
-                // $image_file->store('public/images');
                 $image = new Image();
-                $image->path = Storage::disk('s3')->url($path);
+                $image->path = $form['path'];
                 $image->user_id = Auth::id();
                 $image->save();
                 return redirect('/owner-page')->with('messageImg', '画像を登録しました。');
@@ -76,7 +75,7 @@ class ImageUploadController extends Controller
                     // $image_dbと$shop_image更新
                     $image_db->update($form);
                     $shop = Shop::where('user_id', Auth::id())->first();
-                    $shop->update(['image' => Storage::disk('s3')->url($path)]);
+                    $shop->update(['image' => $form['path']]);
                     return redirect('/owner-page')->with('messageImg', '画像を更新しました。');
                 }
             }
