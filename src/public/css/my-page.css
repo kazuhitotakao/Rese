@@ -486,19 +486,21 @@
         width: 30rem;
         padding-top: 1.5rem;
         min-height: 100vh;
+        margin: 0 auto;
     }
 
     .my-page__shop {
         width: 20rem;
         padding-top: 1.5rem;
         min-height: 100vh;
+        margin: 0 auto;
     }
 
     .wrap__table {
         position: relative;
         width: 80%;
         background-color: #305dff;
-        margin: 1.5rem 1rem;
+        margin: 0 auto;
         padding: 1rem;
         color: #fff;
         box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
@@ -516,5 +518,6 @@
         width: 25rem;
         padding-top: 1.5rem;
         min-height: 100vh;
+        margin: 0 auto;
     }
 }

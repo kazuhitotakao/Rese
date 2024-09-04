@@ -8,13 +8,14 @@
 .register__content {
     display: flex;
     margin: 0 auto;
+    text-align: center;
     padding: 10vh 15px;
     background-color: #f2f2f2;
     min-height: 100vh;
 }
 
 .card {
-    margin: 5rem 0 1rem 3rem;
+    margin: 5rem 0 1rem 1rem;
     height: 20rem;
     width: 25rem;
     border-radius: 5px;
@@ -57,7 +58,7 @@
 
 .form__input--text input {
     appearance: none;
-    width: 80%;
+    width: 75%;
     height: 36px;
     border: none;
     border-bottom: 2px solid #000;
@@ -103,9 +104,9 @@
 
 .owner__content {
     margin-top: 2rem;
-    padding-left: 13%;
+    padding-left: 7%;
     background-color: #f2f2f2;
-    width: 40rem;
+    width: 50rem;
 }
 
 /* s 検索 */
@@ -162,6 +163,9 @@
     padding: 12px 8px;
     border-top: 1px solid;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* テキストがはみ出した場合に...で省略表示 */
 }
 
 .owner__label-ID,
@@ -285,7 +289,7 @@
 /* e モーダル共通 */
 
 /* s mailモーダル */
-.mail-modal__title{
+.mail-modal__title {
     font-size: 1.6rem;
     font-weight: bold;
     text-align: center;
@@ -311,7 +315,7 @@
 .mail-modal__data {
     width: 80%;
     font-weight: bold;
-}   
+}
 
 .mail-modal__button {
     display: block;
@@ -339,7 +343,7 @@
     border: none;
 }
 
-.form__error-email{
+.form__error-email {
     font-size: 1rem;
     color: red;
     text-align: left;
@@ -365,5 +369,14 @@
         padding-left: 13%;
         background-color: #f2f2f2;
         width: 30rem;
+    }
+    .card {
+        margin: 5rem auto 1rem;
+        height: 20rem;
+        width: 25rem;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        background-color: #fff;
+        border: none;
     }
 }

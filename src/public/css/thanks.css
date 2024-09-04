@@ -2,7 +2,7 @@
 .mail__content {
     text-align: center;
     margin: 0 auto;
-    padding: 20vh 15px;
+    margin: 20vh auto;
     height: 100vh;
     background-color: #f2f2f2;
 }
@@ -34,4 +34,23 @@
     width: 10rem;
     height: 3rem;
 }
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+    .card {
+        margin: 3vh auto;
+        height: 12rem;
+        width: 20rem;
+        padding: 10px 20px 20px 20px;
+        border: 1px solid #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+        background-color: #fff;
+        padding-top: 10vh;
+    }
+
+    .card__title {
+        font-size: 0.9rem;
+    }
+}
+
 /* e main */

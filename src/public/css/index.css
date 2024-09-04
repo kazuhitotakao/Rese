@@ -156,8 +156,8 @@
     .grid {
         display: grid;
         gap: 1rem 1rem;
-        grid-template-columns:  repeat(2, 1fr);
         margin-top: 10rem;
+        grid-template-columns:  repeat(2, 1fr);
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
@@ -205,10 +205,52 @@
 /* 480px以下 */
 @media screen and (max-width: 480px) {
     .grid {
+        display: grid;
+        gap: 1rem 1rem;
         grid-template-columns: 1fr;
+        margin-top: 10rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
-    .btn {
-        margin-right: 2rem;
+    .shop__inner {
+        margin-top: 3px;
+        margin-left: 2rem;
+        width: 90%;
     }
+
+    .search-form {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        gap: 12px;
+        height: 2.5rem;
+    }
+
+    .search-form__item-select {
+        padding: 5px;
+        width: 40%;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    .search-form__keyword-input {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px 12px;
+        width: 70%;
+        border: 1px solid #e3ded9;
+        background-color: #fbfbfb;
+    }
+
+    .btn__wrap {
+        display: flex;
+        justify-content: left;
+    }
+    .btn {
+        margin-right: 1rem;
+    }
+
 }

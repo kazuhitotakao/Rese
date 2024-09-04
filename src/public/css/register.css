@@ -55,6 +55,7 @@
     border: none;
     border-bottom: 2px solid #000;
     outline: none;
+    border-radius: 0; 
 }
 
 .form__input--text::before {
@@ -78,16 +79,27 @@
 }
 
 .form__button {
-    margin-left: 74%;
+    margin-left: 70%;
     margin-top: 10px;
 }
 
 .form__button-submit {
-    width: 4rem;
+    width: 5rem;
     height: 40px;
     border: none;
     border-radius: 5px;
     background: #305dff;
     color: #fff;
     cursor: pointer;
+}
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+    .register__content {
+        padding: 20vh 0;
+    }
+
+    .card {
+        width: 20rem;
+    }
 }

@@ -94,4 +94,18 @@ th {
         width: 2.5rem;
         text-align: center;
     }
+    .alert__info {
+        border-color: #f5c2c7;
+        background-color: #f8d7da;
+        color: #842029;
+        font-size: 1rem;
+        font-weight: bold;
+        width: 90%;
+        margin-left: 5%;
+        height: 3rem;
+        line-height: 3rem;
+    }
+    .available__container {
+        margin-left: 1rem;
+    }
 }

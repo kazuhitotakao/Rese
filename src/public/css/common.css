@@ -33,7 +33,7 @@ html {
 .offcanvas-lg,
 .offcanvas-md,
 .offcanvas-sm {
-    --bs-offcanvas-width: 100vw ;
+    --bs-offcanvas-width: 100% ;
 }
 /* e オフキャンバスの幅 */
 

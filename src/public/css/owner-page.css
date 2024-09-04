@@ -123,7 +123,6 @@
 .wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 4%;
 }
 
 /* s card */
@@ -534,7 +533,81 @@
         padding-top: 1.5rem;
         min-height: 100vh;
     }
+
+    .user-name {
+        width: 40rem;
+        padding-top: 6rem;
+        text-align: center;
+    }
+
+    .shop__card {
+        width: 95%;
+        background-color: #f2f2f2;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        height: 40rem;
+    }
+    
+    .wrap__table {
+        margin: 0 auto;
+    }
 }
 /* 480px以下 */
 @media screen and (max-width: 480px) {
+    .owner-page__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .owner-page__shop {
+        width: 35rem;
+        padding-top: 1.5rem;
+        min-height: 100vh;
+    }
+
+    .form-file {
+        margin-top: 5vh;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 3px 6px;
+        width: 20rem;
+        border-radius: 3px;
+    }
+
+    .form {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 3px 6px;
+        width: 20rem;
+        border: 1px solid gray;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+
+    .owner-page__reservation {
+        width: 35rem;
+        padding-top: 1.5rem;
+        min-height: 100vh;
+    }
+
+    .user-name {
+        width: 35rem;
+        padding-top: 6rem;
+        text-align: center;
+    }
+
+    .shop__card {
+        background-color: #f2f2f2;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        height: 40rem;
+    }
+
+    .wrap__table {
+        margin: 0 auto;
+    }
 }

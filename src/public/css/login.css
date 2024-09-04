@@ -1,4 +1,4 @@
-.login__content{
+.login__content {
     margin: 0 auto;
     padding: 20vh 15px;
     height: 100vh;
@@ -15,14 +15,13 @@
     border: none;
 }
 
-.login-form__heading{
+.login-form__heading {
     text-align: left;
     padding: 15px 20px;
     color: #fff;
     background-color: #305dff;
     border-radius: 5px 5px 0 0;
     border: none;
-
 }
 
 .login-form__heading-text {
@@ -38,7 +37,6 @@
 .form__group {
     margin-bottom: 5px;
 }
-
 
 .form__error {
     height: 18px;
@@ -56,23 +54,24 @@
     border: none;
     border-bottom: 2px solid #000;
     outline: none;
+    border-radius: 0; 
     margin-left: 1%;
 }
 
-.form__input--text::before{
-    content:'';
-    font-family: 'FontAwesome';
+.form__input--text::before {
+    content: "";
+    font-family: "FontAwesome";
     font-size: 1.5rem;
     vertical-align: middle;
-    margin-left: 5% ;
+    margin-left: 5%;
 }
 
-.input__email::before{
-    content:'\f0e0';
+.input__email::before {
+    content: "\f0e0";
 }
 
-.input__password::before{
-    content:'\f023';
+.input__password::before {
+    content: "\f023";
     margin-right: 3px;
 }
 
@@ -82,7 +81,7 @@
 }
 
 .form__button-submit {
-    width: 5rem;
+    width: 6rem;
     height: 40px;
     border: none;
     border-radius: 5px;
@@ -91,8 +90,13 @@
     cursor: pointer;
 }
 
-
 /* 768px以下 */
 @media screen and (max-width: 768px) {
+    .login__content {
+        padding: 20vh 0 ;
+    }
 
+    .card {
+        width: 20rem;
+    }
 }

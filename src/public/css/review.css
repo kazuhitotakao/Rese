@@ -116,3 +116,25 @@ input:checked + label::after {
     border-radius: 3px;
     margin: 0 auto;
 }
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+.card {
+    margin: 2rem auto;
+    height: 32rem;
+    width: 25rem;
+    padding: 10px 20px 20px 20px;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    padding-top: 2rem;
+}
+.mail__content {
+    margin: 0 auto;
+    padding: 4rem 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+}
+
