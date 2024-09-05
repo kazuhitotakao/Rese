@@ -33,7 +33,7 @@ html {
 .offcanvas-lg,
 .offcanvas-md,
 .offcanvas-sm {
-    --bs-offcanvas-width: 100% ;
+    --bs-offcanvas-width: 100%;
 }
 /* e オフキャンバスの幅 */
 
@@ -50,7 +50,7 @@ html {
     --bs-bg-opacity: 0;
 }
 
-.navbar-toggler{
+.navbar-toggler {
     background-color: blue;
     height: 2.5rem;
 }
@@ -71,10 +71,10 @@ html {
 .navbar-toggler.active:focus,
 .navbar-toggler.active:hover,
 .navbar-toggler.active.focus,
-.open>.dropdown-toggle.navbar-toggler,
-.open>.dropdown-toggle.navbar-toggler:hover,
-.open>.dropdown-toggle.navbar-toggler:focus,
-.open>.dropdown-toggle.navbar-toggler.focus,
+.open > .dropdown-toggle.navbar-toggler,
+.open > .dropdown-toggle.navbar-toggler:hover,
+.open > .dropdown-toggle.navbar-toggler:focus,
+.open > .dropdown-toggle.navbar-toggler.focus,
 .navbar-toggler.disabled:hover,
 .navbar-toggler[disabled]:hover,
 fieldset[disabled] .navbar-toggler:hover,
@@ -86,7 +86,7 @@ fieldset[disabled] .navbar-toggler:focus,
 fieldset[disabled] .navbar-toggler.focus {
     background: blue;
     /* ホバーやフォーカス時の背景色を濃い青に設定 */
-    color: rgba(0,0,0,0);
+    color: rgba(0, 0, 0, 0);
     /* ホバーやフォーカス時のテキストの色を透明に設定 */
 }
 
@@ -105,7 +105,7 @@ fieldset[disabled] .navbar-toggler.focus {
     top: 3%;
 }
 
-.close{
+.close {
     background-color: blue;
     color: #fff;
     font-size: 1.2rem;
@@ -113,7 +113,10 @@ fieldset[disabled] .navbar-toggler.focus {
     width: 2.5rem;
     border-radius: 5px;
     border: 1px solid blue;
+    padding: 0; /* パディングをリセット */
+    margin: 0; /* マージンをリセット */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* e 閉じるボタン */
-
-

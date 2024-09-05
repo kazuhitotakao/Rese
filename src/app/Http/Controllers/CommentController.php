@@ -14,7 +14,7 @@ class CommentController extends Controller
     {
         $shop = Shop::where('user_id', Auth::id())->first();
         $reservations = Reservation::where('shop_id', $shop->id)
-            ->whereNotNull('comment')->get();
+            ->whereNotNull('comment_at')->get();
 
         $users = [];
         foreach ($reservations as $reservation) {

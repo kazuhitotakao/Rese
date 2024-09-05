@@ -500,7 +500,7 @@
         position: relative;
         width: 80%;
         background-color: #305dff;
-        margin: 0 auto;
+        margin: 1rem auto;
         padding: 1rem;
         color: #fff;
         box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.4);
@@ -508,8 +508,13 @@
     }
 
     .reservation__title {
-        padding: 0 1rem;
+       text-align: left;
+       padding: 0 3rem;
     }
+    
+    .shop__title-content {
+        text-align: left;
+}
 }
 
 /* 480px以下 */

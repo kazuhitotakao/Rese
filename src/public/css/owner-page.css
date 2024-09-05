@@ -162,7 +162,7 @@
 }
 
 .form-file::file-selector-button {
-    width: 7rem;
+    width: 8rem;
     height: 32px;
     border: none;
     border-radius: 5px;
@@ -170,6 +170,11 @@
     color: #fff;
     cursor: pointer;
     display: block;
+    padding: 0; /* パディングをリセット */
+    margin: 0; /* マージンをリセット */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form__button-image {
@@ -549,7 +554,7 @@
         margin-bottom: 20px;
         height: 40rem;
     }
-    
+
     .wrap__table {
         margin: 0 auto;
     }

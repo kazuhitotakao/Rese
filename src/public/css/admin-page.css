@@ -7,9 +7,10 @@
 
 .register__content {
     display: flex;
+    justify-content: center;
     margin: 0 auto;
     text-align: center;
-    padding: 10vh 15px;
+    padding: 10vh 1rem;
     background-color: #f2f2f2;
     min-height: 100vh;
 }
@@ -63,6 +64,7 @@
     border: none;
     border-bottom: 2px solid #000;
     outline: none;
+    border-radius: 0;
 }
 
 .form__input--text::before {
@@ -357,7 +359,7 @@
     .register__content {
         display: flex;
         flex-direction: column;
-        text-align: center;
+        text-align: left;
         margin: 0 auto;
         padding: 10vh 15px;
         background-color: #f2f2f2;
@@ -365,8 +367,9 @@
     }
 
     .owner__content {
+        margin: 0 auto;
         margin-top: 4rem;
-        padding-left: 13%;
+        padding-left: 0%;
         background-color: #f2f2f2;
         width: 30rem;
     }

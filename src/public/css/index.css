@@ -16,7 +16,6 @@
     display: flex;
     justify-content: space-around;
     gap: 12px;
-    height: 2.5rem;
 }
 
 .search-form__item-select {
@@ -156,7 +155,7 @@
     .grid {
         display: grid;
         gap: 1rem 1rem;
-        margin-top: 10rem;
+        margin-top: 8rem;
         grid-template-columns:  repeat(2, 1fr);
         padding-bottom: 2rem;
         padding-left: 2rem;
@@ -170,12 +169,11 @@
     }
 
     .search-form {
-        margin-top: 4rem;
+        padding-top: 6rem;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
         gap: 12px;
-        height: 2.5rem;
     }
 
     .search-form__item-select {
@@ -208,7 +206,7 @@
         display: grid;
         gap: 1rem 1rem;
         grid-template-columns: 1fr;
-        margin-top: 10rem;
+        margin-top: 8rem;
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
@@ -221,12 +219,11 @@
     }
 
     .search-form {
-        margin-top: 4rem;
+        padding-top: 6rem;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
         gap: 12px;
-        height: 2.5rem;
     }
 
     .search-form__item-select {

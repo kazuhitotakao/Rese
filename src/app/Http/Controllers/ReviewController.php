@@ -15,7 +15,7 @@ class ReviewController extends Controller
     
     public function reviewPost(Request $request, $reservation_id)
     {   
-        $form = $request->all();
+        $form = $request->all();    
         unset($form['_token']);
         $form['comment_at'] = Carbon::now();
         Reservation::find($reservation_id)->update($form);
