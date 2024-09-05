@@ -559,7 +559,7 @@
     }
 
     .wrap__table {
-        margin: 0 auto;
+        margin: 1rem auto;
     }
 }
 /* 480px以下 */
@@ -616,6 +616,6 @@
     }
 
     .wrap__table {
-        margin: 0 auto;
+        margin: 1rem auto;
     }
 }

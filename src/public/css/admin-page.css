@@ -371,15 +371,29 @@
         margin-top: 4rem;
         padding-left: 0%;
         background-color: #f2f2f2;
-        width: 30rem;
+        width: 22rem;
     }
     .card {
         margin: 5rem auto 1rem;
         height: 20rem;
-        width: 25rem;
+        width: 22rem;
         border-radius: 5px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
         background-color: #fff;
         border: none;
     }
+    .search-form {
+        display: flex;
+        justify-content: space-around;
+        gap: 2px;
+        height: 32px;
+        width: 22rem;
+    }
+.search-form__item-select{
+    width: 25%;
+}
+    .search-form__keyword-input {
+        width: 35%;
+    }
+
 }
