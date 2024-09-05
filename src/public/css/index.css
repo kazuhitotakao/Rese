@@ -155,7 +155,7 @@
     .grid {
         display: grid;
         gap: 1rem 1rem;
-        margin-top: 8rem;
+        margin-top: 2rem;
         grid-template-columns:  repeat(2, 1fr);
         padding-bottom: 2rem;
         padding-left: 2rem;
@@ -169,7 +169,7 @@
     }
 
     .search-form {
-        padding-top: 6rem;
+        padding-top: 4rem;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
@@ -206,7 +206,7 @@
         display: grid;
         gap: 1rem 1rem;
         grid-template-columns: 1fr;
-        margin-top: 8rem;
+        margin-top: 2rem;
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
@@ -219,7 +219,7 @@
     }
 
     .search-form {
-        padding-top: 6rem;
+        padding-top: 4rem;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
