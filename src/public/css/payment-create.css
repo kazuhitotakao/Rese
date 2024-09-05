@@ -5,3 +5,14 @@ main {
 .container {
     margin: 6rem auto;
 }
+
+.card {
+    width: 30rem;
+}
+
+/* 768px以下 */
+@media screen and (max-width: 768px) {
+    .card {
+        width: 20rem;
+    }
+}
