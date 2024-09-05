@@ -298,6 +298,8 @@
 
 .reservation-modal__label {
     width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .reservation-modal__data {
@@ -508,13 +510,19 @@
     }
 
     .reservation__title {
-       text-align: left;
-       padding: 0 3rem;
+        text-align: left;
+        padding: 0 3rem;
     }
-    
+
     .shop__title-content {
         text-align: left;
-}
+    }
+    .modal-wrapper .modal-window {
+        padding: 30px 10px 15px;
+    }
+    .available {
+        right: 7%;
+    }
 }
 
 /* 480px以下 */
@@ -527,6 +535,6 @@
     }
 
     .modal-wrapper .modal-window {
-    width: 375px;
-}
+        width: 375px;
+    }
 }
