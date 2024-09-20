@@ -111,6 +111,10 @@
 　８　パーミッション設定  
 　　　chmod -R 777 /var/www/storage  
 
+　９　シンボリックリンク設定  
+　　　php artisan storage:link  
+   
+
 ## 【URL】  
    　【test用ユーザー】  
 　　　`管理者　　　　→　Email：admin@sample.com　　Password：password`  
@@ -122,7 +126,8 @@
 　　MailHog：http://localhost:8025/  
 #### ・本番環境
 　　デプロイ済のURL：https://rese-shops.com  
-　　※ＱＲコードリーダーでのカメラ使用の際にhttpsでの接続が必要だったため、独自ドメインでhttps接続をしている
+　　※ＱＲコードリーダーでのカメラ使用の際にhttpsでの接続が必要だったため、独自ドメインでhttps接続をしている  
+　　※2024.9.20現在、本番環境は停止している
 ## 【その他】  
 #### ・開発環境と本番環境の切り分けについて  
 　　.env.development（開発環境） .env.production（本番環境）で切り分けを実施  
