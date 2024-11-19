@@ -235,7 +235,6 @@
 .modal-wrapper::after {
     display: inline-block;
     height: 100%;
-    margin-left: -0.05em;
     vertical-align: middle;
     content: "";
 }

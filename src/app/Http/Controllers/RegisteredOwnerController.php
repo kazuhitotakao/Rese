@@ -75,7 +75,7 @@ class RegisteredOwnerController  extends Controller
         if ($request->has('reset')) {
             return redirect('/admin-page');
         }
-        
+
         $query = User::query();
         $query = $this->getSearchQuery($request, $query);
         $users = $query->get();
@@ -103,7 +103,7 @@ class RegisteredOwnerController  extends Controller
         if (!empty($request->role)) {
             $query->role($request->role);
         }
-        
+
         return $query;
     }
 }

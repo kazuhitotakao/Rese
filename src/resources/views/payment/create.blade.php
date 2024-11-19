@@ -30,19 +30,15 @@
                         <label for="card_number">カード番号</label>
                         <div id="card-number" class="form-control"></div>
                     </div>
-
                     <div>
                         <label for="card_expiry">有効期限</label>
                         <div id="card-expiry" class="form-control"></div>
                     </div>
-
                     <div>
                         <label for="card-cvc">セキュリティコード</label>
                         <div id="card-cvc" class="form-control"></div>
                     </div>
-
                     <div id="card-errors" class="text-danger"></div>
-
                     <button class="mt-3 btn btn-primary">支払い</button>
                 </form>
             </div>
