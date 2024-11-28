@@ -32,12 +32,6 @@
                             <button class="shop__setting-content"> <i class="las la-cog"></i>設定</button>
                         </form>
                     @endif
-                    @if ($reviews_count > 0)
-                        <span class="shop__review-content">{{ $review_average }}</span>
-                        <form class="shop__comment-form" action="/comment" method="get">
-                            <button class="shop__comment-content"><i class="las la-comment"></i>コメントを見る</button>
-                        </form>
-                    @endif
                 </div>
                 <div class="wrapper">
                     <div class="shop__card">

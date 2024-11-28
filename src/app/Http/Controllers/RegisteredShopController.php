@@ -41,10 +41,8 @@ class RegisteredShopController extends Controller
             $users_name = [];
             $times = [];
             $numbers = [];
-            $review_average = null;
-            $reviews_count = null;
             $check_in = null;
-            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count','check_in'));
+            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'check_in'));
         }
 
         // --shopデータが存在する場合
@@ -55,21 +53,6 @@ class RegisteredShopController extends Controller
         } else {
             // ストレージ内の画像の場合
             $imageUrl = Storage::url($shop->image);
-        }
-
-        // 評価の平均値
-        $reviews = Reservation::where('shop_id', $shop->id)
-            ->whereNotNull('review')->get();
-        $reviews_count = $reviews->count();
-
-        $total_review = 0;
-        foreach ($reviews as $review) {
-            $total_review += $review->review;
-        }
-        if ($reviews_count !== 0) {
-            $review_average = '評価  ★ ' . round($total_review / $reviews_count, 1);
-        } else {
-            $review_average = null;
         }
 
         $reservations = Reservation::where('shop_id', $shop->id)
@@ -100,7 +83,7 @@ class RegisteredShopController extends Controller
             $checks_in[] = $check_in;
         }
 
-        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'review_average', 'reviews_count', 'checks_in'));
+        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'checks_in'));
     }
 
     public function saveOrUpdate(ResisterShopRequest $request)

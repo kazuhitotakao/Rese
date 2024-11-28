@@ -51,8 +51,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/image-upload', [ImageUploadController::class, 'imageUpload']);
     Route::get('/mail/shop-to-user', [MailSendController::class, 'shopToUser']);
     Route::get('/mail/admin-to-each', [MailSendController::class, 'adminToEach']);
-    Route::get('/review/{reservation_id}', [ReviewController::class, 'review'])->name('review');
-    Route::post('/review/{reservation_id}', [ReviewController::class, 'reviewPost']);
+    Route::get('/reviews/{shop_id}', [ReviewController::class, 'show'])->name('reviews.show');
+    Route::post('/reviews/{shop_id}', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/comment', [CommentController::class, 'view']);
     Route::get('/setting', [SettingController::class, 'index']);
     Route::post('/setting/save', [SettingController::class, 'save']);

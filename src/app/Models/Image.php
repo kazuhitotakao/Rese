@@ -12,4 +12,10 @@ class Image extends Model
         'path',
         'user_id',
     ];
+
+    // Userモデルとのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

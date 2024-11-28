@@ -1,11 +1,123 @@
-.mail__content {
+/* s shop card */
+.shop-card__wrapper {
+    display: flex;
+    flex-direction: column; /* 子要素を縦方向に配置 */
+    align-items: center; /* 子要素を横方向に中央寄せ */
+    justify-content: center; /* 子要素を縦方向に中央寄せ */
     margin: 0 auto;
     padding: 4rem 15px;
-    height: 100vh;
-    background-color: #f2f2f2;
 }
 
-.card {
+.shop-card__title {
+    width: 70%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.shop-card {
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.shop-card__image-img {
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
+}
+
+.shop-card__content {
+    padding: 15px 25px;
+}
+
+.shop-card__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.shop-card__tags {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.shop-card__tag--area {
+    display: inline-block;
+}
+
+.shop-card__tag--genre {
+    display: inline-block;
+    margin-left: 10px;
+}
+/* e カード */
+
+.shop-card__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.shop-card__button {
+    width: 6rem;
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    width: 6rem;
+}
+
+.shop-card__button:hover {
+    background-color: #88b7db;
+    color: #fff;
+}
+
+/* s いいねボタン */
+.like-button {
+    cursor: pointer;
+    color: rgb(188, 188, 188);
+    font-size: 1.8rem;
+    vertical-align: middle;
+}
+
+.liked {
+    font-size: 1.8rem;
+    color: red;
+    font-weight: 900;
+    z-index: 10;
+}
+
+.like__form {
+    display: inline-block;
+}
+
+.like__form-button {
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    padding: 0px;
+}
+/* e いいねボタン */
+/* e shop card */
+
+.vertical-line {
+    width: 2px; /* 縦線の太さ */
+    background-color: #d3d3d3; /* 縦線の色 */
+    height: 60%; /* 縦線の高さ（画面の半分） */
+}
+
+/* s review */
+.review {
+    margin: 0 auto;
+    padding: 4rem 15px;
+}
+
+.review__card {
     margin: 0 auto;
     height: 32rem;
     width: 30rem;
@@ -17,124 +129,182 @@
     padding-top: 2rem;
 }
 
-.card__title {
+.review__title {
     text-align: center;
     font-weight: bold;
 }
 
-.form {
+.review__form {
     margin-top: 1rem;
     font-size: 1.2rem;
 }
 
-.form__group {
+.review__form-group {
     margin-left: 2rem;
     margin-bottom: 1rem;
 }
 
-.form__group-title {
+.review__form-title {
     text-align: left;
 }
 
-.form__label--item {
+.review__form-label {
     font-weight: bold;
-}
-
-.form__input--textarea textarea {
-    width: 100%;
-    height: 6rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    padding: 5px;
 }
 
 /* sラジオボタン */
-label {
-    position: relative;
+.review__rating-options {
+    display: flex; /* 要素をフレックスボックスにする */
+    flex-direction: row-reverse; /* 星を逆順に並べる */
+    justify-content: flex-end; /* 逆順なので、endで左寄せにする */
+}
+
+.review__rating-label {
+    color: #d3d3d3; /* ★の初期の色 */
+    font-size: 30px; /* 星のサイズ */
     cursor: pointer;
-    padding-left: 50px;
-    padding: 0px 50px 0px 3rem;
-    display: block;
 }
 
-label::before,
-label::after {
-    content: "";
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-}
-
-label::before {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    left: 10px;
-}
-
-label::after {
-    background-color: #2384cf;
-    border-radius: 50%;
-    opacity: 0;
-    width: 16px;
-    height: 16px;
-    left: 12px;
-}
-
-input:checked + label::after {
-    opacity: 1;
+.review__rating-label:hover, /* マウスに乗せたラベルのみの色変更 */
+.review__rating-label:hover ~ .review__rating-label, /* ホバーしたラベルの後に続く全ての兄弟ラベルにスタイルが適用されます。 */
+.review__rating-input:checked ~ .review__rating-label {
+    color: #305dff;
 }
 
 .visually-hidden {
-    position: absolute;
-    white-space: nowrap;
-    border: 0;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    overflow: hidden;
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
+    display: none;
 }
 /* e ラジオボタン */
 
-.card__button-submit {
-        display: block;
+/* s 口コミ */
+.review__textarea-wrapper {
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    gap: 0; /* 要素間の隙間をゼロに設定 */
+}
+
+.review__textarea {
+    width: 100%;
+    height: 8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 0;
+}
+
+.review__textarea-char-counter {
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+    margin-top: 0;
+}
+/* e 口コミ */
+
+/* s 画像アプロード */
+.image-upload__container {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.image-upload__dropzone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 8rem;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.image-upload__dropzone:hover {
+    background-color: #d3d3d3;
+}
+
+.image-upload__input {
+    display: none;
+}
+
+.image-upload__text-click {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.image-upload__text-drop {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.image-upload__preview {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-upload__preview img {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+/* e 画像アプロード */
+
+.review__submit-button {
+    position: fixed;
+    bottom: 5%; /* 画面下から20pxの位置 */
+    left: 50%; /* 水平方向の中央に配置 */
+    transform: translateX(-50%); /* 中央揃え調整 */
     border: none;
-    background-color: #2384cf;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    width: 10rem;
+    width: 25rem;
     height: 2.5rem;
     border-radius: 3px;
     margin: 0 auto;
 }
 
+.review__submit-button:hover {
+    background-color: #2384cf;
+    color: #fff;
+}
+/* e review */
+
 /* 768px以下 */
 @media screen and (max-width: 768px) {
-.card {
-    margin: 2rem auto;
-    height: 32rem;
-    width: 25rem;
-    padding: 10px 20px 20px 20px;
-    border: 1px solid #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
-    background-color: #fff;
-    padding-top: 2rem;
-}
-.mail__content {
-    margin: 0 auto;
-    padding: 4rem 0;
-    height: 100vh;
-    background-color: #f2f2f2;
-}
-}
+    .review {
+        margin: 0 auto;
+        padding: 4rem 0;
+        height: 100vh;
+        background-color: #f2f2f2;
+    }
 
+    .review__card {
+        margin: 2rem auto;
+        height: 32rem;
+        width: 25rem;
+        padding: 10px 20px 20px 20px;
+        border: 1px solid #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+        background-color: #fff;
+        padding-top: 2rem;
+    }
+
+    .vertical-line {
+        display: none; /* スマートフォンでは縦線を非表示にする */
+    }
+}

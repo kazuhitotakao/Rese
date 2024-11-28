@@ -33,6 +33,13 @@ class ReservationController extends Controller
         $user_reservation = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
         $time_head = substr($time, 0, 2);
 
+        // 直近の予約の日時オブジェクトを作成
+        $reservation_date = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->date;
+        $reservation_time = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->time;
+        $reservation_date_time = Carbon::parse($reservation_date->format('Y-m-d') . ' ' . $reservation_time);
+        // 現在の日時を取得
+        $now = Carbon::now();
+
         $reservation_time = Reservation::where('user_id', Auth::id())->where('shop_id', $shop->id)->where('date', $date)->pluck('time');
         $reservation_already_count = Reservation::where('shop_id', $shop->id)->where('date', $date)
             ->where('time', 'LIKE', $time_head . '%')->count();
@@ -53,7 +60,7 @@ class ReservationController extends Controller
             $user = User::find($user_id);
             $user_name = User::find($user_id)->name;
             Mail::to($user)->send(new SendQrMail($reservation_id, $user_name, $shop_name));
-        } elseif ($user_reservation->review_mail_sent != true) {
+        } elseif ($reservation_date_time->gt($now)) {  // 直近の予約日時が現在時刻より先の日時の場合
             $user->reservations()->updateExistingPivot($shop_id, ['date' => $date, 'time' => $time, 'number_id' => $number_id]);
         } else {
             $user->reservations()->attach($shop_id, ['date' => $date, 'time' => $time, 'number_id' => $number_id]);

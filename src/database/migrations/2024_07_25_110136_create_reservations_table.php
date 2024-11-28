@@ -20,10 +20,6 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->string('time');
             $table->foreignId('number_id')->constrained()->cascadeOnDelete();
-            $table->integer('review')->nullable();
-            $table->string('comment')->nullable();
-            $table->timestamp('comment_at')->nullable();
-            $table->boolean('review_mail_sent')->nullable();
             $table->string('check_in')->nullable();
             $table->timestamp('check_in_at')->nullable();
             $table->timestamps();

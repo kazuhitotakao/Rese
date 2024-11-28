@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class CreateReviewImagesTable extends Migration
 {
-    // 店舗用の画像DB（1店舗につき1つのみ）
     /**
      * Run the migrations.
      *
@@ -14,13 +13,14 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('path');
-            $table->unsignedBigInteger('user_id')->unique();
+        Schema::create('review_images', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('review_id');  // 外部キー
+            $table->string('image_path', 255);
             $table->timestamps();
+
             // 外部キー制約
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('review_images');
     }
 }

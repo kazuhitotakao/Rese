@@ -76,6 +76,18 @@
 
     padding: 0px 25px 0px 25px;
 }
+
+.detail__review {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 2.5rem;
+    padding: 10px 25px 0px 25px;
+}
+
+.detail__review-link {
+    color: #000;
+}
+
 /* e detail */
 
 /* s reservation */

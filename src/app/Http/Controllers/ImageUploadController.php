@@ -14,7 +14,7 @@ class ImageUploadController extends Controller
     {
         if (app('env') == 'local') {
             $image_file = $request->file('image');
-            $image_db = Image::cwhere('user_id', Auth::id())->first();
+            $image_db = Image::where('user_id', Auth::id())->first();
             $shop_image = Shop::where('user_id', Auth::id())->pluck('image')->first();
             if ($image_file == null) {
                 return redirect('/owner-page')->with('messageImg', 'ファイルを選択してください');

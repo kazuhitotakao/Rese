@@ -22,7 +22,7 @@
             <div class="reservation__title">
                 <h2 class="reservation__title-content">コメント一覧</h2>
             </div>
-            <div class="grid">
+            {{-- <div class="grid">
                 @php $count = 0; @endphp
                 @foreach($reservations as $reservation)
                 <div class=" wrap__table">
@@ -48,7 +48,7 @@
                 </div>
                 @php $count++ ; @endphp
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

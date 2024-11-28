@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 
@@ -151,6 +152,12 @@ class ShopController extends Controller
         $times = $this->generateTimeOptions($shop_interval);
         $numbers = Number::all();
 
+        if ($user_reservation !== null) {
+            // 予約日と予約時間を組み合わせる
+            $reservation_date_time = Carbon::parse($user_reservation->date->format('Y-m-d') . ' ' . $user_reservation->time);
+            // 現在の日時を取得
+            $now = Carbon::now();
+        }
         if ($user_reservation == null) {
             $data_flg = false;
             $date = Carbon::today();
@@ -160,7 +167,7 @@ class ShopController extends Controller
             JavaScriptFacade::put([
                 'flgBtn' => false,
             ]);
-        } elseif (!$user_reservation->review_mail_sent) {
+        } elseif ($reservation_date_time->gt($now)) {
             $data_flg = true;
             $date = $user_reservation->date;
             $select_time = $user_reservation->time;
@@ -210,7 +217,7 @@ class ShopController extends Controller
         $shops = Shop::with('genre')->get();
 
         $reservations = Reservation::where('user_id', Auth::id())
-            ->Where('review_mail_sent', '=', null)
+            ->whereDate('date', '>=', Date::today())
             ->orderBy('date')->orderBy('time')->get();
         $shops_name = [];
         foreach ($reservations as $reservation) {

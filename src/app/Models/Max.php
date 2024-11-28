@@ -25,4 +25,10 @@ class Max extends Model
         'time22',
         'time23',
     ];
+
+    // Userモデルとのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

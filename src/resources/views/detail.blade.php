@@ -38,6 +38,9 @@
         <div class="detail__overview">
             {{ $shop->overview }}
         </div>
+        <div class="detail__review">
+            <a href="{{ route('reviews.show', ['shop_id' => $shop->id]) }}" class="detail__review-link">口コミを投稿する</a>
+        </div>
     </div>
     <div class="shop__reservation">
         <div class="reservation__wrap-form">
