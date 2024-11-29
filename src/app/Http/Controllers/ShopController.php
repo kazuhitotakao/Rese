@@ -6,6 +6,7 @@ use App\Models\Favorite;
 use App\Models\Genre;
 use App\Models\Number;
 use App\Models\Reservation;
+use App\Models\Review;
 use App\Models\Shop;
 use App\Models\Time;
 use App\Models\User;
@@ -195,7 +196,19 @@ class ShopController extends Controller
             $imagesUrl = Storage::url($shop->image);
         }
 
-        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'select_time', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl'));
+        // reviewを投稿済みかどうか（viewのレイアウト変更のフラグを立てる）
+        $review = Review::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
+        if ($review) {
+            $review_flg = true;
+            $review_rating = $review->review;
+            $review_comment = $review->comment;
+        } else {
+            $review_flg = false;
+            $review_rating = null;
+            $review_comment = null;
+        }
+
+        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'select_time', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl', 'review_flg', 'review_rating', 'review_comment'));
     }
 
     private function generateTimeOptions($interval)

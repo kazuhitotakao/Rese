@@ -64,14 +64,14 @@ class ReviewController extends Controller
                 }
                 $image_paths[] = $path;
             }
-        }
 
-        // 前処理でストレージに保存したものをreview_imagesテーブルに保存
-        $images_data = [];
-        foreach ($image_paths as $path) {
-            $images_data[] = new ReviewImage(['image_path' => $path]);
+            // ストレージに保存したものをreview_imagesテーブルに保存
+            $images_data = [];
+            foreach ($image_paths as $path) {
+                $images_data[] = new ReviewImage(['image_path' => $path]);
+            }
+            $review->reviewImages()->saveMany($images_data); // すべての画像データを一括でデータベースに保存
         }
-        $review->reviewImages()->saveMany($images_data); // すべての画像データを一括でデータベースに保存
 
         return redirect()->route('detail', ['shop_id' => $shop_id]);
     }

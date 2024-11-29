@@ -1,147 +1,199 @@
 @extends('layouts.app')
 
 @section('css')
-@if(app('env')=='local')
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
-@endif
-@if(app('env')=='production')
-<link rel="stylesheet" href="{{ secure_asset('css/detail.css') }}">
-@endif
+    @if (app('env') == 'local')
+        <link href="{{ asset('css/detail.css') }}" rel="stylesheet">
+    @endif
+    @if (app('env') == 'production')
+        <link href="{{ secure_asset('css/detail.css') }}" rel="stylesheet">
+    @endif
 @endsection
 
 @section('content')
-@include ('footer')
-<div class="detail__container">
-    <div class="shop__detail">
-        <div class="detail__wrap">
-            <button class="detail__btn-move" type="button" onClick="history.back()">&lt</button>
-            <div class="detail__name">{{ $shop->name }}</div>
-        </div>
-        <div class="detail__img">
-            @if(empty($shop->image))
-            @if(app('env')=='local')
-            <img class="card__img-img" src="{{ asset('images/NoImage.png') }}" alt="image">
-            @endif
-            @if(app('env')=='production')
-            <img class="card__img-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
-            @endif
-            @else
-            <img class="card__img-img" src="{{ $imagesUrl }}" alt="image">
-            @endif
-        </div>
-        <div class="detail__content">
-            <div class="tag">
-                <div class="detail__area">#{{ $shop->area }}</div>
-                <div class="detail__genre">#{{ $shop->genre->name }}</div>
+    @include ('footer')
+    <div class="detail__container">
+        @if ($review_flg) {{-- 口コミを投稿済みの場合 --}}
+            <div class="shop__detail">
+                <div class="detail__img detail__img--reviewed">
+                    @if (empty($shop->image))
+                        @if (app('env') == 'local')
+                            <img class="card__image-img card__image-img--reviewed" src="{{ asset('images/NoImage.png') }}"
+                                alt="image">
+                        @endif
+                        @if (app('env') == 'production')
+                            <img class="card__image-img card__image-img--reviewed"
+                                src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                        @endif
+                    @else
+                        <img class="card__image-img card__image-img--reviewed" src="{{ $imagesUrl }}" alt="image">
+                    @endif
+                </div>
+                <div class="detail__content">
+                    <div class="tag">
+                        <div class="detail__area">#{{ $shop->area }}</div>
+                        <div class="detail__genre">#{{ $shop->genre->name }}</div>
+                    </div>
+                </div>
+                <div class="detail__overview">
+                    {{ $shop->overview }}
+                </div>
+                <a class="detail__review-link-all" href="">全ての口コミ情報</a>
+                <hr class="horizontal-line">
+                <div class="detail__review-wrapper">
+                    <a class="detail__review-link" href="">口コミを編集</a>
+                    <form action="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="detail__review-button">口コミを削除</button>
+                    </form>
+                </div>
+                <div class="detail__review-rating">
+                    <span class="star5_rating" data-rate="{{ $review_rating }}"></span>
+                </div>
+                <p class="detail__review-comment">{{ $review_comment }}</p>
+                <hr class="horizontal-line horizontal-line--bottom">
+            </div>
+        @else
+            {{-- 口コミ未投稿の場合 --}}
+            <div class="shop__detail">
+                <div class="detail__wrap">
+                    <button class="detail__btn-move" type="button" onClick="history.back()">&lt</button>
+                    <div class="detail__name">{{ $shop->name }}</div>
+                </div>
+                <div class="detail__img">
+                    @if (empty($shop->image))
+                        @if (app('env') == 'local')
+                            <img class="card__image-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                        @endif
+                        @if (app('env') == 'production')
+                            <img class="card__image-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                        @endif
+                    @else
+                        <img class="card__image-img" src="{{ $imagesUrl }}" alt="image">
+                    @endif
+                </div>
+                <div class="detail__content">
+                    <div class="tag">
+                        <div class="detail__area">#{{ $shop->area }}</div>
+                        <div class="detail__genre">#{{ $shop->genre->name }}</div>
+                    </div>
+                </div>
+                <div class="detail__overview">
+                    {{ $shop->overview }}
+                </div>
+                <div class="detail__review">
+                    <a class="detail__review-link"
+                        href="{{ route('reviews.show', ['shop_id' => $shop->id]) }}">口コミを投稿する</a>
+                </div>
+            </div>
+        @endif
+        <div class="shop__reservation">
+            <div class="reservation__wrap-form">
+                <h2 class="reservation__title">予約</h2>
+                @if (session('message'))
+                    <div class="alert__info">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                <form class="reservation__form" action="/reserve" method="post">
+                    @csrf
+                    <input name="shops_id" type="hidden" value="{{ $shops_id }}">
+                    <input name="shop_id" type="hidden" value="{{ $shop->id }}">
+                    <input class="form reservation__date" id="inputDate" name="date" type="date"
+                        value="{{ old('date') }}"
+                        @if ($data_flg) value="{{ $date->format('Y-m-d') }}" @endif>
+                    <a class="available" href="{{ route('available', ['shop_id' => $shop->id]) }}">予約空き時間検索</a>
+                    <div class="form__error">
+                        @error('date')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                    <select class="form reservation__time" id="selectTime" name="time">
+                        <option disabled selected>時間を選択してください</option>
+                        @foreach ($times as $time)
+                            <option data-time="{{ $time }}" value="{{ $time }}"
+                                @if ($time == old('time')) selected @endif
+                                @if ($data_flg && $select_time == $time) selected @endif>
+                                {{ $time }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="form__error">
+                        @error('time')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                    <select class="form reservation__number" id="selectNumber" name="number_id">
+                        <option disabled selected>人数を選択してください</option>
+                        @foreach ($numbers as $number)
+                            <option data-number="{{ $number->number }}" value="{{ $number->id }}"
+                                @if ($number->id == old('number_id')) selected @endif
+                                @if ($data_flg && $number->id == $number_id) selected @endif>
+                                {{ $number->number }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="form__error">
+                        @error('number_id')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                    <div class=" wrap__table">
+                        <table class="reservation__table">
+                            <tr class="reservation__row">
+                                <th class="reservation__label">Shop</th>
+                                <td class="reservation__data">
+                                    {{ $shop->name }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $comment }}</td>
+                            </tr>
+                            <tr class="reservation__row">
+                                <th class="reservation__label">Date</th>
+                                <td class="reservation__data" id="tableDate"></td>
+                            </tr>
+                            <tr class="reservation__row">
+                                <th class="reservation__label">Time</th>
+                                <td class="reservation__data" id="tableTime"></td>
+                            </tr>
+                            <tr class="reservation__row">
+                                <th class="reservation__label">Number</th>
+                                <td class="reservation__data" id="tableNumber"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button class="reservation__button" id="reservationButton"></button>
+                </form>
             </div>
         </div>
-        <div class="detail__overview">
-            {{ $shop->overview }}
-        </div>
-        <div class="detail__review">
-            <a href="{{ route('reviews.show', ['shop_id' => $shop->id]) }}" class="detail__review-link">口コミを投稿する</a>
-        </div>
     </div>
-    <div class="shop__reservation">
-        <div class="reservation__wrap-form">
-            <h2 class="reservation__title">予約</h2>
-            @if (session('message'))
-            <div class="alert__info">
-                {{ session('message') }}
-            </div>
-            @endif
-            <form class="reservation__form" action="/reserve" method="post">
-                @csrf
-                <input type="hidden" name="shops_id" value="{{ $shops_id }}">
-                <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                <input id="inputDate" class="form reservation__date" type="date" name="date" @if($data_flg) value="{{ $date->format('Y-m-d' )}}" @endif value="{{ old('date') }}">
-                <a class="available" href="{{ route('available', ['shop_id' => $shop->id]) }}">予約空き時間検索</a>
-                <div class="form__error">
-                    @error('date')
-                    {{ $message }}
-                    @enderror
-                </div>
-                <select id="selectTime" class="form reservation__time" name="time">
-                    <option disabled selected>時間を選択してください</option>
-                    @foreach($times as $time)
-                    <option value="{{ $time }}" data-time="{{ $time }}" @if($time==old('time')) selected @endif @if( $data_flg && $select_time==$time ) selected @endif>
-                        {{ $time }}
-                    </option>
-                    @endforeach
-                </select>
-                <div class="form__error">
-                    @error('time')
-                    {{ $message }}
-                    @enderror
-                </div>
-                <select id="selectNumber" class="form reservation__number" name="number_id">
-                    <option disabled selected>人数を選択してください</option>
-                    @foreach($numbers as $number)
-                    <option value="{{ $number->id }}" data-number="{{ $number->number }}" @if($number->id == old('number_id')) selected @endif @if( $data_flg && $number->id==$number_id ) selected @endif>
-                        {{ $number->number }}
-                    </option>
-                    @endforeach
-                </select>
-                <div class="form__error">
-                    @error('number_id')
-                    {{ $message }}
-                    @enderror
-                </div>
-                <div class=" wrap__table">
-                    <table class="reservation__table">
-                        <tr class="reservation__row">
-                            <th class="reservation__label">Shop</th>
-                            <td class="reservation__data">{{ $shop->name }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $comment }}</td>
-                        </tr>
-                        <tr class="reservation__row">
-                            <th class="reservation__label">Date</th>
-                            <td id="tableDate" class="reservation__data"></td>
-                        </tr>
-                        <tr class="reservation__row">
-                            <th class="reservation__label">Time</th>
-                            <td id="tableTime" class="reservation__data"></td>
-                        </tr>
-                        <tr class="reservation__row">
-                            <th class="reservation__label">Number</th>
-                            <td id="tableNumber" class="reservation__data"></td>
-                        </tr>
-                    </table>
-                </div>
-                <button id="reservationButton" class="reservation__button"></button>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')
-<script>
-    window.addEventListener('DOMContentLoaded', function() {
-        const inputDate = document.getElementById('inputDate');
-        const tableDate = document.getElementById('tableDate');
-        const tableTime = document.getElementById('tableTime');
-        const tableNumber = document.getElementById('tableNumber');
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const inputDate = document.getElementById('inputDate');
+            const tableDate = document.getElementById('tableDate');
+            const tableTime = document.getElementById('tableTime');
+            const tableNumber = document.getElementById('tableNumber');
 
-        tableDate.textContent = inputDate.value;
-        tableTime.textContent = $("#selectTime option:selected").data("time");
-        tableNumber.textContent = $("#selectNumber option:selected").data("number");
-
-        inputDate.addEventListener('change', function() {
             tableDate.textContent = inputDate.value;
-        });
-        selectTime.addEventListener('change', function() {
             tableTime.textContent = $("#selectTime option:selected").data("time");
-        });
-        selectNumber.addEventListener('change', function() {
             tableNumber.textContent = $("#selectNumber option:selected").data("number");
-        });
-    });
 
-    const button = document.getElementById('reservationButton');
-    if (flgBtn) {
-        button.textContent = '変更する';
-    } else {
-        button.textContent = '予約する';
-    }
-</script>
+            inputDate.addEventListener('change', function() {
+                tableDate.textContent = inputDate.value;
+            });
+            selectTime.addEventListener('change', function() {
+                tableTime.textContent = $("#selectTime option:selected").data("time");
+            });
+            selectNumber.addEventListener('change', function() {
+                tableNumber.textContent = $("#selectNumber option:selected").data("number");
+            });
+        });
+
+        const button = document.getElementById('reservationButton');
+        if (flgBtn) {
+            button.textContent = '変更する';
+        } else {
+            button.textContent = '予約する';
+        }
+    </script>
 @endsection
