@@ -9,16 +9,15 @@
 }
 
 .shop-card__title {
-    width: 70%;
+    width: 300px;
     margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+    padding: 2rem 1rem;
     font-weight: bold;
     font-size: 30px;
 }
 
 .shop-card {
-    width: 50%;
+    width: 250px;
     background-color: #fff;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
@@ -117,18 +116,6 @@
     padding: 4rem 15px;
 }
 
-.review__card {
-    margin: 0 auto;
-    height: 32rem;
-    width: 30rem;
-    padding: 10px 20px 20px 20px;
-    border: 1px solid #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
-    background-color: #fff;
-    padding-top: 2rem;
-}
-
 .review__title {
     text-align: center;
     font-weight: bold;
@@ -137,6 +124,15 @@
 .review__form {
     margin-top: 1rem;
     font-size: 1.2rem;
+    position: relative;
+}
+
+.review__form-error {
+    margin-top: 2px;
+    color: red;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .review__form-group {
@@ -202,11 +198,6 @@
 /* e 口コミ */
 
 /* s 画像アプロード */
-.image-upload__container {
-    width: 100%;
-    margin: 20px auto;
-}
-
 .image-upload__dropzone {
     display: flex;
     flex-direction: column;
@@ -222,7 +213,11 @@
 }
 
 .image-upload__dropzone:hover {
-    background-color: #d3d3d3;
+    background-color: #2384cf;
+}
+
+.image-upload__dropzone:hover p {
+    color: #fff; /* フォント色を指定 */
 }
 
 .image-upload__input {
@@ -259,12 +254,13 @@
     border: 1px solid #ddd;
 }
 /* e 画像アプロード */
+.review__submit-button-wrapper {
+    position: absolute;
+    margin-top: auto;
+    right: 70%;
+}
 
 .review__submit-button {
-    position: fixed;
-    bottom: 5%; /* 画面下から20pxの位置 */
-    left: 50%; /* 水平方向の中央に配置 */
-    transform: translateX(-50%); /* 中央揃え調整 */
     border: none;
     background-color: #fff;
     color: #000;
@@ -283,28 +279,45 @@
 }
 /* e review */
 
-/* 768px以下 */
+/* 画面幅が1024px以下の場合 */
+@media screen and (max-width: 1024px) {
+    .review__submit-button-wrapper {
+        right: 60%;
+    }
+}
+
+/* 画面幅が768px以下の場合 */
 @media screen and (max-width: 768px) {
-    .review {
-        margin: 0 auto;
-        padding: 4rem 0;
-        height: 100vh;
-        background-color: #f2f2f2;
-    }
-
-    .review__card {
-        margin: 2rem auto;
-        height: 32rem;
-        width: 25rem;
-        padding: 10px 20px 20px 20px;
-        border: 1px solid #f2f2f2;
-        border-radius: 5px;
-        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
-        background-color: #fff;
-        padding-top: 2rem;
-    }
-
     .vertical-line {
         display: none; /* スマートフォンでは縦線を非表示にする */
+    }
+
+    .shop-card__wrapper {
+        padding: 4rem 15px 0;
+    }
+
+    .review {
+        padding: 0rem 15px;
+    }
+
+    .review__form-group {
+        margin-left: 0rem;
+        margin-bottom: 1rem;
+    }
+
+    .review__submit-button-wrapper {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .review__submit-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 2rem;
     }
 }

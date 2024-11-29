@@ -1,6 +1,5 @@
 .detail__container {
     display: flex;
-    height: 100vh;
     background-color: #f2f2f2;
 }
 
@@ -97,7 +96,7 @@
     height: 35rem;
     background-color: #305dff;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
-    margin: 5vh 5vw 5vh 8vw;
+    margin: 13vh 5vw 5vh 8vw;
     border-radius: 5px;
 }
 
@@ -165,7 +164,7 @@
 .wrap__table {
     width: 90%;
     background-color: #4d7fff;
-    margin: 2rem 1.5rem 0 1.5rem;
+    margin: 2rem 1.5rem 0;
     padding: 1rem;
     color: #fff;
     border-radius: 3px;
@@ -203,6 +202,13 @@
 }
 
 /* e reservation */
+/* 1024px以下 */
+@media screen and (max-width: 1024px) {
+    .shop__reservation {
+        margin: 13vh 2vw 5vh 4vw;
+        border-radius: 5px;
+    }
+}
 
 /* 768px以下 */
 @media screen and (max-width: 768px) {
@@ -210,13 +216,14 @@
         display: flex;
         flex-direction: column;
         background-color: #f2f2f2;
+        margin-bottom: 2rem; /* 画面下に余白を追加 */
     }
 
     .shop__detail {
         width: 22rem;
         min-height: 35rem;
         background-color: #f2f2f2;
-        margin-top: 5.5rem;
+        margin: 5.5rem auto;
     }
 
     .detail__img img {
@@ -224,14 +231,28 @@
         height: 45vh;
         object-fit: cover;
     }
+
+    .detail__review {
+        margin-left: 0rem;
+    }
+
     .shop__reservation {
         width: 22rem;
         min-height: 35rem;
         background-color: #305dff;
         box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
-        margin: 0 auto;
+        margin: 0 auto 2rem; /* 下部に余白を追加 */
         border-radius: 5px;
     }
+
+    .form {
+        margin-left: 1rem;
+    }
+
+    .wrap__table {
+        margin: 2rem 1rem 0;
+    }
+
     .reservation__button {
         height: 4rem;
     }
@@ -252,8 +273,4 @@
     .available {
         top: 16%;
     }
-}
-
-/* 480px以下 */
-@media screen and (max-width: 480px) {
 }

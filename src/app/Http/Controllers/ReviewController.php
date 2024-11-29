@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewRequest;
 use App\Models\Favorite;
 use App\Models\Shop;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class ReviewController extends Controller
         return view('review', compact('shop_id', 'shop', 'image_url', 'common_shop_id'));
     }
 
-    public function store(Request $request, $shop_id)
+    public function store(ReviewRequest $request, $shop_id)
     {
         dd($request->file('images'));
         // $images = [];
@@ -39,6 +40,6 @@ class ReviewController extends Controller
         //     };
         // dd($images);
 
-        return view('done_review');
+        // return view('done_review');
     }
 }
