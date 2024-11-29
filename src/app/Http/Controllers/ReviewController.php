@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReviewRequest;
 use App\Models\Favorite;
+use App\Models\Review;
+use App\Models\ReviewImage;
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -33,13 +36,46 @@ class ReviewController extends Controller
 
     public function store(ReviewRequest $request, $shop_id)
     {
-        dd($request->file('images'));
-        // $images = [];
-        // foreach ($request->file('images') as $image) {
-        //     $images[] = $image;
-        //     };
-        // dd($images);
+        // リクエストから★評価とコメントを取得して、reviewsテーブルにレコード作成
+        $param = [
+            "user_id" => Auth::id(),
+            "shop_id" => $shop_id,
+            "review" => $request->rating,
+            "comment" => $request->comment,
+        ];
+        $review = Review::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
+        // 更新 or 追加 (2つ目の口コミ追加をview側でも防ぐが、念のために、口コミがすでにある場合、更新処理を実施)
+        if ($review) {
+            $review->update($param);
+        } else {
+            Review::create($param);
+        }
 
-        // return view('done_review');
+        // リクエストからファイルを取得してストレージに保存
+        $directory = 'public/images/reviews';
+        $image_paths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if (app('env') == 'local') {
+                    $path = $image->store($directory);
+                } elseif (app('env') == 'production') {
+                    $path = Storage::disk('s3')->putFile('users', $image); //S3バケットのusersフォルダに、$imageを保存
+                    $path = Storage::disk('s3')->url($path); //直前に保存した画像のS3上で付与されたurlを取得 https://~
+                } elseif (app('env') == 'testing') {
+                    // テスト環境の処理を追加
+                    $path = $image->store($directory, 'local');
+                }
+                $image_paths[] = $path;
+            }
+        }
+
+        // 前処理でストレージに保存したものをreview_imagesテーブルに保存
+        $images_data = [];
+        foreach ($image_paths as $path) {
+            $images_data[] = new ReviewImage(['image_path' => $path]);
+        }
+        $review->reviewImages()->saveMany($images_data); // すべての画像データを一括でデータベースに保存
+
+        return redirect()->route('detail', ['shop_id' => $shop_id]);
     }
 }
