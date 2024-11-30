@@ -53,7 +53,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/mail/admin-to-each', [MailSendController::class, 'adminToEach']);
     Route::get('/reviews/{shop_id}', [ReviewController::class, 'show'])->name('reviews.show');
     Route::post('/reviews/{shop_id}', [ReviewController::class, 'store'])->name('reviews.store');
-    Route::get('/comment', [CommentController::class, 'view']);
+    Route::delete('/reviews/{shop_id}', [ReviewController::class, 'destroyReview'])->name('reviews.destroy');
+    Route::put('/reviews/{shop_id}', [ReviewController::class, 'updateReview'])->name('reviews.update');
+    Route::get('/reviews/{shop_id}/edit', [ReviewController::class, 'editReview'])->name('reviews.edit');
+    Route::delete('/reviews/image/{image_id}', [ReviewController::class, 'destroyImage'])->name('image.destroy');
+    Route::get('/comment/{shop_id}', [CommentController::class, 'index'])->name('shop.comments.index');
+    Route::delete('/comment/{shop_id}', [CommentController::class, 'destroyComment'])->name('comments.destroy');
     Route::get('/setting', [SettingController::class, 'index']);
     Route::post('/setting/save', [SettingController::class, 'save']);
     Route::get('/available/{shop_id}', [AvailabilityController::class, 'index'])->name('available');

@@ -12,52 +12,91 @@
 @section('content')
     @include ('footer')
     <div class="detail__container">
-        @if ($review_flg) {{-- 口コミを投稿済みの場合 --}}
-            <div class="shop__detail">
-                <div class="detail__img detail__img--reviewed">
-                    @if (empty($shop->image))
-                        @if (app('env') == 'local')
-                            <img class="card__image-img card__image-img--reviewed" src="{{ asset('images/NoImage.png') }}"
-                                alt="image">
+        @can('user')
+            {{-- 一般ユーザーは口コミの追加・編集・削除可能 --}}
+            @if ($review_flg)
+                {{-- 口コミを投稿済みの場合 --}}
+                <div class="shop__detail">
+                    <div class="detail__img detail__img--reviewed">
+                        @if (empty($shop->image))
+                            @if (app('env') == 'local')
+                                <img class="card__image-img card__image-img--reviewed" src="{{ asset('images/NoImage.png') }}"
+                                    alt="image">
+                            @endif
+                            @if (app('env') == 'production')
+                                <img class="card__image-img card__image-img--reviewed"
+                                    src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                            @endif
+                        @else
+                            <img class="card__image-img card__image-img--reviewed" src="{{ $imagesUrl }}" alt="image">
                         @endif
-                        @if (app('env') == 'production')
-                            <img class="card__image-img card__image-img--reviewed"
-                                src="{{ secure_asset('images/NoImage.png') }}" alt="image">
-                        @endif
-                    @else
-                        <img class="card__image-img card__image-img--reviewed" src="{{ $imagesUrl }}" alt="image">
-                    @endif
+                    </div>
+                    <div class="detail__content">
+                        <div class="tag">
+                            <div class="detail__area">#{{ $shop->area }}</div>
+                            <div class="detail__genre">#{{ $shop->genre->name }}</div>
+                        </div>
+                    </div>
+                    <div class="detail__overview">
+                        {{ $shop->overview }}
+                    </div>
+                    <a class="detail__review-link-all"
+                        href="{{ route('shop.comments.index', ['shop_id' => $shop->id]) }}">全ての口コミ情報</a>
+                    <hr class="horizontal-line">
+                    <div class="detail__review-wrapper">
+                        <a class="detail__review-link" href="{{ route('reviews.edit', ['shop_id' => $shop->id]) }}">口コミを編集</a>
+                        <form action="{{ route('reviews.destroy', ['shop_id' => $shop->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="detail__review-button">口コミを削除</button>
+                        </form>
+                    </div>
+                    <div class="detail__review-rating">
+                        <span class="star5_rating" data-rate="{{ $review_rating }}"></span>
+                    </div>
+                    <p class="detail__review-comment">{{ $review_comment }}</p>
+                    <hr class="horizontal-line horizontal-line--bottom">
                 </div>
-                <div class="detail__content">
-                    <div class="tag">
-                        <div class="detail__area">#{{ $shop->area }}</div>
-                        <div class="detail__genre">#{{ $shop->genre->name }}</div>
+            @else
+                {{-- 口コミ未投稿の場合 --}}
+                <div class="shop__detail">
+                    <div class="detail__wrap">
+                        <a class="detail__btn-move" href="/">&lt</a>
+                        <div class="detail__name">{{ $shop->name }}</div>
+                    </div>
+                    <div class="detail__img">
+                        @if (empty($shop->image))
+                            @if (app('env') == 'local')
+                                <img class="card__image-img" src="{{ asset('images/NoImage.png') }}" alt="image">
+                            @endif
+                            @if (app('env') == 'production')
+                                <img class="card__image-img" src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                            @endif
+                        @else
+                            <img class="card__image-img" src="{{ $imagesUrl }}" alt="image">
+                        @endif
+                    </div>
+                    <div class="detail__content">
+                        <div class="tag">
+                            <div class="detail__area">#{{ $shop->area }}</div>
+                            <div class="detail__genre">#{{ $shop->genre->name }}</div>
+                        </div>
+                    </div>
+                    <div class="detail__overview">
+                        {{ $shop->overview }}
+                    </div>
+                    <div class="detail__review">
+                        <a class="detail__review-link"
+                            href="{{ route('reviews.show', ['shop_id' => $shop->id]) }}">口コミを投稿する</a>
                     </div>
                 </div>
-                <div class="detail__overview">
-                    {{ $shop->overview }}
-                </div>
-                <a class="detail__review-link-all" href="">全ての口コミ情報</a>
-                <hr class="horizontal-line">
-                <div class="detail__review-wrapper">
-                    <a class="detail__review-link" href="">口コミを編集</a>
-                    <form action="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="detail__review-button">口コミを削除</button>
-                    </form>
-                </div>
-                <div class="detail__review-rating">
-                    <span class="star5_rating" data-rate="{{ $review_rating }}"></span>
-                </div>
-                <p class="detail__review-comment">{{ $review_comment }}</p>
-                <hr class="horizontal-line horizontal-line--bottom">
-            </div>
-        @else
-            {{-- 口コミ未投稿の場合 --}}
+            @endif
+        @endcan
+        @can('owner')
+            {{-- 店舗ユーザーは口コミ関連はなにもできない --}}
             <div class="shop__detail">
                 <div class="detail__wrap">
-                    <button class="detail__btn-move" type="button" onClick="history.back()">&lt</button>
+                    <a class="detail__btn-move" href="/">&lt</a>
                     <div class="detail__name">{{ $shop->name }}</div>
                 </div>
                 <div class="detail__img">
@@ -81,12 +120,42 @@
                 <div class="detail__overview">
                     {{ $shop->overview }}
                 </div>
-                <div class="detail__review">
-                    <a class="detail__review-link"
-                        href="{{ route('reviews.show', ['shop_id' => $shop->id]) }}">口コミを投稿する</a>
-                </div>
             </div>
-        @endif
+        @endcan
+        @can('register')
+            {{-- 管理者ユーザーは口コミ追加はできないが削除は可能 --}}
+            <div class="shop__detail">
+                <div class="detail__wrap">
+                    <a class="detail__btn-move" href="/">&lt</a>
+                    <div class="detail__name">{{ $shop->name }}</div>
+                </div>
+                <div class="detail__img detail__img--reviewed">
+                    @if (empty($shop->image))
+                        @if (app('env') == 'local')
+                            <img class="card__image-img card__image-img--reviewed" src="{{ asset('images/NoImage.png') }}"
+                                alt="image">
+                        @endif
+                        @if (app('env') == 'production')
+                            <img class="card__image-img card__image-img--reviewed"
+                                src="{{ secure_asset('images/NoImage.png') }}" alt="image">
+                        @endif
+                    @else
+                        <img class="card__image-img card__image-img--reviewed" src="{{ $imagesUrl }}" alt="image">
+                    @endif
+                </div>
+                <div class="detail__content">
+                    <div class="tag">
+                        <div class="detail__area">#{{ $shop->area }}</div>
+                        <div class="detail__genre">#{{ $shop->genre->name }}</div>
+                    </div>
+                </div>
+                <div class="detail__overview">
+                    {{ $shop->overview }}
+                </div>
+                <a class="detail__review-link-all"
+                    href="{{ route('shop.comments.index', ['shop_id' => $shop->id]) }}">全ての口コミ情報（管理者用 ※削除可）</a>
+            </div>
+        @endcan
         <div class="shop__reservation">
             <div class="reservation__wrap-form">
                 <h2 class="reservation__title">予約</h2>
@@ -100,8 +169,7 @@
                     <input name="shops_id" type="hidden" value="{{ $shops_id }}">
                     <input name="shop_id" type="hidden" value="{{ $shop->id }}">
                     <input class="form reservation__date" id="inputDate" name="date" type="date"
-                        value="{{ old('date') }}"
-                        @if ($data_flg) value="{{ $date->format('Y-m-d') }}" @endif>
+                        value="{{ $data_flg ? $date->format('Y-m-d') : old('date') }}">
                     <a class="available" href="{{ route('available', ['shop_id' => $shop->id]) }}">予約空き時間検索</a>
                     <div class="form__error">
                         @error('date')

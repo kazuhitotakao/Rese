@@ -149,8 +149,14 @@ class ShopController extends Controller
         $user = User::find(Auth::id());
         $user_id = User::find(Auth::id())->id;
 
-        $shop_interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
-        $times = $this->generateTimeOptions($shop_interval);
+        if ($shop) {
+            $shop_interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
+            $times = $this->generateTimeOptions($shop_interval);
+        } else {
+            $shop_interval = 15; // デフォルトで15分間隔
+            $times = $this->generateTimeOptions($shop_interval);
+        }
+
         $numbers = Number::all();
 
         if ($user_reservation !== null) {

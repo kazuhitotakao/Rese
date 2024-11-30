@@ -1,0 +1,344 @@
+/* s shop card */
+.shop-card__wrapper {
+    display: flex;
+    flex-direction: column; /* 子要素を縦方向に配置 */
+    align-items: center; /* 子要素を横方向に中央寄せ */
+    justify-content: center; /* 子要素を縦方向に中央寄せ */
+    margin: 0 auto;
+    padding: 4rem 15px;
+}
+
+.shop-card__title {
+    width: 300px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.shop-card {
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.shop-card__image-img {
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
+}
+
+.shop-card__content {
+    padding: 15px 25px;
+}
+
+.shop-card__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.shop-card__tags {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.shop-card__tag--area {
+    display: inline-block;
+}
+
+.shop-card__tag--genre {
+    display: inline-block;
+    margin-left: 10px;
+}
+/* e カード */
+
+.shop-card__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.shop-card__button {
+    width: 6rem;
+    display: block;
+    border: none;
+    background-color: #2384cf;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    width: 6rem;
+}
+
+.shop-card__button:hover {
+    background-color: #88b7db;
+    color: #fff;
+}
+
+/* s いいねボタン */
+.like-button {
+    cursor: pointer;
+    color: rgb(188, 188, 188);
+    font-size: 1.8rem;
+    vertical-align: middle;
+}
+
+.liked {
+    font-size: 1.8rem;
+    color: red;
+    font-weight: 900;
+    z-index: 10;
+}
+
+.like__form {
+    display: inline-block;
+}
+
+.like__form-button {
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    padding: 0px;
+}
+/* e いいねボタン */
+/* e shop card */
+
+.vertical-line {
+    width: 2px; /* 縦線の太さ */
+    background-color: #d3d3d3; /* 縦線の色 */
+    height: 60%; /* 縦線の高さ（画面の半分） */
+}
+
+/* s review */
+.review {
+    margin: 0 auto;
+    padding: 4rem 15px;
+}
+
+.review__title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.review__form {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.review__form-error {
+    margin-top: 2px;
+    color: red;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.review__form-group {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.review__form-title {
+    text-align: left;
+}
+
+.review__form-label {
+    font-weight: bold;
+}
+
+/* sラジオボタン */
+.review__rating-options {
+    display: flex; /* 要素をフレックスボックスにする */
+    flex-direction: row-reverse; /* 星を逆順に並べる */
+    justify-content: flex-end; /* 逆順なので、endで左寄せにする */
+}
+
+.review__rating-label {
+    color: #d3d3d3; /* ★の初期の色 */
+    font-size: 30px; /* 星のサイズ */
+    cursor: pointer;
+}
+
+.review__rating-label:hover, /* マウスに乗せたラベルのみの色変更 */
+.review__rating-label:hover ~ .review__rating-label, /* ホバーしたラベルの後に続く全ての兄弟ラベルにスタイルが適用されます。 */
+.review__rating-input:checked ~ .review__rating-label {
+    color: #305dff;
+}
+
+.visually-hidden {
+    display: none;
+}
+/* e ラジオボタン */
+
+/* s 口コミ */
+.review__textarea-wrapper {
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    gap: 0; /* 要素間の隙間をゼロに設定 */
+}
+
+.review__textarea {
+    width: 100%;
+    height: 8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 0;
+}
+
+.review__textarea-char-counter {
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+    margin-top: 0;
+}
+/* e 口コミ */
+
+/* s 画像アプロード */
+.image-upload__dropzone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 8rem;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.image-upload__dropzone:hover {
+    background-color: #2384cf;
+}
+
+.image-upload__dropzone:hover p {
+    color: #fff; /* フォント色を指定 */
+}
+
+.image-upload__input {
+    display: none;
+}
+
+.image-upload__text-click {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.image-upload__text-drop {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.image-upload__preview {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-upload__preview img {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+/* e 画像アプロード */
+
+/* s 画像削除ボタン */
+.image-container {
+    position: relative;
+}
+
+.delete-mark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer; /* クリック可能な外観 */
+    padding: 0px 6px; /* マークの大きさを調整 */
+    border-radius: 50%; /* 円形に見せる */
+    border: none;
+}
+/* e 画像削除ボタン */
+
+.review__submit-button-wrapper {
+    position: absolute;
+    margin-top: auto;
+    right: 70%;
+}
+
+.review__submit-button {
+    border: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 25rem;
+    height: 2.5rem;
+    border-radius: 3px;
+    margin: 0 auto;
+}
+
+.review__submit-button:hover {
+    background-color: #2384cf;
+    color: #fff;
+}
+/* e review */
+
+/* 画面幅が1024px以下の場合 */
+@media screen and (max-width: 1024px) {
+    .review__submit-button-wrapper {
+        right: 60%;
+    }
+}
+
+/* 画面幅が768px以下の場合 */
+@media screen and (max-width: 768px) {
+    .vertical-line {
+        display: none; /* スマートフォンでは縦線を非表示にする */
+    }
+
+    .shop-card__wrapper {
+        padding: 4rem 15px 0;
+    }
+
+    .review {
+        padding: 0rem 15px;
+    }
+
+    .review__form-group {
+        margin-left: 0rem;
+        margin-bottom: 1rem;
+    }
+
+    .review__submit-button-wrapper {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .review__submit-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 2rem;
+    }
+}

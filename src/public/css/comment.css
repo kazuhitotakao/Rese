@@ -1,9 +1,9 @@
-.comment__wrap {
+.comment {
     position: relative;
     background-color: #f2f2f2;
 }
 
-.btn__back {
+.comment__back-btn {
     position: absolute;
     left: 5%;
     font-size: 20px;
@@ -11,6 +11,7 @@
     color: black;
     background-color: #fff;
     border: none;
+    text-decoration: none;
     width: 2rem;
     height: 2rem;
     border-radius: 10%;
@@ -18,39 +19,44 @@
     cursor: pointer;
 }
 
-.shop-name {
+.comment__header {
     padding-top: 6rem;
     text-align: center;
 }
 
-.shop-name__content {
+.comment__shop-name {
     display: inline-block;
     font-size: 1.8rem;
     font-weight: bold;
 }
 
-/* s reservation */
-.grid {
+/* s review */
+.comment__reviews {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.reservation__title {
+.comment__title {
     padding: 0 4rem;
 }
 
-.reservation__title-content {
+.comment__title-text {
+    margin-top: 1rem;
     font-weight: bold;
     font-size: 1.5rem;
     width: 100%;
 }
 
-.wrap__table {
+.comment__review {
     position: relative;
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: space-between; /* 子要素間の隙間を均等に */
+    align-items: flex-start; /* 子要素を左揃えに */
     width: 80%;
-    background-color: #d0dad5;
+    background-color: #e6e6e6;
     margin: 1.5rem 4rem;
     padding: 1rem;
     color: #000;
@@ -58,65 +64,127 @@
     border-radius: 5px;
 }
 
-.clock__icon {
-    width: 1.5rem;
-}
-
-.table__title {
-    vertical-align: middle;
-    padding-top: 5px;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.la-edit {
-    font-size: 2rem;
+.comment__review-delete-button {
     position: absolute;
-    top: 6%;
-    right: 20%;
-    color: #fff;
+    top: 3%;
+    right: 2%;
+    background-color: transparent;
+    border: none;
 }
 
 .la-times-circle {
     font-size: 2rem;
+    color: red;
+}
+
+.comment__review-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.comment__review-user {
+    margin-left: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.comment__review-date {
+    margin-left: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+/* s ★５の表示 */
+.comment__review-rating {
+    margin-left: 1rem;
+}
+
+.star5_rating {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #d3d3d3;
+    font-size: 30px;
+}
+
+.star5_rating:before,
+.star5_rating:after {
+    content: "★★★★★";
+}
+
+.star5_rating:after {
     position: absolute;
-    top: 7%;
-    right: 5%;
-    color: #fff;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #305dff;
 }
 
-.reservation__table {
-    margin-top: 1rem;
+.star5_rating[data-rate="5"]:after {
     width: 100%;
-}
+} /* 星5 */
+.star5_rating[data-rate="4"]:after {
+    width: 80%;
+} /* 星4 */
+.star5_rating[data-rate="3"]:after {
+    width: 60%;
+} /* 星3 */
+.star5_rating[data-rate="2"]:after {
+    width: 40%;
+} /* 星2 */
+.star5_rating[data-rate="1"]:after {
+    width: 20%;
+} /* 星1 */
+.star5_rating[data-rate="0"]:after {
+    width: 0%;
+} /* 星0 */
+/* e ★５の表示 */
 
-.reservation__row {
-    height: 1.7rem;
-    font-size: 1.2rem;
-}
-
-.reservation__label {
-    width: 32%;
-}
-
-.reservation__data {
-    width: 68%;
+.comment__review-text {
+    margin-left: 1rem;
+    margin-bottom: 1rem; /* 画像との間に余白を設定 */
+    font-size: 16px;
     font-weight: bold;
 }
 
+/* s 画像表示 */
+.comment__review-images {
+    margin-top: auto; /* 自動的に上の要素との間に隙間を作る */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%; /* コンテナ全体の幅を使用 */
+}
+
+.comment__review-images img {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+/* e 画像表示 */
+
 /* 768px以下 */
 @media screen and (max-width: 768px) {
-    .grid {
+    .comment__reviews {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         padding-left: 2rem;
         padding-right: 2rem;
     }
 
-    .wrap__table {
+    .comment__review {
         position: relative;
         width: 100%;
-        background-color: #d0dad5;
+        background-color: #e6e6e6;
         margin: 1.5rem auto;
         padding: 1rem;
         color: #000;
@@ -124,4 +192,3 @@
         border-radius: 5px;
     }
 }
-

@@ -130,3 +130,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+/* 画像削除処理 */
+$(document).ready(function () {
+    $('.delete-mark').on('click', function () {
+        let imageId = $(this).data('id');  // データ属性から画像IDを取得
+        let container = $(this).closest('.image-container');  // 親のコンテナを取得
+
+        $.ajax({
+            url: `/reviews/image/${imageId}`,  // DELETEリクエストのURL
+            type: 'DELETE',  // HTTPメソッドを指定
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')  // CSRFトークン
+            },
+            success: function (response) {
+                if (response.success) {
+                    container.remove();  // レスポンスが成功ならDOMから画像コンテナを削除
+                    console.log('画像を削除しました。');
+                } else {
+                    console.log('画像の削除に失敗しました。');
+                }
+            },
+            error: function () {
+                console.log('通信エラーが発生しました。');
+            }
+        });
+    });
+});

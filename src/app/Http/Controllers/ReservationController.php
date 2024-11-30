@@ -34,9 +34,11 @@ class ReservationController extends Controller
         $time_head = substr($time, 0, 2);
 
         // 直近の予約の日時オブジェクトを作成
-        $reservation_date = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->date;
-        $reservation_time = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->time;
-        $reservation_date_time = Carbon::parse($reservation_date->format('Y-m-d') . ' ' . $reservation_time);
+        if (!$user_reservation == null) {
+            $reservation_date = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->date;
+            $reservation_time = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->latest('created_at')->first()->time;
+            $reservation_date_time = Carbon::parse($reservation_date->format('Y-m-d') . ' ' . $reservation_time);
+        }
         // 現在の日時を取得
         $now = Carbon::now();
 
