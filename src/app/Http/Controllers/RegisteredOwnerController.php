@@ -67,7 +67,7 @@ class RegisteredOwnerController  extends Controller
         $user = User::create($form);
         $user->assignRole('owner');
 
-        return redirect('/admin-page')->with('message', $user->name . 'さんを店舗代表者として登録しました。');
+        return redirect('/admin-page')->with('success', $user->name . 'さんを店舗代表者として登録しました。');
     }
 
     public function search(Request $request)

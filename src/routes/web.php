@@ -4,6 +4,7 @@ use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisteredOwnerController;
@@ -67,4 +68,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/qr-send/{reservation_id}', [SendQrController::class, 'show'])->name('qrSend');
     Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+    Route::post('/import', [ImportController::class, 'import'])->name('import.csv');
 });

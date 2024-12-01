@@ -15,8 +15,13 @@
     min-height: 100vh;
 }
 
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .card {
-    margin: 5rem 0 1rem 1rem;
+    margin: 3rem 0 1rem 1rem;
     height: 20rem;
     width: 25rem;
     border-radius: 5px;
@@ -73,6 +78,54 @@
     padding: 5px 10px;
     font-size: 1.5rem;
     vertical-align: middle;
+}
+
+.import-csv__title {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.import-csv {
+    display: flex;
+    justify-content: center; /* アイテムを左端から配置 */
+    gap: 5px; /* アイテム間の隙間 */
+}
+
+.form-file {
+    font-size: 14px;
+    font-weight: 500;
+    width: 20vw;
+    border-radius: 3px;
+}
+
+.form-file::file-selector-button {
+    width: 100%;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #305dff;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__button-csv {
+    width: 6rem;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: #305dff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.import-csv__description {
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    text-align: left;
 }
 
 .input__name::before {
