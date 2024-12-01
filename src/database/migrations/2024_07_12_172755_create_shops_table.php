@@ -23,6 +23,7 @@ class CreateShopsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('interval')->default('15');
             $table->integer('amount')->default('3000')->nullable();
+            $table->integer('average_rating')->nullable();
             $table->timestamps();
         });
     }

@@ -16,6 +16,9 @@ class Shop extends Model
         'overview',
         'image',
         'user_id',
+        'interval',
+        'amount',
+        'average_rating'
     ];
 
     public function genre()
@@ -33,8 +36,8 @@ class Shop extends Model
         return $this->belongsToMany(User::class, 'reservations')->withPivot('date', 'time', 'number_id', 'check_in', 'check_in_at')->withTimestamps();
     }
 
-    public function review()
+    public function reviews()
     {
-        return $this->hasOne(Review::class);
+        return $this->hasMany(Review::class);
     }
 }

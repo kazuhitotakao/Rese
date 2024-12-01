@@ -22,7 +22,25 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $user = User::find(Auth::id());
-        $shops = Shop::with('genre')->get();
+
+        // ショップとジャンル、レビューをプリロードして取得
+        $shops = Shop::with(['genre', 'reviews' => function ($query) {
+            $query->whereNotNull('review');
+        }])->get();
+
+        // 各ショップについて平均評価を計算し、データベースを更新
+        foreach ($shops as $shop) {
+            $reviews = $shop->reviews;
+            $review_count = $reviews->count();
+            $total_review = $reviews->sum('review');
+            $review_average = $review_count > 0 ? round($total_review / $review_count, 1) : null;
+            // 平均評価をショップモデルに保存
+            $shop->average_rating = $review_average;
+            $shop->save(); // データベースに保存
+        };
+
+        $sort = request()->input('sort', 'id');
+
         $search = [
             'pref' => null,
             'genre_id' => null,
@@ -47,7 +65,7 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'imagesUrl', 'genres', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort', 'imagesUrl', 'genres', 'common_shops_id'));
     }
 
     public function guest(Request $request)
@@ -88,7 +106,6 @@ class ShopController extends Controller
             return redirect('/')->withInput();
         }
 
-
         $query = Shop::query();
         $query = $this->getSearchQuery($request, $query);
         $shops = $query->get();
@@ -100,6 +117,7 @@ class ShopController extends Controller
         ];
         session(['search' => $search]);
         $genres = Genre::all();
+        $sort = $request->input('sort', 'id'); // ビューに渡すために再度取得
 
         $imagesUrl = [];
         foreach ($shops as $shop) {
@@ -115,7 +133,7 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'genres', 'imagesUrl', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort','genres', 'imagesUrl', 'common_shops_id'));
     }
 
     private function getSearchQuery($request, $query)
@@ -131,7 +149,24 @@ class ShopController extends Controller
         if (!empty($request->genre_id)) {
             $query->where('genre_id', '=', $request->genre_id);
         }
-
+        // ソート処理
+        $sort = request()->input('sort', 'id');
+        switch ($sort) {
+            case 'random':
+                $query->inRandomOrder();
+                break;
+            case 'high_rating':
+                // 評価が高い順、null値は最後(null ならば、 1 を返し、nullでない場合は 0 を返す)
+                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating DESC');
+                break;
+            case 'low_rating':
+                // 評価が低い順、null値は最後
+                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating ASC');
+                break;
+            default:
+                $query->orderBy($sort);
+                break;
+        }
         return $query;
     }
 

@@ -8,30 +8,51 @@
 /* s 検索 */
 .shop__inner {
     margin-top: 3px;
-    margin-left: 17rem;
-    width: 67%;
+    margin-left: auto;
+    margin-right: 4rem;
+    width: 70%;
 }
 
 .search-form {
     display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-radius: 3px;
+}
+
+.search-form__group {
+    display: flex;
     justify-content: space-around;
-    gap: 12px;
+    gap: 0;
+    width: 70%;
 }
 
 .search-form__item-select {
     padding: 5px;
-    width: 18%;
     border: 1px solid #ddd;
     border-radius: 3px;
+    height: 2.5rem;
+    font-size: 14px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
+.search-form__item-select--sort {
+    width: 11rem;
+}
+
+.search-form__item-select--pref,
+.search-form__item-select--genre {
+    width: 25%;
+}
 .search-form__keyword-input {
     font-size: 16px;
+    width: 50%;
+    height: 2.5rem;
     font-weight: 500;
     padding: 8px 12px;
-    width: 40%;
     border: 1px solid #e3ded9;
     background-color: #fbfbfb;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn {
@@ -150,46 +171,49 @@
 }
 /* e いいねボタン */
 
+/* 1024px以下 */
+@media screen and (max-width: 1024px) {
+    .shop__inner {
+        margin-right: 2rem;
+    }
+    .search-form__item-select--sort {
+        width: 10.5rem;
+    }
+
+    .search-form__item-select--pref,
+    .search-form__item-select--genre {
+        width: 20%;
+    }
+    .search-form__keyword-input {
+        width: 60%;
+    }
+}
 /* 768px以下 */
 @media screen and (max-width: 768px) {
     .grid {
         display: grid;
         gap: 1rem 1rem;
         margin-top: 2rem;
-        grid-template-columns:  repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
     }
 
     .shop__inner {
-        margin-top: 3px;
-        margin-left: 2rem;
-        width: 90%;
+        margin-left: 1rem;
+        margin-right: 4rem;
+        width: 80%;
     }
 
     .search-form {
-        padding-top: 4rem;
         display: flex;
-        justify-content: space-around;
         flex-direction: column;
-        gap: 12px;
-    }
-
-    .search-form__item-select {
-        padding: 5px;
-        width: 40%;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-    }
-
-    .search-form__keyword-input {
-        font-size: 16px;
-        font-weight: 500px;
-        padding: 8px 12px;
-        width: 70%;
-        border: 1px solid #e3ded9;
-        background-color: #fbfbfb;
+        justify-content: space-between;
+        margin-left: 2rem;
+        margin-top: 4rem;
+        width: 100%;
+        gap: 5px;
     }
 
     .btn__wrap {
@@ -198,6 +222,51 @@
     }
     .btn {
         margin-right: 1rem;
+    }
+
+    .search-form__sort {
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+        width: 30%;
+    }
+
+    .search-form__group {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 5px;
+        width: 100%;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+
+    .search-form__item-select {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        height: 2.5rem;
+        font-size: 14px;
+    }
+
+    .search-form__item-select--sort {
+        width: 11rem;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-form__item-select--pref,
+    .search-form__item-select--genre {
+        width: 11rem;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+    .search-form__keyword-input {
+        font-size: 16px;
+        width: 17rem;
+        height: 2.5rem;
+        font-weight: 500;
+        padding: 8px 12px;
+        border: 1px solid #e3ded9;
+        background-color: #fbfbfb;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
     }
 }
 /* 480px以下 */
@@ -212,36 +281,6 @@
         padding-right: 2rem;
     }
 
-    .shop__inner {
-        margin-top: 3px;
-        margin-left: 2rem;
-        width: 90%;
-    }
-
-    .search-form {
-        padding-top: 4rem;
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .search-form__item-select {
-        padding: 5px;
-        width: 40%;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-    }
-
-    .search-form__keyword-input {
-        font-size: 16px;
-        font-weight: 500;
-        padding: 8px 12px;
-        width: 70%;
-        border: 1px solid #e3ded9;
-        background-color: #fbfbfb;
-    }
-
     .btn__wrap {
         display: flex;
         justify-content: left;
@@ -249,5 +288,4 @@
     .btn {
         margin-right: 1rem;
     }
-
 }
