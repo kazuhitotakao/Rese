@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }
+
+        Validator::extend('image_extension', function ($attribute, $value, $parameters, $validator) {
+            $extension = strtolower(pathinfo($value, PATHINFO_EXTENSION));
+            return in_array($extension, ['jpg', 'jpeg', 'png']);
+        }, '画像はjpegまたはpng形式である必要があります。');
     }
 }

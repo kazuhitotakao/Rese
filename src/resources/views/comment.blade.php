@@ -14,7 +14,7 @@
 @section('content')
     <div class="comment">
         <div class="comment__header">
-            <a href="{{ route('detail', ['shop_id' => $shop_id]) }}" class="comment__back-btn">&lt</a>
+            <a class="comment__back-btn" href="{{ route('detail', ['shop_id' => $shop_id]) }}">&lt</a>
             <h2 class="comment__shop-name">{{ $shop->name }}</h2>
         </div>
         <div class="comment__body">
@@ -25,7 +25,8 @@
                 @foreach ($review_data as $index => $review)
                     <div class="comment__review">
                         @can('register')
-                            <form action="{{ route('comments.destroy', ['shop_id' => $shop->id]) }}" method="post">
+                            <form action="{{ route('comments.destroy', ['shop_id' => $shop->id]) }}" method="post"
+                                onsubmit="return confirm('このコメントを削除してもよろしいですか？');">
                                 @csrf
                                 @method('DELETE')
                                 <input name="review_id" type="hidden" value="{{ $review['review_id'] }}">
@@ -34,7 +35,8 @@
                         @endcan
                         @can('user')
                             @if (Auth::check() && Auth::id() === $review['user_id'])
-                                <form action="{{ route('comments.destroy', ['shop_id' => $shop->id]) }}" method="post">
+                                <form action="{{ route('comments.destroy', ['shop_id' => $shop->id]) }}" method="post"
+                                    onsubmit="return confirm('このコメントを削除してもよろしいですか？');">
                                     @csrf
                                     @method('DELETE')
                                     <input name="review_id" type="hidden" value="{{ $review['review_id'] }}">

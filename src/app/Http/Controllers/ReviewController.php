@@ -52,12 +52,12 @@ class ReviewController extends Controller
         }
 
         // リクエストからファイルを取得してストレージに保存
-        $directory = 'public/images/reviews';
+        $directory = 'images/reviews';
         $image_paths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 if (app('env') == 'local') {
-                    $path = $image->store($directory);
+                    $path = $image->store($directory, 'public');
                 } elseif (app('env') == 'production') {
                     $path = Storage::disk('s3')->putFile('users', $image); //S3バケットのusersフォルダに、$imageを保存
                     $path = Storage::disk('s3')->url($path); //直前に保存した画像のS3上で付与されたurlを取得 https://~
@@ -142,12 +142,12 @@ class ReviewController extends Controller
 
         // 既存の画像はリクエストには入らない。このため、新規のリクエストされた画像だけが追加。
         // リクエストからファイルを取得してストレージに保存
-        $directory = 'public/images/reviews';
+        $directory = 'images/reviews';
         $image_paths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 if (app('env') == 'local') {
-                    $path = $image->store($directory);
+                    $path = $image->store($directory, 'public');
                 } elseif (app('env') == 'production') {
                     $path = Storage::disk('s3')->putFile('users', $image); //S3バケットのusersフォルダに、$imageを保存
                     $path = Storage::disk('s3')->url($path); //直前に保存した画像のS3上で付与されたurlを取得 https://~

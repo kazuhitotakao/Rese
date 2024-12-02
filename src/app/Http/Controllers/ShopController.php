@@ -133,7 +133,7 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'sort','genres', 'imagesUrl', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort', 'genres', 'imagesUrl', 'common_shops_id'));
     }
 
     private function getSearchQuery($request, $query)
@@ -238,7 +238,7 @@ class ShopController extends Controller
         }
 
         // reviewを投稿済みかどうか（viewのレイアウト変更のフラグを立てる）
-        $review = Review::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
+        $review = Review::with('reviewImages')->where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
         if ($review) {
             $review_flg = true;
             $review_rating = $review->review;
@@ -249,7 +249,24 @@ class ShopController extends Controller
             $review_comment = null;
         }
 
-        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'select_time', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl', 'review_flg', 'review_rating', 'review_comment'));
+        // 画像のパスとIDをまとめた配列を作成
+        if ($review) {
+            $review_images = $review->reviewImages()->get();
+            $review_image_data = $review_images->map(function ($image) {
+                $path = $image->image_path;
+                if (strpos($path, 'http') !== 0) {
+                    $path = Storage::url($path); // パスがHTTPで始まらない場合、URLを生成
+                }
+                return [
+                    'url' => $path,
+                    'id'  => $image->id
+                ];
+            });
+        } else {
+            $review_image_data = collect([]); // 空のコレクションを返す
+        }
+
+        return view('detail', compact('shops_id', 'shop_id', 'shop', 'times', 'numbers', 'select_time', 'number_id', 'date', 'comment', 'data_flg', 'imagesUrl', 'review_flg', 'review_rating', 'review_comment', 'review_image_data'));
     }
 
     private function generateTimeOptions($interval)

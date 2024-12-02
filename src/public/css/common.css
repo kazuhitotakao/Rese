@@ -3,6 +3,30 @@ main {
     background-color: #f2f2f2;
 }
 
+/* s バリデーション表示 */
+.custom-alert {
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 0;
+    margin: 1rem 0 1rem 1rem;
+    color: red;
+    text-align: left;
+}
+
+.custom-alert ul {
+    padding-left: 2rem;
+    margin-bottom: 0;
+}
+
+.custom-alert li {
+    margin-bottom: 5px; /* 項目間に少しスペースを追加 */
+}
+
+.custom-alert li:last-child {
+    margin-bottom: 0;
+}
+/* e バリデーション表示 */
+
 .offcanvas {
     background-color: #fff;
 }

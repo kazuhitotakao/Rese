@@ -5,6 +5,16 @@
     padding-bottom: 3px;
 }
 
+.import__success {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-bottom: 3px;
+    width: 22rem;
+    margin: 0 auto;
+    text-align: left;
+}
+
 .register__content {
     display: flex;
     justify-content: center;
@@ -81,8 +91,8 @@
 }
 
 .import-csv__title {
-    margin-left: 2rem;
-    margin-top: 1rem;
+    width: 22rem;
+    margin: 1rem auto 0.5rem;
     text-align: left;
 }
 
@@ -95,7 +105,7 @@
 .form-file {
     font-size: 14px;
     font-weight: 500;
-    width: 20vw;
+    width: 10rem;
     border-radius: 3px;
 }
 
@@ -123,9 +133,9 @@
 }
 
 .import-csv__description {
-    margin-top: 0.5rem;
-    margin-left: 2rem;
+    margin: 0.5rem auto;
     text-align: left;
+    width: 22rem;
 }
 
 .input__name::before {
@@ -413,7 +423,7 @@
         flex-direction: column;
         text-align: left;
         margin: 0 auto;
-        padding: 10vh 15px;
+        padding: 10vh 0;
         background-color: #f2f2f2;
         min-height: 100vh;
     }
@@ -423,7 +433,7 @@
         margin-top: 4rem;
         padding-left: 0%;
         background-color: #f2f2f2;
-        width: 22rem;
+        width: 100vw;
     }
     .card {
         margin: 5rem auto 1rem;
@@ -441,11 +451,10 @@
         height: 32px;
         width: 22rem;
     }
-.search-form__item-select{
-    width: 25%;
-}
+    .search-form__item-select {
+        width: 25%;
+    }
     .search-form__keyword-input {
         width: 35%;
     }
-
 }

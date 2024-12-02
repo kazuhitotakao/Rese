@@ -123,7 +123,7 @@
                                     <p class="image-upload__text-click">クリックして写真を追加</p>
                                     <p class="image-upload__text-drop">またはドラッグアンドドロップ</p>
                                     <input class="image-upload__input" id="image_upload" name="images[]" type="file"
-                                        accept="image/*" multiple >
+                                        accept="image/*" multiple>
                                 </label>
                                 @error('images.*')
                                     <div class="review__form-error">

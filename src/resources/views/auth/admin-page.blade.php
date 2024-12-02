@@ -60,12 +60,26 @@
                 </form>
             </div>
             <h2 class="import-csv__title">Import CSV</h2>
+            @if (session('import_success'))
+                <div class="import__success">
+                    {!! session('import_success') !!}
+                </div>
+            @endif
+            @if (session('error_messages'))
+                <div class="alert alert-danger custom-alert">
+                    <ul>
+                        @foreach (session('error_messages') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form class="import-csv" action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input class="form-file" name="file" type="file" required>
                 <button class="form__button-csv" type="submit">インポート</button>
             </form>
-            <p class="import-csv__description">※店舗代表者と店舗情報を1つのCSVで登録する。</p>
+            <p class="import-csv__description">※店舗情報をCSVファイルから追加する。</p>
         </div>
         <div class="owner__content">
             <div class="owner-name__container">

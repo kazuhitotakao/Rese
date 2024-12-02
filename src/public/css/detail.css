@@ -8,8 +8,7 @@
 
 .horizontal-line--bottom {
     margin-left: 4rem;
-    position: absolute;
-    bottom: 5%;
+    margin-top: 20px;
     width: 90%;
     height: 1px;
     background-color: #000;
@@ -201,11 +200,27 @@
 
 .detail__review-comment {
     margin-left: 4rem;
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
     font-weight: bold;
     font-size: 16px;
 }
 
+.detail__review-image {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 4rem;
+}
+
+.detail__review-image img {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
 /* e detail */
 
 /* s reservation */

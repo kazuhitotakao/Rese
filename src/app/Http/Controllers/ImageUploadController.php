@@ -20,12 +20,12 @@ class ImageUploadController extends Controller
                 return redirect('/owner-page')->with('messageImg', 'ファイルを選択してください');
             }
             $form = [
-                'path' => $image_file->store('public/images'),
+                'path' => $image_file->store('images','public'),
                 'user_id' => Auth::id(),
             ];
             if ($image_db == null) {
                 // $image_dbを登録
-                $path = $image_file->store('public/images');
+                $path = $image_file->store('images', 'public');
                 $image = new Image();
                 $image->path = $path;
                 $image->user_id = Auth::id();
@@ -41,7 +41,7 @@ class ImageUploadController extends Controller
                     // $image_dbと$shop_image更新
                     $image_db->update($form);
                     $shop = Shop::where('user_id', Auth::id())->first();
-                    $shop->update(['image' => $image_file->store('public/images')]);
+                    $shop->update(['image' => $image_file->store('images', 'public')]);
                     return redirect('/owner-page')->with('messageImg', '画像を更新しました。');
                 }
             }
@@ -66,7 +66,7 @@ class ImageUploadController extends Controller
                 $image->save();
                 return redirect('/owner-page')->with('messageImg', '画像を登録しました。');
             } else {
-                // $image_dbありで、$shop_imageの有り無しで場合分け
+                // $image_dbありの場合、$shop_imageの有り無しで場合分け
                 if ($shop_image == null) {
                     // $image_dbのみ更新
                     $image_db->update($form);

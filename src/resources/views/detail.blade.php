@@ -45,7 +45,8 @@
                     <hr class="horizontal-line">
                     <div class="detail__review-wrapper">
                         <a class="detail__review-link" href="{{ route('reviews.edit', ['shop_id' => $shop->id]) }}">口コミを編集</a>
-                        <form action="{{ route('reviews.destroy', ['shop_id' => $shop->id]) }}" method="POST">
+                        <form action="{{ route('reviews.destroy', ['shop_id' => $shop->id]) }}" method="POST"
+                            onsubmit="return confirm('このコメントを削除してもよろしいですか？');">
                             @csrf
                             @method('DELETE')
                             <button class="detail__review-button">口コミを削除</button>
@@ -55,6 +56,13 @@
                         <span class="star5_rating" data-rate="{{ $review_rating }}"></span>
                     </div>
                     <p class="detail__review-comment">{{ $review_comment }}</p>
+                    <div class="detail__review-image">
+                        @foreach ($review_image_data as $image_data)
+                            <div id="image-container-{{ $image_data['id'] }}">
+                                <img src="{{ $image_data['url'] }}" alt="Uploaded image">
+                            </div>
+                        @endforeach
+                    </div>
                     <hr class="horizontal-line horizontal-line--bottom">
                 </div>
             @else
