@@ -198,7 +198,7 @@
        ※初期データの作成（デモ用のデータ）  
 
     ７　【phpコンテナ内】パーミッション設定  
-       chmod -R 775 /var/www/storage  
+       chmod -R 777 /var/www/storage  
 
     ８　【phpコンテナ内】シンボリックリンク設定  
        php artisan storage:link  
