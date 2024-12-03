@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
 use App\Mail\SendQrMail;
+use App\Models\Area;
 use App\Models\Favorite;
 use App\Models\Genre;
 use App\Models\Max;
@@ -108,6 +109,7 @@ class ReservationController extends Controller
     {
         $shops = session('search_results');
         $search = session('search');
+        $areas = Area::all();
         $genres = Genre::all();
 
         $imagesUrl = [];
@@ -121,12 +123,14 @@ class ReservationController extends Controller
             }
         }
 
+        $sort = request()->input('sort', 'id');
+
         $phpArray = json_decode($request->shops_id, true);
         $shops_id = collect($phpArray);
 
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'genres', 'imagesUrl', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort', 'genres', 'areas', 'imagesUrl', 'common_shops_id'));
     }
 
     public function cancel(Request $request)

@@ -135,7 +135,7 @@
             </div>
         @endcan
         @can('register')
-            {{-- 管理者ユーザーは口コミ追加はできないが削除は可能 --}}
+            {{-- 管理者ユーザーは口コミ追加はできないが全権削除が可能 --}}
             <div class="shop__detail">
                 <div class="detail__wrap">
                     <a class="detail__btn-move" href="/">&lt</a>
@@ -165,7 +165,7 @@
                     {{ $shop->overview }}
                 </div>
                 <a class="detail__review-link-all"
-                    href="{{ route('shop.comments.index', ['shop_id' => $shop->id]) }}">全ての口コミ情報（管理者用 ※削除可）</a>
+                    href="{{ route('shop.comments.index', ['shop_id' => $shop->id]) }}">全ての口コミ情報（管理者用 ※全件削除可）</a>
             </div>
         @endcan
         <div class="shop__reservation">

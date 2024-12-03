@@ -23,7 +23,6 @@ class ShopController extends Controller
     {
         $user = User::find(Auth::id());
 
-        // ショップとジャンル、レビューをプリロードして取得
         $shops = Shop::with(['genre', 'reviews' => function ($query) {
             $query->whereNotNull('review');
         }])->get();
@@ -160,11 +159,11 @@ class ShopController extends Controller
                 break;
             case 'high_rating':
                 // 評価が高い順、null値は最後(null ならば、 1 を返し、nullでない場合は 0 を返す)
-                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating DESC');
+                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating DESC, id ASC');
                 break;
             case 'low_rating':
                 // 評価が低い順、null値は最後
-                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating ASC');
+                $query->orderByRaw('ISNULL(average_rating) ASC, average_rating ASC, id ASC');
                 break;
             default:
                 $query->orderBy($sort);

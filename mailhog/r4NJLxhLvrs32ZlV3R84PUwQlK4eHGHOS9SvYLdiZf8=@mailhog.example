@@ -1,0 +1,47 @@
+HELO:<localhost>
+FROM:<info@example.com>
+TO:<user@sample.com>
+
+Message-ID: <fe3073bc74c88a6234ff2bcecc7681d0@localhost>
+Date: Tue, 03 Dec 2024 11:22:11 +0900
+Subject: =?utf-8?Q?=E5=8F=97=E4=BB=98=E7=94=A8=EF=BC=B1?=
+ =?utf-8?Q?=EF=BC=B2=E3=82=B3=E3=83=BC=E3=83=89?=
+ =?utf-8?Q?=E3=81=AE=E9=80=81=E4=BF=A1?=
+From: Rese <info@example.com>
+To: =?utf-8?Q?=E5=88=A9=E7=94=A8=E8=80=85?= <user@sample.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"ja">
+
+<body>
+    <p>=E5=88=A9=
+=E7=94=A8=E8=80=85 =E6=A7=98</p>
+    <p>=E7=89=9B=E5=8A=A9=E3=81=B8=
+=E3=81=AE=E3=81=94=E4=BA=88=E7=B4=84=E3=81=82=E3=82=8A=E3=81=8C=E3=81=A8=
+=E3=81=86=E3=81=94=E3=81=96=E3=81=84=E3=81=BE=E3=81=97=E3=81=9F=E3=80=82</p=
+>
+    <p>=E3=81=A4=E3=81=8D=E3=81=BE=E3=81=97=E3=81=A6=E3=81=AF=E3=80=
+=81=E6=9D=A5=E5=BA=97=E6=99=82=E5=8F=97=E4=BB=98=E7=94=A8=E3=81=AE=EF=BC=
+=B1=EF=BC=B2=E3=82=B3=E3=83=BC=E3=83=89=E3=83=AA=E3=83=B3=E3=82=AF=E3=82=
+=92=E3=81=8A=E9=80=81=E3=82=8A=E3=81=95=E3=81=9B=E3=81=A6=E3=81=84=E3=81=
+=9F=E3=81=A0=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82</p>
+    <p>=E6=9D=A5=
+=E5=BA=97=E3=81=AE=E9=9A=9B=E3=81=AB=E3=80=81=E5=8F=97=E4=BB=98=E3=81=AB=
+=E3=81=A6=E3=81=8A=E8=A6=8B=E3=81=9B=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82</p>
+
+    <a href=3D"http://localhost/qr-send/1">=E5=8F=97=
+=E4=BB=98=E7=94=A8=EF=BC=B1=EF=BC=B2=E3=82=B3=E3=83=BC=E3=83=89=E3=83=AA=
+=E3=83=B3=E3=82=AF</a>
+
+    <p>=E3=81=9D=E3=82=8C=E3=81=A7=E3=81=AF=
+=E3=80=81=E5=BD=93=E6=97=A5=E3=82=B9=E3=82=BF=E3=83=83=E3=83=95=E4=B8=80=
+=E5=90=8C=E6=A5=BD=E3=81=97=E3=81=BF=E3=81=AB=E3=81=97=E3=81=A6=E3=81=8A=
+=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82</p>
+
+</body>
+
+</html>
