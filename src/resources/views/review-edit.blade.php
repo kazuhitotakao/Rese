@@ -37,7 +37,7 @@
                     <div class="shop-card__content">
                         <div class="shop-card__name">{{ $shop->name }}</div>
                         <div class="shop-card__tags">
-                            <div class="shop-card__tag shop-card__tag--area">#{{ $shop->area }}</div>
+                            <div class="shop-card__tag shop-card__tag--area">#{{ $shop->area->name }}</div>
                             <div class="shop-card__tag shop-card__tag--genre">#{{ $shop->genre->name }}</div>
                             <div class="shop-card__actions">
                                 <form class="shop-card__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}"

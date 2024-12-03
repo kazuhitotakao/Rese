@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Favorite;
 use App\Models\Genre;
 use App\Models\Number;
 use App\Models\Reservation;
 use App\Models\Review;
 use App\Models\Shop;
-use App\Models\Time;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,10 +42,11 @@ class ShopController extends Controller
         $sort = request()->input('sort', 'id');
 
         $search = [
-            'pref' => null,
+            'area_id' => null,
             'genre_id' => null,
             'keyword' => null
         ];
+        $areas = Area::all();
         $genres = Genre::all();
 
         session(['search_results' => $shops]);
@@ -65,18 +66,19 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'sort', 'imagesUrl', 'genres', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort', 'imagesUrl', 'genres', 'areas', 'common_shops_id'));
     }
 
     public function guest(Request $request)
     {
         $user = User::find(Auth::id());
-        $shops = Shop::with('genre')->get();
+        $shops = Shop::with('genre', 'area')->get();
         $search = [
-            'pref' => null,
+            'area_id' => null,
             'genre_id' => null,
             'keyword' => null
         ];
+        $areas = Area::all();
         $genres = Genre::all();
 
         session(['search_results' => $shops]);
@@ -96,7 +98,7 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('guest', compact('shops', 'search', 'imagesUrl', 'genres', 'common_shops_id'));
+        return view('guest', compact('shops', 'search', 'imagesUrl', 'genres', 'areas', 'common_shops_id'));
     }
 
     public function search(Request $request)
@@ -111,11 +113,12 @@ class ShopController extends Controller
         $shops = $query->get();
         session(['search_results' => $shops]);
         $search = [
-            'pref' => $request->pref,
+            'area_id' => $request->area_id,
             'genre_id' => $request->genre_id,
             'keyword' => $request->keyword
         ];
         session(['search' => $search]);
+        $areas = Area::all();
         $genres = Genre::all();
         $sort = $request->input('sort', 'id'); // ビューに渡すために再度取得
 
@@ -133,7 +136,7 @@ class ShopController extends Controller
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');
         $common_shops_id = $shops_id->intersect($user_favorite_shop_id);
-        return view('index', compact('shops', 'search', 'sort', 'genres', 'imagesUrl', 'common_shops_id'));
+        return view('index', compact('shops', 'search', 'sort', 'genres', 'areas', 'imagesUrl', 'common_shops_id'));
     }
 
     private function getSearchQuery($request, $query)
@@ -142,8 +145,8 @@ class ShopController extends Controller
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
 
-        if (!empty($request->pref)) {
-            $query->where('area', '=', $request->pref);
+        if (!empty($request->area_id)) {
+            $query->where('area_id', '=', $request->area_id);
         }
 
         if (!empty($request->genre_id)) {
@@ -180,12 +183,12 @@ class ShopController extends Controller
             $shops_id = Shop::all()->pluck('id');
         }
         $user_reservation = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
-        $shop = Shop::with('genre')->where('id', $shop_id)->first();
+        $shop = Shop::with('genre', 'area')->where('id', $shop_id)->first();
         $user = User::find(Auth::id());
         $user_id = User::find(Auth::id())->id;
 
         if ($shop) {
-            $shop_interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
+            $shop_interval = Shop::with('genre', 'area')->where('id', $shop_id)->first()->interval;
             $times = $this->generateTimeOptions($shop_interval);
         } else {
             $shop_interval = 15; // デフォルトで15分間隔
@@ -285,7 +288,7 @@ class ShopController extends Controller
     public function myPage(Request $request)
     {
         $user = User::find(Auth::id());
-        $shops = Shop::with('genre')->get();
+        $shops = Shop::with('genre', 'area')->get();
 
         $reservations = Reservation::where('user_id', Auth::id())
             ->whereDate('date', '>=', Date::today())
@@ -337,7 +340,7 @@ class ShopController extends Controller
         $shops_interval = [];
         $count = 0;
         foreach ($reservations as $reservation) {
-            $shop_interval = Shop::with('genre')->where('id', $shops_id[$count])->first()->interval;
+            $shop_interval = Shop::with('genre', 'area')->where('id', $shops_id[$count])->first()->interval;
             $shops_interval[] = $shop_interval;
             $count++;
         }

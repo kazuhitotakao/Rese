@@ -25,7 +25,7 @@ class ResisterShopRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'area' => 'required',
+            'area_id' => 'required',
             'genre_id' => 'required',
         ];
     }
@@ -34,7 +34,7 @@ class ResisterShopRequest extends FormRequest
     {
         return [
             'name.required' => '※店名を入力してください。',
-            'area.required' => '※地域を選択してください。',
+            'area_id.required' => '※地域を選択してください。',
             'genre_id.required' => '※ジャンルを選択してください。',
         ];
     }

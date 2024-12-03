@@ -10,8 +10,6 @@ use App\Models\Max;
 use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\User;
-use App\Models\Time;
-use App\Models\Number;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

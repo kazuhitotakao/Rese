@@ -11,7 +11,7 @@ class Shop extends Model
 
     protected $fillable = [
         'name',
-        'area',
+        'area_id',
         'genre_id',
         'overview',
         'image',
@@ -20,6 +20,11 @@ class Shop extends Model
         'amount',
         'average_rating'
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 
     public function genre()
     {

@@ -6,7 +6,6 @@ use App\Http\Requests\MailSendRequest;
 use App\Mail\SendAdminMail;
 use App\Models\Reservation;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendShopMail;
 

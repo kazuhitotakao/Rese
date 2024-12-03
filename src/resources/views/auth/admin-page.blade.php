@@ -9,6 +9,10 @@
     @endif
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/role_dropdown.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="register__content">
         <div class="card-wrapper">
@@ -192,18 +196,4 @@
             </table>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        document.getElementById('role-dropdown').addEventListener('focus', function() {
-            this.children[0].style.display = 'none';
-        });
-
-        document.getElementById('role-dropdown').addEventListener('blur', function() {
-            if (this.value === "") {
-                this.children[0].style.display = 'block';
-            }
-        });
-    </script>
 @endsection

@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
-use App\Models\Genre;
-use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 
 class FavoriteController extends Controller
 {
@@ -21,7 +18,7 @@ class FavoriteController extends Controller
             $user->shops()->detach($shop_id);
         } else{
             $user->shops()->syncWithoutDetaching($shop_id);
-        } 
+        }
 
         $shops_id = session('search_results')->pluck('id');
         $user_favorite_shop_id = Favorite::where('user_id', Auth::id())->orderBy('shop_id')->get()->pluck('shop_id');

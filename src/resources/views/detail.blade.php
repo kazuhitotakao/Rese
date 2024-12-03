@@ -9,6 +9,10 @@
     @endif
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/detail.js') }}"></script>
+@endsection
+
 @section('content')
     @include ('footer')
     <div class="detail__container">
@@ -33,7 +37,7 @@
                     </div>
                     <div class="detail__content">
                         <div class="tag">
-                            <div class="detail__area">#{{ $shop->area }}</div>
+                            <div class="detail__area">#{{ $shop->area->name }}</div>
                             <div class="detail__genre">#{{ $shop->genre->name }}</div>
                         </div>
                     </div>
@@ -86,7 +90,7 @@
                     </div>
                     <div class="detail__content">
                         <div class="tag">
-                            <div class="detail__area">#{{ $shop->area }}</div>
+                            <div class="detail__area">#{{ $shop->area->name }}</div>
                             <div class="detail__genre">#{{ $shop->genre->name }}</div>
                         </div>
                     </div>
@@ -121,7 +125,7 @@
                 </div>
                 <div class="detail__content">
                     <div class="tag">
-                        <div class="detail__area">#{{ $shop->area }}</div>
+                        <div class="detail__area">#{{ $shop->area->name }}</div>
                         <div class="detail__genre">#{{ $shop->genre->name }}</div>
                     </div>
                 </div>
@@ -153,7 +157,7 @@
                 </div>
                 <div class="detail__content">
                     <div class="tag">
-                        <div class="detail__area">#{{ $shop->area }}</div>
+                        <div class="detail__area">#{{ $shop->area->name }}</div>
                         <div class="detail__genre">#{{ $shop->genre->name }}</div>
                     </div>
                 </div>
@@ -240,36 +244,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            const inputDate = document.getElementById('inputDate');
-            const tableDate = document.getElementById('tableDate');
-            const tableTime = document.getElementById('tableTime');
-            const tableNumber = document.getElementById('tableNumber');
-
-            tableDate.textContent = inputDate.value;
-            tableTime.textContent = $("#selectTime option:selected").data("time");
-            tableNumber.textContent = $("#selectNumber option:selected").data("number");
-
-            inputDate.addEventListener('change', function() {
-                tableDate.textContent = inputDate.value;
-            });
-            selectTime.addEventListener('change', function() {
-                tableTime.textContent = $("#selectTime option:selected").data("time");
-            });
-            selectNumber.addEventListener('change', function() {
-                tableNumber.textContent = $("#selectNumber option:selected").data("number");
-            });
-        });
-
-        const button = document.getElementById('reservationButton');
-        if (flgBtn) {
-            button.textContent = '変更する';
-        } else {
-            button.textContent = '予約する';
-        }
-    </script>
 @endsection

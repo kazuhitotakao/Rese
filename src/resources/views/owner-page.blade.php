@@ -11,14 +11,13 @@
         rel="stylesheet">
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/index.js') }}" defer></script>
+    <script src="{{ asset('js/shop_image_upload.js') }}" defer></script>
+@endsection
+
 @section('content')
     @include ('footer')
-    @if (app('env') == 'local')
-        <script src="{{ asset('js/index.js') }}" defer></script>
-    @endif
-    @if (app('env') == 'production')
-        <script src="{{ secure_asset('js/index.js') }}" defer></script>
-    @endif
     <div class="owner-page__wrap">
         <div class="user-name">
             <h2 class="user-name__content">店舗代表者：{{ $user->name }}さん</h2>
@@ -107,28 +106,28 @@
                                         <span class="card__content-label">地域</span>
                                     </div>
                                     <div class="form__group-content">
-                                        @if (empty($shop->area))
-                                            <select class="form select__form" id="pref-dropdown" name="area">
+                                        @if (empty($shop->area_id))
+                                            <select class="form select__form" id="pref-dropdown" name="area_id">
                                                 <option value="" disabled selected>登録する地域を選択してください</option>
-                                                @foreach (config('pref') as $pref_id => $name)
-                                                    <option value="{{ $name }}"
-                                                        @if (old('area') == $name) selected @endif>
-                                                        {{ $name }}
+                                                @foreach ($areas as $area)
+                                                    <option value="{{ $area->id }}"
+                                                        @if (old('area_id') == $area->id) selected @endif>
+                                                        {{ $area->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         @else
                                             <select class="form select__form" id="pref-dropdown" name="area">
-                                                @foreach (config('pref') as $pref_id => $name)
-                                                    <option value="{{ $name }}"
-                                                        @if ($shop->area == $name) selected @endif>
-                                                        {{ $name }}
+                                                @foreach ($areas as $area)
+                                                    <option value="{{ $area->id }}"
+                                                        @if (old('area_id') == $area->id) selected @endif>
+                                                        {{ $area->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         @endif
                                         <div class="form__error">
-                                            @error('area')
+                                            @error('area_id')
                                                 {{ $message }}
                                             @enderror
                                         </div>
@@ -300,14 +299,4 @@
         </div>
     </div>
 
-@endsection
-@section('script')
-    <script>
-        const button = document.getElementById('imageButton');
-        if (flgBtn) {
-            button.textContent = '更新';
-        } else {
-            button.textContent = '登録';
-        }
-    </script>
 @endsection

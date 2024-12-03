@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ResisterShopRequest;
-use App\Models\Favorite;
+use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Image;
 use App\Models\Max;
@@ -11,7 +11,6 @@ use App\Models\Number;
 use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -24,6 +23,7 @@ class RegisteredShopController extends Controller
         $user = User::find(Auth::id());
         $shop = Shop::where('user_id', Auth::id())->first();
         $image = Image::where('user_id', Auth::id())->first();
+        $areas = Area::all();
         $genres = Genre::all();
 
         if ($image == null) {
@@ -42,7 +42,7 @@ class RegisteredShopController extends Controller
             $times = [];
             $numbers = [];
             $check_in = null;
-            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'check_in'));
+            return view('owner-page', compact('user', 'shop', 'image', 'genres', 'areas', 'reservations', 'users_name', 'times', 'numbers', 'check_in'));
         }
 
         // --shopデータが存在する場合
@@ -83,14 +83,14 @@ class RegisteredShopController extends Controller
             $checks_in[] = $check_in;
         }
 
-        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'reservations', 'users_name', 'times', 'numbers', 'checks_in'));
+        return view('owner-page', compact('user', 'shop', 'image', 'imageUrl', 'genres', 'areas', 'reservations', 'users_name', 'times', 'numbers', 'checks_in'));
     }
 
     public function saveOrUpdate(ResisterShopRequest $request)
     {
         $form = [
             'name' => $request->name,
-            'area' => $request->area,
+            'area_id' => $request->area_id,
             'genre_id' => $request->genre_id,
             'overview' => $request->overview,
             'image' =>  null,

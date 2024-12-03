@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Shop;
-use App\Models\Time;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ReservationRequest extends FormRequest
 {
@@ -36,7 +34,7 @@ class ReservationRequest extends FormRequest
                 $end = strtotime('23:59');
                 $times = [];
                 $shop_id = $this->input('shop_id');
-                $interval = Shop::with('genre')->where('id', $shop_id)->first()->interval;
+                $interval = Shop::with('genre', 'area')->where('id', $shop_id)->first()->interval;
 
                 for ($time = $start; $time <= $end; $time += $interval * 60) {
                     $times[] = date('H:i', $time);

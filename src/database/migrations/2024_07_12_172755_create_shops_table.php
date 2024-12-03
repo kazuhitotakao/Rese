@@ -16,8 +16,8 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('area');
-            $table->foreignId('genre_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('genre_id');
             $table->string('overview')->nullable();
             $table->string('image')->nullable();
             $table->integer('user_id')->nullable();
@@ -25,6 +25,9 @@ class CreateShopsTable extends Migration
             $table->integer('amount')->default('3000')->nullable();
             $table->integer('average_rating')->nullable();
             $table->timestamps();
+
+            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 

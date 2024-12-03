@@ -11,14 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ui\Presets\React;
 
 class ReviewController extends Controller
 {
     public function show($shop_id)
     {
         $collect_shop_id = collect($shop_id);
-        $shop = Shop::with('genre')->where('id', $shop_id)->first();
+        $shop = Shop::with('genre', 'area')->where('id', $shop_id)->first();
 
         if (strpos($shop->image, 'http') === 0) {
             // 公開URLの場合
@@ -89,7 +88,7 @@ class ReviewController extends Controller
     public function editReview($shop_id)
     {
         $collect_shop_id = collect($shop_id);
-        $shop = Shop::with('genre')->where('id', $shop_id)->first();
+        $shop = Shop::with('genre', 'area')->where('id', $shop_id)->first();
         $review = Review::with('reviewImages')->where('user_id', Auth::id())->where('shop_id', $shop_id)->first();
         $review_images = $review->reviewImages()->get();
         $review_rating = $review->review;

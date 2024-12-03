@@ -9,24 +9,22 @@
     @endif
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/index.js') }}"></script>
+@endsection
+
 @section('content')
     @include ('footer')
-    @if (app('env') == 'local')
-        <script src="{{ asset('js/index.js') }}" defer></script>
-    @endif
-    @if (app('env') == 'production')
-        <script src="{{ secure_asset('js/index.js') }}" defer></script>
-    @endif
     <div class="shop__container">
         <div class="shop__inner">
             <form class="search-form" action="/search" method="get">
                 <div class="search-form__group">
                     <select class="search-form__item-select search-form__item-select--pref" id="pref-dropdown"
-                        name="pref" onchange="this.form.submit()">
+                        name="area_id" onchange="this.form.submit()">
                         <option disabled selected>All area</option>
-                        @foreach (config('pref') as $pref_id => $name)
-                            <option value="{{ $name }}" @if ($search['pref'] == $name) selected @endif>
-                                {{ $name }}
+                        @foreach ($areas as $area)
+                            <option value="{{ $area->id }}" @if ($search['area_id'] == $area->id) selected @endif>
+                                {{ $area->name }}
                             </option>
                         @endforeach
                     </select>
@@ -66,7 +64,7 @@
                     <div class="card__content">
                         <div class="card__name">{{ $shop->name }}</div>
                         <div class="tag">
-                            <div class="card__area">#{{ $shop->area }}</div>
+                            <div class="card__area">#{{ $shop->area->name }}</div>
                             <div class="card__genre">#{{ $shop->genre->name }}</div>
                             <div class="form__wrap">
                                 <form class="detail__form" action="{{ route('detail', ['shop_id' => $shop->id]) }}"
@@ -97,38 +95,4 @@
             @endforeach
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('.like-button').on('click', function() {
-                const shop_id = $(this).data('id');
-                if (this.classList.contains('liked')) {
-                    this.classList.remove('liked');
-                    this.classList.replace('las', 'lar');
-                } else {
-                    this.classList.add('liked');
-                    this.classList.replace('lar', 'las');
-                }
-                $.ajax({
-                    url: '/favorite',
-                    type: 'POST',
-                    data: {
-                        shop_id: shop_id
-                    },
-                    dataType: "json",
-                }).done(function(res) {
-                    console.log(res);
-                }).fail(function() {
-                    alert('通信の失敗をしました');
-                });
-            });
-        });
-    </script>
 @endsection

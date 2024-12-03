@@ -46,7 +46,7 @@ class ShopsImport implements ToModel, WithHeadingRow, WithCustomCsvSettings
 
         $shop = new Shop([
             'name' => $row['shop_name'],
-            'area' => $row['area'],
+            'area_id' => $row['area_id'],
             'genre_id' => $row['genre_id'],
             'overview' => $row['overview'],
             'image' => $path
@@ -64,7 +64,7 @@ class ShopsImport implements ToModel, WithHeadingRow, WithCustomCsvSettings
     {
         return [
             'shop_name' => 'required|string|max:50',
-            'area' => 'required|in:東京都,大阪府,福岡県',
+            'area_id' => 'required|in:13,27,40', //13:東京都 27:大阪府 40:福岡県
             'genre_id' => 'required|in:1,2,3,4,5', // 1:寿司 2:焼肉 3:居酒屋 4:イタリアン 5:ラーメン
             'overview' => 'required|string|max:400',
             'image_path' => 'required|image_extension'
@@ -76,8 +76,8 @@ class ShopsImport implements ToModel, WithHeadingRow, WithCustomCsvSettings
         return [
             'shop_name.required' => '店舗名は必須です。',
             'shop_name.max' => '店舗名は最大50文字までです。',
-            'area.required' => '地域は必須です。',
-            'area.in' => '地域は東京都・大阪府・福岡県のみ有効です。',
+            'area_id.required' => '地域は必須です。',
+            'area_id.in' => '地域は東京都・大阪府・福岡県のみ有効です。',
             'genre_id.required' => 'ジャンルは必須です。',
             'genre_id.in' => '無効なジャンルが入力されています。',
             'overview.required' => '店舗概要は必須です。',
