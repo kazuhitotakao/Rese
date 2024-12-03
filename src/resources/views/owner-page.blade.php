@@ -91,7 +91,7 @@
                                             <input class="form card__name" name="name" type="text"
                                                 value="{{ old('name') }}" placeholder="店名を記入してください">
                                         @else
-                                            <input class="form card__name" name=" name" type="text"
+                                            <input class="form card__name" name="name" type="text"
                                                 value="{{ $shop->name }}">
                                         @endif
                                         <div class="form__error">

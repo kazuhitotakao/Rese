@@ -136,7 +136,9 @@
     border-radius: 5px;
     margin-bottom: 20px;
     margin-left: 4rem;
-    height: 40rem;
+    min-height: 40rem; /* 最小の高さを設定 */
+    padding-bottom: 1rem;
+    overflow-y: auto; /* 内容がはみ出したら縦にスクロールバーを表示 */
 }
 
 /* s image */
@@ -211,7 +213,7 @@
 .form__group {
     margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .form {
@@ -226,7 +228,7 @@
 
 .form__group-title {
     padding-top: 3px;
-    width: 5rem;
+    width: 8rem;
     text-align: center;
     font-weight: bold;
 }
