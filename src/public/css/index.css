@@ -88,8 +88,9 @@
 
 .grid {
     display: grid;
-    gap: 1rem 1rem;
-    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5em 1.5rem;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: center;
     margin-top: 1.5rem;
     padding-bottom: 2rem;
     padding-left: 2rem;
@@ -106,7 +107,7 @@
 
 .card__img img {
     width: 100%;
-    height: 20vh;
+    height: 120px;
     object-fit: cover;
 }
 
@@ -194,7 +195,7 @@
         display: grid;
         gap: 1rem 1rem;
         margin-top: 2rem;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, 250px);
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
@@ -274,12 +275,14 @@
     .grid {
         display: grid;
         gap: 1rem 1rem;
-        grid-template-columns: 1fr;
+        grid-template-columns: 250px;
         margin-top: 2rem;
         padding-bottom: 2rem;
         padding-left: 2rem;
         padding-right: 2rem;
     }
+
+
 
     .btn__wrap {
         display: flex;
