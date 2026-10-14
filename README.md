@@ -1,233 +1,227 @@
-## 【Rese（飲食店予約アプリ）】  
-　～トップ画面イメージ～  
- <img width="700" alt="トップページ" src="https://github.com/user-attachments/assets/6cd33c9f-89f9-42ca-84ff-bce6984b096d">
+# Rese（飲食店予約アプリ）
 
-## 【制作した目的】  
-　『外部の飲食店予約サービスは手数料を取られるので自社で予約サービスを持ちたい』というクライアントの要望に応えるため。  
-  
-## 【機能一覧】  
-## ・口コミ機能  
-### 新規口コミ追加
-<img width="700" alt="口コミ" src="https://github.com/user-attachments/assets/5999f500-2da9-4185-9e5c-7c829673616f">
-  
-- 一般ユーザーは店舗に対し口コミを追加することができる
-- 口コミは「テキスト・星(1~5)・画像」で構成されている
-    - テキスト：400文字以内、自由記述
-    - 星(1~5)：選択式
-    - 画像：jpeg、pngのみアップロード可能。非対応の拡張子はエラーメッセージを表示する
-- 一般ユーザーは1店舗に対し2件以上の口コミを追加することはできない
+飲食店の検索・予約・口コミ投稿から、店舗代表者による店舗管理、管理者によるCSVインポートまでを実装した予約アプリです。
+「外部サービスの手数料を抑えるため、自社で予約サービスを持ちたい」という要望を想定して制作した学習作品です。
 
-### 口コミ編集
-<img width="700" alt="口コミ編集1" src="https://github.com/user-attachments/assets/b3b86dc9-5d4d-49b9-ad20-c5f0506ab963">  
-  
-<img width="700" alt="口コミ編集2" src="https://github.com/user-attachments/assets/9eeea2ec-2e44-497f-9389-41acdf016a20">  
-  
-- 一般ユーザーは自身が追加した口コミの内容を編集することができる
-- 編集画面で前回の口コミの入力値を保持することができる
+**現在の公開状況**：現在はAWS環境に接続しておらず、アプリのオンライン公開を停止しています。アクセス可能な公開ドメイン・デモURLはありません。画面は以下のスクリーンショットで確認でき、動作を試す場合は[環境構築](#環境構築)の手順でローカル環境を起動できます。
 
-### 口コミ削除
-<img width="700" alt="口コミ削除_一般ユーザー" src="https://github.com/user-attachments/assets/c4469723-f22d-40e6-88f6-35d1d0ca516a">
-  
-<img width="700" alt="口コミ削除_管理者" src="https://github.com/user-attachments/assets/1abcd7df-868f-4089-8a83-c92b263c5c55">  
-  
-- 一般ユーザーは自身が追加した口コミを削除することができる
-- 管理ユーザーは全ての口コミを削除することができる
+![店舗一覧：地域・ジャンル・店舗名での検索と並び替え](docs/images/shop-list.jpg)
 
-|  | 一般ユーザー | 店舗ユーザー | 管理者ユーザー |
-| --- | --- | --- | --- |
-| 新規口コミ追加 | ○ | × | × |
-| 口コミ編集 | ○ | × | × |
-| 口コミ削除 | ○(*) | × | ○ |
-  
-## ・店舗一覧ソート機能  
-<img width="700" alt="ソート" src="https://github.com/user-attachments/assets/b19d4820-e94f-42d3-9c53-9ec3ef205ae0">   
-  
-- 一般ユーザーは店舗一覧を並び替えることができる  
-  - ランダム (※1)  
-  - 評価が高い順 (※2)  
-  - 評価が低い順  
-  ※1 選択する度にショップの並び順が不規則に変わる  
-  ※2 評価が一件もないショップの場合は、「評価が高い順」「評価が低い順」のどちらの場合でも最後尾に表示される  
-         
-## ・CSVインポート機能（店舗情報の新規登録 ※管理者でのログイン必須）  
- <img width="700" alt="CSVインポート" src="https://github.com/user-attachments/assets/9dea529f-9685-4e6f-8e5c-d6440d4bc16b">  
-  
-管理者はCSVファイルをインポートすることで、店舗情報を新規追加することができる  
-【CSVファイルの記述方法】  
-  1. ヘッダーの書き方（一番上の行に書く）  
-     shop_name,area_id,genre_id,overview,image_path ※','で項目を区切ること（中のデータも同様）  
-     それぞれ、店舗名、地域、ジャンル、店舗概要、画像URL、を表している。  
-  2. area_idとgenre_idの書き方について  
-     area_id  13,27,40（それぞれ、「東京都」、「大阪府」、「福岡県」）の数値を記載すること。  
-     genre_id  1,2,3,4,5（それぞれ、「寿司」「焼肉」「居酒屋」「イタリアン」「ラーメン」）の数値を記載すること。  
-  3. image_pathの書き方  
-     AWSのS3などに保存している場合はそのまま記述する。　例）https://（以下略）  
-     ネットワーク上に保存できない場合は次の方法で記述する。  
-     a. 開発環境構築後に、Rese>src>public>imagesへアプロードしたい画像を移動する。  
-     b. CSVファイルのimage_path欄へ /var/www/public/images/ファイル名.jpeg のようにファイル名とその拡張子以外は固定で記述すること
-  4. CSVファイルの文字コードについて
-     CSVファイルの文字コードはUTF-8形式で保存しておくこと。UTF-8形式以外だとCSVインポート後に文字化けを起こす。  
-     ※windowsなどはデフォルトがUTF-8になっていないことが多いので要注意  
-     ※UTF-8形式で保存する方法は、テキストエディタなどで名前を付けて保存し、ファイル名などを入力するウィンドウ下部で、UTF-8でエンコードする  
-  5. その他の注意事項  
-     ・ 項目は全て入力必須  
-     ・ 店舗名は50文字以内  
-     ・ 地域・ジャンルについては、項番2の数値以外受け付けない  
-     ・ 店舗概要は400文字以内  
-     ・ 画像URLの拡張子は、jpeg,jpg,pngのみ対応  
-  
-【CSVファイル記述例】  
-| shop_name | area_id | genre_id | overview       | image_path                                                               |  
-|-----------|---------|----------|----------------|--------------------------------------------------------------------------|  
-| 花吹雪    | 13      | 1        | おいしいお寿司屋 | /var/www/public/images/sushi.jpg                                         |  
-| えびす    | 40      | 2        | おいしい焼肉屋 | /var/www/public/images/yakiniku.jpg |  
-  
-#### 　・ログイン機能  
-#### 　・メールアドレス認証機能（メールによる本人確認）  
-       Mailhogを開発環境では使用。  
-       開発環境構築後に、Mailhog : http://localhost:8025/  へアクセス可能。  
-       ※ 会員登録後に、Mailhogに「メールアドレスの認証」というメールが届くので、メールを開きメールアドレス認証を行う
-       
-#### 　・ログアウト機能  
-#### 　・飲食店一覧表示＆検索機能  
-#### 　・飲食店お気に入り登録機能  
-#### 　・飲食店予約機能  
-       予約時に、予約空き時間検索が可能（※デモ店舗には対応していない。新規登録店舗が対象）。  
-       
-#### 　・マイページ機能（予約内容・お気に入り飲食店一覧）  
-       決済、予約変更、予約キャンセルが可能。  
-       
-#### 　・権限設定  
-       管理者・店舗代表者・一般ユーザーに権限を分けている。  
-       またゲストユーザー（権限なし）には店舗一覧のみの閲覧を可能にしている。  
-       
-#### 　・店舗情報作成＆予約確認画面（店舗代表者用）    
-       店舗画像のアプロードと店舗情報の登録が可能。　※店舗代表者につき１店舗のみ登録可能  
-       ＱＲコードリーダー起動による来店確認。  
-       時間帯ごとの予約枠の上限設定。  
-       予約時の時間間隔の設定。  
-       
-#### 　・店舗代表者設定管理画面（管理者用）  
-       店舗代表者の登録が可能。  
-       全ユーザーの一覧表示ができ、条件で抽出が可能。   
-       
-#### 　・メール送信機能（店舗代表者・管理者）  
-       利用ユーザーに対して個別メールを送信できる機能を実装。  
-       
-#### 　・リマインダー機能  
-       タスクスケジューラーを利用して、予約当日の朝に予約情報のリマインダーを送る。  
+[画面紹介](#画面紹介) · [主な機能](#主な機能) · [実装のポイント](#実装のポイント) · [データベース設計](#データベース設計) · [環境構築](#環境構築) · [ローカルでの確認方法](#ローカルでの確認方法)
 
-#### 　・ＱＲコード  
-       予約時に利用者のメアドに受付用ＱＲコードリンクを送信する。  
-       また、当日朝のリマインダーメールにも受付用ＱＲコードリンクを再度載せて送信する。  
-       利用者は、店頭で店舗代表者のＱＲコードリーダーにＱＲコードをかざすことで、店舗代表者の管理画面で「来店済」になる。  
-       
-#### 　・決済機能（Stripeを利用）  
-       アプリ内で決済機能を設けている。  
-       ※Stripeのテスト環境で構築しているため、テスト時のクレジットカードは下記の公式ページのテスト用カードを使用すること。  
-         テストカード：https://docs.stripe.com/testing?locale=ja-JP  
-  
-## 【使用技術（実行環境）】  
-#### ・開発環境（Docker環境）  
-    PHP		8.2.19  
-    Laravel		8.83.27  
-    MySQL		8.0.35  
-    nginx		1.22.1  
-    MailHog（メールサーバー）　  
-    cron （自動実行ジョブサーバー）  
-    ※開発環境においては、PCがスリープ中はcronの実行が行われないため、常にPCを起動しておくなどの対処が必要。  
-  
-#### ・本番環境（AWS環境）  
-    EC2（バックエンド）  
-    PHP		8.2.19  
-    Laravel		8.83.27  
-    nginx		1.22.1  
-    RDS（データベース）  
-    S3（ストレージ）  
-    Gmail（メールサーバーとして使用）  
-    cron（Amazon linux2に初期実装されている）  
-  
-## 【テーブル設計図】  
-<img width="700" alt="CSVインポート" src="https://github.com/user-attachments/assets/7ed0219d-a56a-401f-b6d7-e7c820fbefac">  
-  
-## 【ER図】  
-<img width="700" alt="CSVインポート" src="https://github.com/user-attachments/assets/f3a0b512-8f8c-4ad5-af26-8217b967c37d">  
-  
-## 【環境構築】  
-### 【開発環境の構築】
-### Dockerビルド  
-    １　任意のディレクトリでリポジトリをクローン  
-        git clone git@github.com:kazuhitotakao/Rese.git  
-    ２  Reseディレクトリが作成されているのでReseディレクトリに移動  
-        cd Rese  
-    ３　DockerDesktopアプリを立ち上げる  
-    ４　docker compose up -d --build  
-    
-### Laravel環境構築   
-    １　【phpコンテナに入り】各種パッケージのインストール  
-        docker compose exec php bash  
-        composer install  
-    ２　phpコンテナ内から抜けて、srcディレクリに移動し、「.env」ファイルを作成
-        exit
-        cd src  
-        cp .env.example .env  
-    ３　.envファイルに以下の環境変数を修正・追加  
-       APP_NAME=Rese  
-       DB_HOST=mysql  
-       DB_DATABASE=laravel_db  
-       DB_USERNAME=laravel_user  
-       DB_PASSWORD=laravel_pass  
-       MAIL_USERNAME=user  
-       MAIL_PASSWORD=password  
-       MAIL_FROM_ADDRESS=info@example.com  
+## 画面紹介
 
-     ※Stripe決済機能のために追加（ = 以下を各個人で設定）  
-       STRIPE_PUBLIC_KEY=  
-       STRIPE_SECRET_KEY=  
-      （このサイトに登録し、KEYを取得する）公式サイト：https://dashboard.stripe.com/  
-   
-    ４　【phpコンテナに入り】アプリケーションキーの作成  
-       docker compose exec php bash  
-       php artisan key:generate  
-  
-    ５　【phpコンテナ内】マイグレーションの実行  
-       php artisan migrate:fresh  
-  
-    ６　【phpコンテナ内】シーディングの実行  
-       php artisan db:seed  
-       ※初期データの作成（デモ用のデータ）
-       店舗写真は src/public/images に同梱し、APP_URLをもとに画像URLを登録します。
-       既存データベースの画像URLは、この変更だけでは更新されません。  
+現在のコードと同梱のデモデータを使い、ローカル環境で撮影した画面です。口コミの入力例は撮影用のサンプルです。
 
-    ７　【phpコンテナ内】パーミッション設定  
-       chmod -R 777 /var/www/storage  
+### 店舗詳細・予約フォーム
 
-    ８　【phpコンテナ内】シンボリックリンク設定  
-       php artisan storage:link  
-       
-## 【URL】  
-   　【test用ユーザー】  
-　　　`管理者　　　　→　Email：admin@sample.com　　Password：password`  
-　　　`店舗代表者　　→　Email：owner@sample.com　　Password：password`  
-　　　`一般ユーザー　→　Email：user@sample.com　　 Password：password`  
-   
-#### ・開発環境  
-    開発環境：http://localhost/  
-    phpMyAdmin：http://localhost:8080/	  
-    MailHog：http://localhost:8025/  
+店舗の写真・地域・ジャンル・紹介文を表示し、日付・時間・人数を選んで予約できます。
 
-## ・本番環境  
-## ※2024.12.3現在、本番環境はEC2インスタンスを停止しているので、アクセスできない  
-   ~~デプロイ済のURL：https://rese-shops.com~~  
-   ※ＱＲコードリーダーでのカメラ使用の際にhttpsでの接続が必要だったため、独自ドメインでhttps接続をしている  
-  
-## 【その他】  
-#### ・開発環境と本番環境の切り分けについて  
-    .env.development（開発環境） .env.production（本番環境）で切り分けを実施  
-    ※個人情報が記載されているため、git.ignoreに記載し、リモートリポジトリへはpushしていない  
-  
-#### ・開発環境と本番環境での主な相違点  
-    開発環境ではDockerで環境構築を行っている。  
-    メールアドレスの認証にMailHogを使用しており、MailHog上でメール認証を行うことが必要。  
-    本番環境では、AWSで環境構築を行っている。  
-    メールアドレス認証にGmailサーバーを使用しており、実際に各人のメールアドレスでメール認証を行うこと。
+![店舗詳細と予約フォームの入力例](docs/images/shop-detail.jpg)
+
+<details>
+<summary>口コミ・管理者・店舗代表者の画面を見る</summary>
+
+### 口コミの投稿
+
+星評価、400文字以内のコメント、JPEG・PNGの画像を入力できます。
+
+![口コミ投稿の入力例](docs/images/review-create.jpg)
+
+### 口コミの編集
+
+保存した星評価とコメントを引き継いで編集します。添付画像の追加・削除にも対応しています。
+
+![投稿内容を引き継いだ口コミ編集画面](docs/images/review-edit.jpg)
+
+### 管理者の画面
+
+店舗代表者の登録、CSVによる店舗情報の追加、ユーザー検索、メール送信の入口をまとめています。
+
+![店舗代表者登録・CSVインポート・ユーザー一覧](docs/images/admin-page.jpg)
+
+### 店舗代表者の画面
+
+店舗情報・写真の登録と更新、予約情報の確認、QRコードによる来店確認の入口を表示します。画像は店舗登録前の初期状態です。
+
+![店舗情報の登録と予約情報の画面](docs/images/owner-page.jpg)
+
+</details>
+
+## 主な機能
+
+| 利用者 | 機能 |
+| --- | --- |
+| ゲスト | 店舗一覧の閲覧、地域・ジャンル・店舗名での検索 |
+| 一般ユーザー | 会員登録・メール認証・ログイン・ログアウト、店舗詳細、お気に入り、予約 |
+| 一般ユーザー | マイページでの予約変更・キャンセル・決済、口コミの投稿・編集・削除 |
+| 店舗代表者 | 店舗情報・画像の登録と更新、予約一覧、時間帯別の予約枠と予約間隔の設定、QRコードによる来店確認、利用者へのメール送信 |
+| 管理者 | 店舗代表者の登録、ユーザーの検索、CSVインポート、利用者へのメール送信、口コミの削除 |
+
+### 口コミと並び替え
+
+- 星評価は1〜5、コメントは400文字以内、添付画像はJPEG・PNGに対応しています。
+- 一般ユーザーは1店舗につき1件の口コミを投稿し、自分の投稿を編集・削除できます。
+- 管理者は店舗の口コミ一覧から口コミを削除できます。
+- 店舗一覧はランダム・評価が高い順・評価が低い順に並び替えられます。評価がない店舗は評価順の最後に表示します。
+
+### CSVインポート
+
+管理者はUTF-8のCSVから店舗情報を追加できます。項目・入力条件・ローカル画像の指定方法は[CSVインポートの手順](docs/csv-import.md)を参照してください。AWSを使わず、同梱の店舗画像で試す方法も記載しています。
+
+### 予約・来店確認
+
+- 予約時に受付用QRコードのリンクをメールで送信します。
+- スケジューラーで予約当日のリマインダーを送信します。
+- 店舗代表者はQRコードを読み取り、来店確認の状態を更新します。
+- 予約空き時間検索は、店舗代表者が登録し予約枠を設定した店舗が対象です。同梱のデモ店舗には対応していません。
+- クレジットカード決済はStripeのテスト環境を使用します。
+
+## 実装のポイント
+
+- **認証と役割の管理**：Laravel Fortifyで認証・メール認証を実装し、Spatie Laravel Permissionで一般ユーザー・店舗代表者・管理者の役割を管理しています。([ルート定義](src/routes/web.php)、[デモユーザーと権限](src/database/seeders/UserPermissionSeeder.php))
+- **口コミと画像の分離**：口コミ本文・星評価を`reviews`、添付画像を`review_images`で管理。編集時には保存済みの入力内容を取得します。([口コミ処理](src/app/Http/Controllers/ReviewController.php))
+- **CSVの入力検証と一括登録**：店舗名・地域・ジャンル・概要・画像パスを検証し、入力エラーがあればトランザクションをロールバックする実装です。([インポート処理](src/app/Http/Controllers/ImportController.php)、[CSVの入力条件](src/app/Imports/ShopsImport.php))
+- **予約と店舗運用の連携**：利用者の予約と、店舗代表者の予約一覧・来店確認・時間帯別の枠設定をつなげています。([予約処理](src/app/Http/Controllers/ReservationController.php)、[店舗管理](src/app/Http/Controllers/RegisteredShopController.php))
+- **定期処理**：予約当日の案内を毎朝8時に送るスケジュールを設定しています。([スケジューラー](src/app/Console/Kernel.php))
+
+## 使用技術
+
+| 区分 | 技術 |
+| --- | --- |
+| バックエンド | PHP 8.2.19、Laravel 8.83.27、Laravel Fortify、Spatie Laravel Permission |
+| フロントエンド | Blade、HTML / CSS、JavaScript、Bootstrap、Livewire、Laravel Mix |
+| 開発環境 | Docker Compose、MySQL 8.0.35、nginx 1.22.1、MailHog、phpMyAdmin、cron |
+| CSV・QRコード・決済 | Laravel Excel、Simple QrCode / jsQR、Stripe（テスト環境） |
+| 過去に構築したAWS環境（現在は非公開） | EC2、RDS、S3、独自ドメインでのHTTPS接続 |
+
+依存関係とバージョンは[composer.lock](src/composer.lock)、[package-lock.json](src/package-lock.json)、[Docker構成](docker-compose.yml)を参照してください。
+
+## データベース設計
+
+マイグレーションから再作成した主要テーブルの関係です。店舗画像・予約枠・権限管理を含むER図と19テーブルのカラム・制約は[データベース設計](docs/database.md)にまとめています。
+
+```mermaid
+erDiagram
+    areas ||--o{ shops : "地域"
+    genres ||--o{ shops : "ジャンル"
+    users ||--o{ reservations : "予約者"
+    shops ||--o{ reservations : "予約店舗"
+    numbers ||--o{ reservations : "人数"
+    users ||--o{ favorites : "お気に入り"
+    shops ||--o{ favorites : "対象店舗"
+    users ||--o{ reviews : "投稿者"
+    shops ||--o{ reviews : "口コミ対象"
+    reviews ||--o{ review_images : "添付画像"
+```
+
+## 環境構築
+
+Docker DesktopとGitを使用します。以下は、画面確認用の開発環境を初めて構築する手順です。
+
+### 1. リポジトリの取得
+
+```bash
+git clone https://github.com/kazuhitotakao/Rese.git
+cd Rese
+cp src/.env.example src/.env
+```
+
+### 2. 開発用の設定
+
+`src/.env`を以下の設定にします。DBの値は`docker-compose.yml`の開発用設定に対応しています。
+
+```dotenv
+APP_NAME=Rese
+APP_ENV=local
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=laravel_pass
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=info@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+### 3. 起動と初期データの作成
+
+```bash
+docker compose up -d --build
+docker compose exec php composer install --no-dev
+docker compose exec php php artisan key:generate
+docker compose exec php php artisan migrate --seed
+docker compose exec php php artisan storage:link
+```
+
+この手順は画面確認に必要な実行用パッケージをインストールします。テスト用などの開発依存は含めていません。
+MySQLの起動直後に接続エラーが出る場合は、起動完了後にマイグレーションを再実行してください。`storage`と`bootstrap/cache`はPHPの実行ユーザーが書き込める権限にします。
+表示用のCSS・JavaScriptは`src/public`に含まれています。
+
+店舗写真は`src/public/images`に同梱し、シーディング時の`APP_URL`から画像URLを登録します。既存DBに保存済みの画像URLは、設定変更だけでは更新されません。
+
+## ローカルでの確認方法
+
+現在、AWS上のアプリや旧独自ドメインでの公開デモは提供していません。以下は環境構築後、自分のPCで開くためのURLです。
+
+| 確認する内容 | ローカル環境のURL |
+| --- | --- |
+| ログイン | http://localhost/login |
+| 会員登録 | http://localhost/register |
+| ゲストの店舗一覧 | http://localhost/guest |
+| ログイン後の店舗一覧 | http://localhost/ |
+| マイページ | http://localhost/my-page |
+| phpMyAdmin | http://localhost:8080/ |
+| 認証メール・予約メールの確認（MailHog） | http://localhost:8025/ |
+
+### デモアカウント
+
+初回のシーディングで作成されます。パスワードはすべて`password`です。デモアカウントはメール認証済みとして登録されるため、そのままログインできます。
+
+| 役割 | メールアドレス |
+| --- | --- |
+| 管理者 | admin@sample.com |
+| 店舗代表者 | owner@sample.com |
+| 一般ユーザー | user@sample.com |
+
+新たに会員登録した場合は、MailHogで認証メールを開き、メールアドレスを認証してください。店舗代表者はメニューの「Shop Info」、管理者は「Admin Page」から各画面を開けます。
+
+### Stripeのテスト決済
+
+決済を試す場合は`src/.env`に自分のStripeテスト用キーを追加します。
+
+```dotenv
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+```
+
+テスト用カードは[Stripe公式ドキュメント](https://docs.stripe.com/testing?locale=ja-JP)を参照してください。ログインや店舗一覧・口コミの画面確認には決済キーは不要です。
+
+### リマインダーとQRコード
+
+リマインダーはLaravelのスケジューラーとPHPコンテナのcronを使用します。予約当日の8時の処理を確認する場合は、その時刻にコンテナとPCを起動しておく必要があります。
+QRコードリーダーはブラウザのカメラ機能を使用するため、カメラを利用できる接続環境が必要です。過去のAWS環境では独自ドメインによるHTTPSを使用していました。
+
+## ディレクトリ構成
+
+```text
+docker/                     nginx・PHP・MySQL・cronの開発用設定
+docs/                       画面画像・ER図・テーブル定義・CSV操作手順
+src/app/Http/Controllers/    検索・予約・口コミ・店舗管理などの処理
+src/app/Http/Requests/       入力値の検証
+src/app/Imports/             CSVインポートの入力条件と登録処理
+src/app/Models/              データ取得・保存とリレーション
+src/app/Console/             定期処理とスケジュール
+src/database/               マイグレーション・シーダー
+src/resources/views/        Bladeテンプレート
+src/routes/                 ルート定義
+```
