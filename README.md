@@ -80,7 +80,7 @@
 | shop_name | area_id | genre_id | overview       | image_path                                                               |  
 |-----------|---------|----------|----------------|--------------------------------------------------------------------------|  
 | 花吹雪    | 13      | 1        | おいしいお寿司屋 | /var/www/public/images/sushi.jpg                                         |  
-| えびす    | 40      | 1        | おいしいお寿司屋 | https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg |  
+| えびす    | 40      | 2        | おいしい焼肉屋 | /var/www/public/images/yakiniku.jpg |  
   
 #### 　・ログイン機能  
 #### 　・メールアドレス認証機能（メールによる本人確認）  
@@ -195,7 +195,9 @@
   
     ６　【phpコンテナ内】シーディングの実行  
        php artisan db:seed  
-       ※初期データの作成（デモ用のデータ）  
+       ※初期データの作成（デモ用のデータ）
+       店舗写真は src/public/images に同梱し、APP_URLをもとに画像URLを登録します。
+       既存データベースの画像URLは、この変更だけでは更新されません。  
 
     ７　【phpコンテナ内】パーミッション設定  
        chmod -R 777 /var/www/storage  
